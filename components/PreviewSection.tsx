@@ -39,18 +39,15 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     canvas.height = baseHeight * scale;
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
-    // White background
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, baseWidth, baseHeight);
 
-    // Multiple Watermarks
     ctx.save();
     ctx.globalAlpha = 0.05;
     ctx.textAlign = 'center';
     ctx.font = 'bold 72px Times New Roman';
     ctx.fillStyle = '#7b5b46';
     
-    // Create a pattern of watermarks across the page
     const wmSpacingX = 280;
     const wmSpacingY = 200;
     const startX = -100;
@@ -77,7 +74,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     const rightMargin = 100;
     const lineHeight = 26;
 
-    // Date first (top right)
     const today = new Date();
     const location = 'Kasihan';
     const dateStr = today.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -86,22 +82,18 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     ctx.textAlign = 'left';
     y += lineHeight * 1.2;
     
-    // Subject
     ctx.fillText('Perihal', leftMargin, y);
     ctx.fillText(': Permohonan ijin tidak mengikuti kegiatan pramuka', leftMargin + 80, y);
     y += lineHeight * 1.8;
 
-    // Recipient
     ctx.fillText('Kepada Yth.', leftMargin, y); y += lineHeight;
     ctx.fillText('Kakak Dewan Ambalan', leftMargin, y); y += lineHeight;
     ctx.fillText('SMA Negeri 1 Kasihan', leftMargin, y); y += lineHeight;
     ctx.fillText('Di tempat', leftMargin, y); y += lineHeight * 1.8;
 
-    // Opening
     ctx.fillText('Dengan Hormat,', leftMargin, y); y += lineHeight * 1.4;
     ctx.fillText('Saya yang bertanda tangan di bawah ini:', leftMargin, y); y += lineHeight * 1.4;
 
-    // Personal data
     const indent = leftMargin + 40;
     const labelWidth = 150;
     const dataIndent = indent + 20;
@@ -130,7 +122,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     ctx.fillText(formData.pkKelas, dataIndent + labelWidth + 20, y);
     y += lineHeight * 1.4;
 
-    // Helper function for justified text
     const drawJustifiedText = (text: string, x: number, yPos: number, maxW: number, isLastLine: boolean = false) => {
       const words = text.trim().split(' ');
       if (words.length === 1 || isLastLine) {
@@ -149,7 +140,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
       });
     };
 
-    // Reason intro
     const maxWidth = baseWidth - leftMargin - rightMargin;
     const reasonIntro = 'Dengan ini saya ingin memberitahukan bahwa saya tidak dapat mengikuti kegiatan pramuka dengan alasan sebagai berikut:';
     let words = reasonIntro.split(' ');
@@ -177,7 +167,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     });
     y += lineHeight * 0.2;
 
-    // Main reason
     words = formData.alasan.split(' ');
     line = '';
     lines = [];
@@ -203,7 +192,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     });
     y += lineHeight * 0.6;
 
-    // Closing
     const closing = 'Demikian surat ijin saya sampaikan dengan sebenar-benarnya. Atas perhatiannya saya ucapkan terima kasih.';
     words = closing.split(' ');
     line = '';
@@ -230,7 +218,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     });
     y += lineHeight * 1.2;
 
-    // Signature section
     const signatureStartY = y;
     const hormatSayaX = baseWidth - rightMargin - 80;
     ctx.textAlign = 'center';
@@ -238,7 +225,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     let lineY = signatureStartY + lineHeight * 3.5;
     ctx.fillText('( ' + formData.nama + ' )', hormatSayaX, lineY);
 
-    // Acknowledgements
     y = signatureStartY + lineHeight * 6;
     const colSpacing = (baseWidth - leftMargin - rightMargin) / 3;
     const col1X = leftMargin + colSpacing * 0.5;
@@ -255,19 +241,18 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
 
     ctx.fillText('Mengetahui,', col2X, y);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Judat', col2X, y + lineHeight);
+    ctx.fillText('Mabigus', col2X, y + lineHeight);
     ctx.font = '16px Times New Roman';
     lineY = y + lineHeight * 4;
     ctx.fillText('( ____________________ )', col2X, lineY);
 
     ctx.fillText('Mengetahui,', col3X, y);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Kamabigus', col3X, y + lineHeight);
+    ctx.fillText('Judat', col3X, y + lineHeight);
     ctx.font = '16px Times New Roman';
     lineY = y + lineHeight * 4;
     ctx.fillText('( ____________________ )', col3X, lineY);
 
-    // Set preview
     setPreviewUrl(canvas.toDataURL());
   };
 
@@ -278,7 +263,6 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
 
     const imgData = canvas.toDataURL('image/png');
 
-    // Dynamic import for jsPDF
     const { jsPDF } = await import('jspdf');
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
     const pdfWidth = 210;
