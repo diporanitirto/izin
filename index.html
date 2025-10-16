@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surat Ijin Tidak Mengikuti Pramuka</title>
+  <meta name="description" content="Generator surat izin tidak mengikuti kegiatan Pramuka dengan preview A4 dan unduh PDF." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="hero" role="banner">
+    <div class="hero-inner">
+      <div class="hero-emblem" aria-hidden="true">
+        <img class="logo logo-sma" src="assets/logo-sma.png" alt="" width="56" height="56" />
+      </div>
+      <div class="hero-text" style="flex:1">
+        <h1>Surat Ijin Tidak Mengikuti Pramuka</h1>
+        <p>
+          <i class="fas fa-compass" aria-hidden="true"></i>
+          Dewan Ambalan DIPORANI · Gudep 3089/3090 · SMA Negeri 1 Kasihan
+        </p>
+      </div>
+      <div class="hero-emblem" aria-hidden="true">
+        <img class="logo logo-diporani" src="assets/logo-diporani.png" alt="" width="56" height="56" />
+      </div>
+    </div>
+    <div class="rope-divider" aria-hidden="true"></div>
+  </header>
+
+  <main class="container" role="main">
+    <section id="formSection" class="form-section" aria-label="Form pembuatan surat">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title"><i class="fas fa-clipboard-list" aria-hidden="true"></i> Form Izin Pramuka</span>
+        </div>
+        <div class="card-body">
+          <form id="suratForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nama"><i class="fas fa-user"></i> Nama Lengkap:</label>
+                <input type="text" id="nama" name="nama" required />
+              </div>
+              <div class="form-group">
+                <label for="absen"><i class="fas fa-hashtag"></i> Nomor Absen:</label>
+                <input type="text" id="absen" name="absen" required />
+              </div>
+              <div class="form-group">
+                <label for="kelas"><i class="fas fa-school"></i> Kelas:</label>
+                <select id="kelas" name="kelas" required>
+                  <option value="">Pilih Kelas</option>
+                  <option value="X-1">X-1</option>
+                  <option value="X-2">X-2</option>
+                  <option value="X-3">X-3</option>
+                  <option value="X-4">X-4</option>
+                  <option value="X-5">X-5</option>
+                  <option value="X-6">X-6</option>
+                  <option value="X-7">X-7</option>
+                  <option value="X-8">X-8</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sangga"><i class="fas fa-users"></i> Sangga:</label>
+                <select id="sangga" name="sangga" required>
+                  <option value="">Pilih Sangga</option>
+                  <option value="Pendobrak">Pendobrak</option>
+                  <option value="Penegas">Penegas</option>
+                  <option value="Perintis">Perintis</option>
+                  <option value="Pencoba">Pencoba</option>
+                  <option value="Pelaksana">Pelaksana</option>
+                </select>
+              </div>
+              <div class="form-group full-row">
+                <label for="pkKelas"><i class="fas fa-chalkboard-teacher"></i> Nama Pembina Kelas (PK):</label>
+                <input type="text" id="pkKelas" name="pkKelas" required />
+              </div>
+              <div class="form-group full-row">
+                <label for="alasan"><i class="fas fa-comment-alt"></i> Alasan Tidak Mengikuti:</label>
+                <textarea id="alasan" name="alasan" rows="4" placeholder="Jelaskan alasan Anda tidak dapat mengikuti kegiatan pramuka..." required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit"><i class="fas fa-file-alt"></i> Buat Surat</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="canvasSection" class="canvas-section" style="display: none;" aria-label="Preview surat">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title"><i class="fas fa-eye" aria-hidden="true"></i> Preview Surat</span>
+        </div>
+        <div class="card-body">
+          <canvas id="suratCanvas" style="display: none;"></canvas>
+          <div class="button-group">
+            <button type="button" class="btn-download" onclick="downloadSurat()"><i class="fas fa-download"></i> Download Surat</button>
+            <button type="button" class="btn-back" onclick="backToForm()"><i class="fas fa-arrow-left"></i> Kembali ke Form</button>
+          </div>
+          <div id="previewContainer" class="preview-container"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-icons" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="#5D4037" stroke-width="1.5"/><path d="M14.5 9.5 L10.2 10.8 L9 15 L13.3 13.7 Z" fill="#8D6E63" stroke="#5D4037" stroke-width="0.8"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20 4 C13 4, 8 9, 8 16 C8 16, 8 20, 4 20 C10 20, 16 16, 20 10 Z" fill="#4CAF50" opacity="0.85"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M12 12 C10 10, 10 8, 12 6 C14 8, 14 10, 12 12 Z" fill="#FF9800"/><line x1="8" y1="16" x2="16" y2="19" stroke="#795548" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="16" x2="8" y2="19" stroke="#795548" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <small>Pramuka • Berani, Jujur, Tangguh</small>
+    </div>
+  </footer>
+
+  <script>
+    let formData = {};
+
+    document.getElementById('suratForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      formData = {
+        nama: document.getElementById('nama').value,
+        absen: document.getElementById('absen').value,
+        kelas: document.getElementById('kelas').value,
+        sangga: document.getElementById('sangga').value,
+        pkKelas: document.getElementById('pkKelas').value,
+        alasan: document.getElementById('alasan').value
+      };
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('canvasSection').style.display = 'block';
+      generatePreview();
+    });
+
+    function generatePreview() {
+      const canvas = document.getElementById('suratCanvas');
+      const ctx = canvas.getContext('2d');
+      const baseWidth = 794;
+      const baseHeight = 1123;
+      const scale = 2480 / baseWidth;
+      canvas.width = baseWidth * scale;
+      canvas.height = baseHeight * scale;
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, baseWidth, baseHeight);
+
+      ctx.save();
+      ctx.globalAlpha = 0.06;
+      ctx.translate(baseWidth/2, baseHeight/2);
+      ctx.rotate(-Math.PI/8);
+      ctx.textAlign = 'center';
+      ctx.font = 'bold 96px Times New Roman';
+      ctx.fillStyle = '#7b5b46';
+      ctx.fillText('DIPORANI', 0, 0);
+      ctx.restore();
+
+      ctx.fillStyle = '#000000';
+      ctx.textAlign = 'left';
+      ctx.font = '16px Times New Roman';
+
+      let y = 80;
+      const leftMargin = 100;
+      const rightMargin = 100;
+      const lineHeight = 26;
+
+      const today = new Date();
+      const location = 'Kasihan';
+      const dateStr = today.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+      ctx.fillText('Perihal', leftMargin, y);
+      ctx.fillText(': Permohonan ijin tidak mengikuti kegiatan pramuka', leftMargin + 80, y);
+      ctx.textAlign = 'right';
+      ctx.fillText(`${location}, ${dateStr}`, baseWidth - rightMargin, y);
+      ctx.textAlign = 'left';
+      y += lineHeight * 1.8;
+
+      ctx.fillText('Kepada Yth.', leftMargin, y); y += lineHeight;
+      ctx.fillText('Kakak Dewan Ambalan', leftMargin, y); y += lineHeight;
+      ctx.fillText('SMA Negeri 1 Kasihan', leftMargin, y); y += lineHeight;
+      ctx.fillText('Di tempat', leftMargin, y); y += lineHeight * 1.8;
+
+      ctx.fillText('Dengan Hormat,', leftMargin, y); y += lineHeight * 1.4;
+      const indent = leftMargin + 40;
+      ctx.fillText('Saya yang bertanda tangan di bawah ini:', indent, y); y += lineHeight * 1.4;
+
+      const labelWidth = 150; const dataIndent = indent + 20;
+      ctx.fillText('Nama', dataIndent, y); ctx.fillText(':', dataIndent + labelWidth, y); ctx.fillText(formData.nama, dataIndent + labelWidth + 20, y); y += lineHeight;
+      ctx.fillText('Nomor Absen', dataIndent, y); ctx.fillText(':', dataIndent + labelWidth, y); ctx.fillText(formData.absen, dataIndent + labelWidth + 20, y); y += lineHeight;
+      ctx.fillText('Kelas', dataIndent, y); ctx.fillText(':', dataIndent + labelWidth, y); ctx.fillText(formData.kelas, dataIndent + labelWidth + 20, y); y += lineHeight;
+      ctx.fillText('Sangga', dataIndent, y); ctx.fillText(':', dataIndent + labelWidth, y); ctx.fillText(formData.sangga, dataIndent + labelWidth + 20, y); y += lineHeight;
+      ctx.fillText('Pembina Kelas', dataIndent, y); ctx.fillText(':', dataIndent + labelWidth, y); ctx.fillText(formData.pkKelas, dataIndent + labelWidth + 20, y); y += lineHeight * 1.4;
+
+      const maxWidth = baseWidth - leftMargin - rightMargin - 40;
+      const reasonIntro = 'Dengan ini saya ingin memberitahukan bahwa saya tidak dapat mengikuti kegiatan pramuka dengan alasan sebagai berikut:';
+      let words = reasonIntro.split(' '); let line = '';
+      for (let word of words) { const testLine = line + word + ' '; const m = ctx.measureText(testLine); if (m.width > maxWidth && line !== '') { ctx.fillText(line, indent, y); line = word + ' '; y += lineHeight; } else { line = testLine; } }
+      if (line.trim() !== '') { ctx.fillText(line, indent, y); y += lineHeight * 1.2; }
+
+      words = formData.alasan.split(' '); line = '';
+      for (let word of words) { const testLine = line + word + ' '; const m = ctx.measureText(testLine); if (m.width > maxWidth && line !== '') { ctx.fillText(line, indent, y); line = word + ' '; y += lineHeight; } else { line = testLine; } }
+      if (line.trim() !== '') { ctx.fillText(line, indent, y); y += lineHeight * 1.6; }
+
+      const closing = 'Demikian surat ijin saya sampaikan dengan sebenar-benarnya. Atas perhatiannya saya ucapkan terima kasih.';
+      words = closing.split(' '); line = '';
+      for (let word of words) { const testLine = line + word + ' '; const m = ctx.measureText(testLine); if (m.width > maxWidth && line !== '') { ctx.fillText(line, indent, y); line = word + ' '; y += lineHeight; } else { line = testLine; } }
+      if (line.trim() !== '') { ctx.fillText(line, indent, y); y += lineHeight * 2.2; }
+
+      const signatureStartY = y;
+      const hormatSayaX = baseWidth - rightMargin - 80;
+      ctx.textAlign = 'center';
+      ctx.fillText('Hormat Saya,', hormatSayaX, signatureStartY);
+      let lineY = signatureStartY + lineHeight * 3.5;
+      ctx.fillText('( ' + formData.nama + ' )', hormatSayaX, lineY);
+
+      y = signatureStartY + lineHeight * 6;
+      const colSpacing = (baseWidth - leftMargin - rightMargin) / 3;
+      const col1X = leftMargin + colSpacing * 0.5;
+      const col2X = leftMargin + colSpacing * 1.5;
+      const col3X = leftMargin + colSpacing * 2.5;
+      ctx.textAlign = 'center';
+      ctx.fillText('Mengetahui,', col1X, y); ctx.font = 'bold 16px Times New Roman'; ctx.fillText('Pembina Kelas', col1X, y + lineHeight); ctx.font = '16px Times New Roman'; lineY = y + lineHeight * 4; ctx.fillText('( ' + formData.pkKelas + ' )', col1X, lineY);
+      ctx.fillText('Mengetahui,', col2X, y); ctx.font = 'bold 16px Times New Roman'; ctx.fillText('Kamabigus', col2X, y + lineHeight); ctx.font = '16px Times New Roman'; lineY = y + lineHeight * 4; ctx.fillText('( ____________________ )', col2X, lineY);
+      ctx.fillText('Mengetahui,', col3X, y); ctx.font = 'bold 16px Times New Roman'; ctx.fillText('Judat', col3X, y + lineHeight); ctx.font = '16px Times New Roman'; lineY = y + lineHeight * 4; ctx.fillText('( ____________________ )', col3X, lineY);
+
+      const previewImg = document.createElement('img');
+      previewImg.src = canvas.toDataURL();
+      previewImg.style.maxWidth = '100%';
+      previewImg.style.border = '1px solid #ddd';
+      previewImg.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+      const previewContainer = document.getElementById('previewContainer');
+      previewContainer.innerHTML = '';
+      previewContainer.appendChild(previewImg);
+    }
+
+    function downloadSurat() {
+      generatePreview();
+      const canvas = document.getElementById('suratCanvas');
+      const imgData = canvas.toDataURL('image/png');
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      const pdfWidth = 210; const pdfHeight = 297;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      const filename = `Surat_Ijin_Pramuka_${formData.nama.replace(/\s/g, '_')}_${formData.kelas}.pdf`;
+      pdf.save(filename);
+    }
+
+    function backToForm() {
+      document.getElementById('canvasSection').style.display = 'none';
+      document.getElementById('formSection').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

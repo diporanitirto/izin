@@ -1,0 +1,197 @@
+        function generatePreview() {
+            const canvas = document.getElementById('suratCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size (A4 ratio)
+            canvas.width = 794;
+            canvas.height = 1123;
+
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Border
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
+
+            // Header Section
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 24px Times New Roman';
+            ctx.textAlign = 'center';
+            
+            let y = 80;
+            ctx.fillText('SURAT IJIN', canvas.width / 2, y);
+            y += 30;
+            ctx.font = '18px Times New Roman';
+            ctx.fillText('TIDAK MENGIKUTI KEGIATAN PRAMUKA', canvas.width / 2, y);
+            
+            // Horizontal line
+            y += 20;
+            ctx.beginPath();
+            ctx.moveTo(60, y);
+            ctx.lineTo(canvas.width - 60, y);
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Content
+            ctx.fillStyle = '#000000';
+            ctx.textAlign = 'left';
+            ctx.font = '16px Times New Roman';
+
+            y += 40;
+            const leftMargin = 80;
+            const lineHeight = 28;
+
+            // Date
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('id-ID', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            ctx.textAlign = 'right';
+            ctx.fillText(dateStr, canvas.width - 80, y);
+            ctx.textAlign = 'left';
+            y += lineHeight * 2;
+
+            // Kepada
+            ctx.fillText('Kepada Yth.', leftMargin, y);
+            y += lineHeight;
+            ctx.fillText('Pembina Pramuka', leftMargin, y);
+            y += lineHeight;
+            ctx.fillText('SMA Negeri [Nama Sekolah]', leftMargin, y);
+            y += lineHeight;
+            ctx.fillText('Di tempat', leftMargin, y);
+            y += lineHeight * 2;
+
+            // Salam
+            ctx.fillText('Dengan hormat,', leftMargin, y);
+            y += lineHeight * 1.5;
+
+            // Opening
+            ctx.fillText('Yang bertanda tangan di bawah ini:', leftMargin, y);
+            y += lineHeight * 1.5;
+
+            // Student data with proper spacing
+            const labelWidth = 140;
+            const dataLeftMargin = leftMargin + 20;
+            
+            ctx.fillText('Nama', dataLeftMargin, y);
+            ctx.fillText(':', dataLeftMargin + labelWidth, y);
+            ctx.fillText(formData.nama, dataLeftMargin + labelWidth + 20, y);
+            y += lineHeight;
+            
+            ctx.fillText('Nomor Absen', dataLeftMargin, y);
+            ctx.fillText(':', dataLeftMargin + labelWidth, y);
+            ctx.fillText(formData.absen, dataLeftMargin + labelWidth + 20, y);
+            y += lineHeight;
+            
+            ctx.fillText('Kelas', dataLeftMargin, y);
+            ctx.fillText(':', dataLeftMargin + labelWidth, y);
+            ctx.fillText(formData.kelas, dataLeftMargin + labelWidth + 20, y);
+            y += lineHeight;
+            
+            ctx.fillText('Sangga', dataLeftMargin, y);
+            ctx.fillText(':', dataLeftMargin + labelWidth, y);
+            ctx.fillText(formData.sangga, dataLeftMargin + labelWidth + 20, y);
+            y += lineHeight;
+            
+            ctx.fillText('Pembina Kelas', dataLeftMargin, y);
+            ctx.fillText(':', dataLeftMargin + labelWidth, y);
+            ctx.fillText(formData.pkKelas, dataLeftMargin + labelWidth + 20, y);
+            y += lineHeight * 2;
+
+            // Reason introduction
+            ctx.fillText('Dengan ini mengajukan permohonan ijin untuk tidak mengikuti kegiatan', leftMargin, y);
+            y += lineHeight;
+            ctx.fillText('pramuka dengan alasan sebagai berikut:', leftMargin, y);
+            y += lineHeight * 1.5;
+
+            // Wrap reason text
+            const maxWidth = canvas.width - leftMargin * 2 - 40;
+            const words = formData.alasan.split(' ');
+            let line = '';
+            
+            for (let word of words) {
+                const testLine = line + word + ' ';
+                const metrics = ctx.measureText(testLine);
+                
+                if (metrics.width > maxWidth && line !== '') {
+                    ctx.fillText(line, dataLeftMargin, y);
+                    line = word + ' ';
+                    y += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            if (line.trim() !== '') {
+                ctx.fillText(line, dataLeftMargin, y);
+                y += lineHeight * 1.5;
+            }
+
+            // Closing
+            ctx.fillText('Demikian surat permohonan ijin ini saya buat dengan sesungguhnya. Atas', leftMargin, y);
+            y += lineHeight;
+            ctx.fillText('perhatian dan kebijaksanaannya, saya ucapkan terima kasih.', leftMargin, y);
+            y += lineHeight * 3;
+
+            // Signature section layout
+            const signatureY = y;
+            const colWidth = (canvas.width - leftMargin * 2) / 4;
+            const col1X = leftMargin + colWidth * 0.5;
+            const col2X = leftMargin + colWidth * 1.5;
+            const col3X = leftMargin + colWidth * 2.5;
+            const col4X = leftMargin + colWidth * 3.5;
+
+            // Hormat saya (Siswa)
+            ctx.textAlign = 'center';
+            ctx.fillText('Hormat saya,', col1X, signatureY);
+            let nameY = signatureY + lineHeight * 4.5;
+            ctx.fillText('(____________________)', col1X, nameY);
+            nameY += lineHeight;
+            ctx.font = '14px Times New Roman';
+            ctx.fillText(formData.nama, col1X, nameY);
+            ctx.font = '16px Times New Roman';
+
+            // Mengetahui - Judat
+            ctx.fillText('Mengetahui,', col2X, signatureY);
+            nameY = signatureY + lineHeight;
+            ctx.font = 'bold 16px Times New Roman';
+            ctx.fillText('Ketua Judat', col2X, nameY);
+            ctx.font = '16px Times New Roman';
+            nameY = signatureY + lineHeight * 4.5;
+            ctx.fillText('(____________________)', col2X, nameY);
+
+            // Mengetahui - Kamabigus
+            ctx.fillText('Mengetahui,', col3X, signatureY);
+            nameY = signatureY + lineHeight;
+            ctx.font = 'bold 16px Times New Roman';
+            ctx.fillText('Kamabigus', col3X, nameY);
+            ctx.font = '16px Times New Roman';
+            nameY = signatureY + lineHeight * 4.5;
+            ctx.fillText('(____________________)', col3X, nameY);
+
+            // Mengetahui - PK
+            ctx.fillText('Mengetahui,', col4X, signatureY);
+            nameY = signatureY + lineHeight;
+            ctx.font = 'bold 16px Times New Roman';
+            ctx.fillText('Pembina Kelas', col4X, nameY);
+            ctx.font = '16px Times New Roman';
+            nameY = signatureY + lineHeight * 4.5;
+            ctx.fillText('(____________________)', col4X, nameY);
+            nameY += lineHeight;
+            ctx.font = '14px Times New Roman';
+            ctx.fillText(formData.pkKelas, col4X, nameY);
+
+            // Create preview image
+            const previewImg = document.createElement('img');
+            previewImg.src = canvas.toDataURL();
+            previewImg.style.maxWidth = '100%';
+            previewImg.style.border = '1px solid #ddd';
+            previewImg.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            
+            const previewContainer = document.getElementById('previewContainer');
+            previewContainer.innerHTML = '';
+            previewContainer.appendChild(previewImg);
+        }
