@@ -13,10 +13,11 @@ interface FormData {
 
 interface SuratFormProps {
   onSubmit: (data: FormData) => void;
+  initialData?: FormData;
 }
 
-export default function SuratForm({ onSubmit }: SuratFormProps) {
-  const [formData, setFormData] = useState<FormData>({
+export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
+  const [formData, setFormData] = useState<FormData>(initialData || {
     nama: '',
     absen: '',
     kelas: '',
@@ -40,18 +41,18 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
   return (
     <section className="fade-in" aria-label="Form pembuatan surat">
       <div className="border border-[#BCAAA4] rounded-lg overflow-hidden bg-white">
-        <div className="bg-[#efe7d3] border-b border-[#BCAAA4] px-4 py-3">
-          <span className="font-bold text-mediumBrown">
-            <i className="fas fa-clipboard-list mr-2" aria-hidden="true"></i>
+        <div className="bg-[#efe7d3] border-b border-[#BCAAA4] px-3 sm:px-4 py-2 sm:py-3">
+          <span className="font-bold text-mediumBrown text-sm sm:text-base">
+            <i className="fas fa-clipboard-list mr-1.5 sm:mr-2 text-xs sm:text-sm" aria-hidden="true"></i>
             Form Izin Pramuka
           </span>
         </div>
-        <div className="p-4">
+        <div className="p-3 sm:p-4">
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               <div className="form-group">
-                <label htmlFor="nama" className="block mb-2 text-[#2c3e50] font-medium text-[0.95em]">
-                  <i className="fas fa-user text-lightBrown mr-2 w-4 inline-block text-center"></i>
+                <label htmlFor="nama" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
+                  <i className="fas fa-user text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Nama Lengkap:
                 </label>
                 <input
@@ -61,13 +62,13 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
                   value={formData.nama}
                   onChange={handleChange}
                   required
-                  className="w-full px-[15px] py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown focus:outline-none focus:border-mediumBrown transition-colors"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors"
                 />
               </div>
               
               <div className="form-group">
-                <label htmlFor="absen" className="block mb-2 text-[#2c3e50] font-medium text-[0.95em]">
-                  <i className="fas fa-hashtag text-lightBrown mr-2 w-4 inline-block text-center"></i>
+                <label htmlFor="absen" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
+                  <i className="fas fa-hashtag text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Nomor Absen:
                 </label>
                 <input
@@ -77,13 +78,13 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
                   value={formData.absen}
                   onChange={handleChange}
                   required
-                  className="w-full px-[15px] py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown focus:outline-none focus:border-mediumBrown transition-colors"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors"
                 />
               </div>
               
               <div className="form-group">
-                <label htmlFor="kelas" className="block mb-2 text-[#2c3e50] font-medium text-[0.95em]">
-                  <i className="fas fa-school text-lightBrown mr-2 w-4 inline-block text-center"></i>
+                <label htmlFor="kelas" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
+                  <i className="fas fa-school text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Kelas:
                 </label>
                 <select
@@ -92,7 +93,7 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
                   value={formData.kelas}
                   onChange={handleChange}
                   required
-                  className="w-full px-[15px] py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer"
                 >
                   <option value="">Pilih Kelas</option>
                   <option value="X-1">X-1</option>
@@ -107,8 +108,8 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
               </div>
               
               <div className="form-group">
-                <label htmlFor="sangga" className="block mb-2 text-[#2c3e50] font-medium text-[0.95em]">
-                  <i className="fas fa-users text-lightBrown mr-2 w-4 inline-block text-center"></i>
+                <label htmlFor="sangga" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
+                  <i className="fas fa-users text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Sangga:
                 </label>
                 <select
@@ -117,7 +118,7 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
                   value={formData.sangga}
                   onChange={handleChange}
                   required
-                  className="w-full px-[15px] py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer"
                 >
                   <option value="">Pilih Sangga</option>
                   <option value="Pendobrak">Pendobrak</option>
@@ -129,8 +130,8 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
               </div>
               
               <div className="md:col-span-2">
-                <label htmlFor="pkKelas" className="block mb-2 text-[#2c3e50] font-medium text-[0.95em]">
-                  <i className="fas fa-chalkboard-teacher text-lightBrown mr-2 w-4 inline-block text-center"></i>
+                <label htmlFor="pkKelas" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
+                  <i className="fas fa-chalkboard-teacher text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Nama Pembina Kelas (PK):
                 </label>
                 <input
@@ -140,13 +141,13 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
                   value={formData.pkKelas}
                   onChange={handleChange}
                   required
-                  className="w-full px-[15px] py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown focus:outline-none focus:border-mediumBrown transition-colors"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors"
                 />
               </div>
               
               <div className="md:col-span-2">
-                <label htmlFor="alasan" className="block mb-2 text-[#2c3e50] font-medium text-[0.95em]">
-                  <i className="fas fa-comment-alt text-lightBrown mr-2 w-4 inline-block text-center"></i>
+                <label htmlFor="alasan" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
+                  <i className="fas fa-comment-alt text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Alasan Tidak Mengikuti:
                 </label>
                 <textarea
@@ -157,16 +158,16 @@ export default function SuratForm({ onSubmit }: SuratFormProps) {
                   rows={4}
                   placeholder="Jelaskan alasan Anda tidak dapat mengikuti kegiatan pramuka..."
                   required
-                  className="w-full px-[15px] py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown focus:outline-none focus:border-mediumBrown transition-colors resize-vertical min-h-[100px]"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors resize-vertical min-h-[100px]"
                 />
               </div>
             </div>
             
             <button
               type="submit"
-              className="w-full px-4 py-3.5 bg-mediumBrown text-white rounded font-medium text-base cursor-pointer hover:bg-darkBrown active:scale-[0.98] transition-all mt-2.5"
+              className="w-full px-4 py-3 sm:py-3.5 bg-mediumBrown text-white rounded font-medium text-sm sm:text-base cursor-pointer hover:bg-darkBrown active:scale-[0.98] transition-all mt-2 sm:mt-2.5"
             >
-              <i className="fas fa-file-alt mr-2"></i>
+              <i className="fas fa-file-alt mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
               Buat Surat
             </button>
           </form>

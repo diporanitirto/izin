@@ -45,9 +45,9 @@ export default function Home() {
       
       <Header />
       
-      <main className="max-w-[900px] mx-auto bg-[#fdfaf4] px-10 py-10 rounded-lg shadow-lg border-2 border-mediumBrown" role="main">
+      <main className="max-w-[900px] mx-auto bg-[#fdfaf4] px-4 sm:px-8 md:px-10 py-6 sm:py-8 md:py-10 rounded-lg shadow-lg border-2 border-mediumBrown" role="main">
         {!showPreview ? (
-          <SuratForm onSubmit={handleFormSubmit} />
+          <SuratForm onSubmit={handleFormSubmit} initialData={formData} />
         ) : (
           <PreviewSection formData={formData} onBack={handleBack} />
         )}

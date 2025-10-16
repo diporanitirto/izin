@@ -163,11 +163,11 @@
             nameY = signatureY + lineHeight * 4.5;
             ctx.fillText('(____________________)', col2X, nameY);
 
-            // Mengetahui - Kamabigus
+            // Mengetahui - Mabigus
             ctx.fillText('Mengetahui,', col3X, signatureY);
             nameY = signatureY + lineHeight;
             ctx.font = 'bold 16px Times New Roman';
-            ctx.fillText('Kamabigus', col3X, nameY);
+            ctx.fillText('Mabigus', col3X, nameY);
             ctx.font = '16px Times New Roman';
             nameY = signatureY + lineHeight * 4.5;
             ctx.fillText('(____________________)', col3X, nameY);

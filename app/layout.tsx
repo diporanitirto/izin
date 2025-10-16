@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Surat Ijin Tidak Mengikuti Pramuka",
-  description: "Generator surat izin tidak mengikuti kegiatan Pramuka dengan preview A4 dan unduh PDF.",
+  description: "Surat izin tidka mengikuti pramuka.",
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className="font-sans p-5" suppressHydrationWarning>
+      <body className="font-sans p-3 sm:p-5" suppressHydrationWarning>
         {children}
       </body>
     </html>

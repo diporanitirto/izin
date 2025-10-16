@@ -77,15 +77,18 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     const rightMargin = 100;
     const lineHeight = 26;
 
-    // Date and subject
+    // Date first (top right)
     const today = new Date();
     const location = 'Kasihan';
     const dateStr = today.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
-    ctx.fillText('Perihal', leftMargin, y);
-    ctx.fillText(': Permohonan ijin tidak mengikuti kegiatan pramuka', leftMargin + 80, y);
     ctx.textAlign = 'right';
     ctx.fillText(`${location}, ${dateStr}`, baseWidth - rightMargin, y);
     ctx.textAlign = 'left';
+    y += lineHeight * 1.2;
+    
+    // Subject
+    ctx.fillText('Perihal', leftMargin, y);
+    ctx.fillText(': Permohonan ijin tidak mengikuti kegiatan pramuka', leftMargin + 80, y);
     y += lineHeight * 1.8;
 
     // Recipient
@@ -96,10 +99,10 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
 
     // Opening
     ctx.fillText('Dengan Hormat,', leftMargin, y); y += lineHeight * 1.4;
-    const indent = leftMargin + 40;
-    ctx.fillText('Saya yang bertanda tangan di bawah ini:', indent, y); y += lineHeight * 1.4;
+    ctx.fillText('Saya yang bertanda tangan di bawah ini:', leftMargin, y); y += lineHeight * 1.4;
 
     // Personal data
+    const indent = leftMargin + 40;
     const labelWidth = 150;
     const dataIndent = indent + 20;
     ctx.fillText('Nama', dataIndent, y);
@@ -127,65 +130,105 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     ctx.fillText(formData.pkKelas, dataIndent + labelWidth + 20, y);
     y += lineHeight * 1.4;
 
+    // Helper function for justified text
+    const drawJustifiedText = (text: string, x: number, yPos: number, maxW: number, isLastLine: boolean = false) => {
+      const words = text.trim().split(' ');
+      if (words.length === 1 || isLastLine) {
+        ctx.fillText(text, x, yPos);
+        return;
+      }
+      
+      const totalTextWidth = ctx.measureText(words.join('')).width;
+      const totalSpaces = words.length - 1;
+      const spaceWidth = (maxW - totalTextWidth) / totalSpaces;
+      
+      let currentX = x;
+      words.forEach((word, index) => {
+        ctx.fillText(word, currentX, yPos);
+        currentX += ctx.measureText(word).width + spaceWidth;
+      });
+    };
+
     // Reason intro
-    const maxWidth = baseWidth - leftMargin - rightMargin - 40;
+    const maxWidth = baseWidth - leftMargin - rightMargin;
     const reasonIntro = 'Dengan ini saya ingin memberitahukan bahwa saya tidak dapat mengikuti kegiatan pramuka dengan alasan sebagai berikut:';
     let words = reasonIntro.split(' ');
     let line = '';
+    let lines: string[] = [];
+    
     for (let word of words) {
       const testLine = line + word + ' ';
       const m = ctx.measureText(testLine);
       if (m.width > maxWidth && line !== '') {
-        ctx.fillText(line, indent, y);
+        lines.push(line.trim());
         line = word + ' ';
-        y += lineHeight;
       } else {
         line = testLine;
       }
     }
     if (line.trim() !== '') {
-      ctx.fillText(line, indent, y);
-      y += lineHeight * 1.2;
+      lines.push(line.trim());
     }
+    
+    lines.forEach((l, index) => {
+      const isLast = index === lines.length - 1;
+      drawJustifiedText(l, leftMargin, y, maxWidth, isLast);
+      y += lineHeight;
+    });
+    y += lineHeight * 0.2;
 
     // Main reason
     words = formData.alasan.split(' ');
     line = '';
+    lines = [];
+    
     for (let word of words) {
       const testLine = line + word + ' ';
       const m = ctx.measureText(testLine);
       if (m.width > maxWidth && line !== '') {
-        ctx.fillText(line, indent, y);
+        lines.push(line.trim());
         line = word + ' ';
-        y += lineHeight;
       } else {
         line = testLine;
       }
     }
     if (line.trim() !== '') {
-      ctx.fillText(line, indent, y);
-      y += lineHeight * 1.6;
+      lines.push(line.trim());
     }
+    
+    lines.forEach((l, index) => {
+      const isLast = index === lines.length - 1;
+      drawJustifiedText(l, leftMargin, y, maxWidth, isLast);
+      y += lineHeight;
+    });
+    y += lineHeight * 0.6;
 
     // Closing
     const closing = 'Demikian surat ijin saya sampaikan dengan sebenar-benarnya. Atas perhatiannya saya ucapkan terima kasih.';
     words = closing.split(' ');
     line = '';
+    lines = [];
+    
     for (let word of words) {
       const testLine = line + word + ' ';
       const m = ctx.measureText(testLine);
       if (m.width > maxWidth && line !== '') {
-        ctx.fillText(line, indent, y);
+        lines.push(line.trim());
         line = word + ' ';
-        y += lineHeight;
       } else {
         line = testLine;
       }
     }
     if (line.trim() !== '') {
-      ctx.fillText(line, indent, y);
-      y += lineHeight * 2.2;
+      lines.push(line.trim());
     }
+    
+    lines.forEach((l, index) => {
+      const isLast = index === lines.length - 1;
+      drawJustifiedText(l, leftMargin, y, maxWidth, isLast);
+      y += lineHeight;
+    });
+    y += lineHeight * 1.2;
 
     // Signature section
     const signatureStartY = y;
@@ -212,14 +255,14 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
 
     ctx.fillText('Mengetahui,', col2X, y);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Kamabigus', col2X, y + lineHeight);
+    ctx.fillText('Judat', col2X, y + lineHeight);
     ctx.font = '16px Times New Roman';
     lineY = y + lineHeight * 4;
     ctx.fillText('( ____________________ )', col2X, lineY);
 
     ctx.fillText('Mengetahui,', col3X, y);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Judat', col3X, y + lineHeight);
+    ctx.fillText('Kamabigus', col3X, y + lineHeight);
     ctx.font = '16px Times New Roman';
     lineY = y + lineHeight * 4;
     ctx.fillText('( ____________________ )', col3X, lineY);
@@ -248,33 +291,24 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
   return (
     <section className="fade-in" aria-label="Preview surat">
       <div className="border border-[#BCAAA4] rounded-lg overflow-hidden bg-white">
-        <div className="bg-[#efe7d3] border-b border-[#BCAAA4] px-4 py-3">
-          <span className="font-bold text-mediumBrown">
-            <i className="fas fa-eye mr-2" aria-hidden="true"></i>
+        <div className="bg-[#efe7d3] border-b border-[#BCAAA4] px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
+          <span className="font-bold text-mediumBrown text-sm sm:text-base">
+            <i className="fas fa-eye mr-1.5 sm:mr-2 text-xs sm:text-sm" aria-hidden="true"></i>
             Preview Surat
           </span>
+          <button
+            onClick={onBack}
+            className="px-2 py-1.5 bg-[#a1887f] text-white rounded text-xs sm:text-sm cursor-pointer hover:bg-lightBrown transition-all flex items-center gap-1"
+            title="Kembali ke Form"
+          >
+            <i className="fas fa-arrow-left text-xs"></i>
+            <span className="hidden sm:inline">Kembali</span>
+          </button>
         </div>
-        <div className="p-4">
+        <div className="p-3 sm:p-4">
           <canvas ref={canvasRef} className="hidden"></canvas>
           
-          <div className="flex flex-wrap gap-[15px] mb-[30px]">
-            <button
-              onClick={downloadSurat}
-              className="flex-1 min-w-[200px] px-4 py-3.5 bg-scoutGreen text-white rounded font-medium text-base cursor-pointer hover:bg-[#388E3C] transition-all"
-            >
-              <i className="fas fa-download mr-2"></i>
-              Download Surat
-            </button>
-            <button
-              onClick={onBack}
-              className="flex-1 min-w-[200px] px-4 py-3.5 bg-[#a1887f] text-white rounded font-medium text-base cursor-pointer hover:bg-lightBrown transition-all"
-            >
-              <i className="fas fa-arrow-left mr-2"></i>
-              Kembali ke Form
-            </button>
-          </div>
-          
-          <div className="bg-[#f8f9fa] p-5 rounded text-center">
+          <div className="bg-[#f8f9fa] p-2 sm:p-5 rounded text-center mb-3 sm:mb-4">
             {previewUrl && (
               <Image
                 src={previewUrl}
@@ -286,6 +320,14 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
               />
             )}
           </div>
+          
+          <button
+            onClick={downloadSurat}
+            className="w-full px-4 py-3 sm:py-3.5 bg-scoutGreen text-white rounded font-medium text-sm sm:text-base cursor-pointer hover:bg-[#388E3C] transition-all"
+          >
+            <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
+            Download Surat PDF
+          </button>
         </div>
       </div>
     </section>
