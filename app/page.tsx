@@ -27,7 +27,21 @@ export default function Home() {
     alasan: '',
   });
 
-  const handleFormSubmit = (data: FormData) => {
+  const handleFormSubmit = async (data: FormData) => {
+    const response = await fetch('/api/telegram', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorPayload = await response.json().catch(() => null);
+      const message = errorPayload?.error ?? 'Gagal mengirim notifikasi Telegram.';
+      throw new Error(message);
+    }
+
     setFormData(data);
     setShowPreview(true);
   };

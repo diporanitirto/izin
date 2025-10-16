@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 
 interface FormData {
   nama: string;
@@ -12,23 +12,43 @@ interface FormData {
 }
 
 interface SuratFormProps {
-  onSubmit: (data: FormData) => void;
+  onSubmit: (data: FormData) => Promise<void>;
   initialData?: FormData;
 }
 
 export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
-  const [formData, setFormData] = useState<FormData>(initialData || {
-    nama: '',
-    absen: '',
-    kelas: '',
-    sangga: '',
-    pkKelas: '',
-    alasan: '',
-  });
+  const [formData, setFormData] = useState<FormData>(
+    initialData || {
+      nama: '',
+      absen: '',
+      kelas: '',
+      sangga: '',
+      pkKelas: '',
+      alasan: '',
+    },
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(formData);
+    setErrorMessage(null);
+    setIsSubmitting(true);
+
+    try {
+      await onSubmit(formData);
+    } catch (error) {
+      console.error('Gagal mengirim data ke Telegram:', error);
+      setErrorMessage('Terjadi kendala saat mengirim data. Silakan coba lagi.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -165,11 +185,18 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
             
             <button
               type="submit"
-              className="w-full px-4 py-3 sm:py-3.5 bg-mediumBrown text-white rounded font-medium text-sm sm:text-base cursor-pointer hover:bg-darkBrown active:scale-[0.98] transition-all mt-2 sm:mt-2.5"
+              disabled={isSubmitting}
+              className="w-full px-4 py-3 sm:py-3.5 bg-mediumBrown text-white rounded font-medium text-sm sm:text-base cursor-pointer hover:bg-darkBrown active:scale-[0.98] transition-all mt-2 sm:mt-2.5 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <i className="fas fa-file-alt mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-              Buat Surat
+              {isSubmitting ? 'Mengirim...' : 'Buat Surat'}
             </button>
+
+            {errorMessage && (
+              <p className="mt-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+                {errorMessage}
+              </p>
+            )}
           </form>
         </div>
       </div>
