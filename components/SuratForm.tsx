@@ -29,12 +29,54 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [pkOptions, setPkOptions] = useState<string[]>([]);
+  const [isLoadingPk, setIsLoadingPk] = useState(true);
 
   useEffect(() => {
     if (initialData) {
       setFormData(initialData);
     }
   }, [initialData]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadPkOptions = async () => {
+      try {
+        const res = await fetch('/pk.json');
+        if (!res.ok) {
+          throw new Error(`Gagal memuat daftar PK (status ${res.status})`);
+        }
+        const data: string[] = await res.json();
+        if (!Array.isArray(data)) {
+          throw new Error('Format pk.json tidak valid');
+        }
+        if (isMounted) {
+          setPkOptions(data);
+          // ensure initial PK value is part of options for controlled select
+          if (formData.pkKelas && !data.includes(formData.pkKelas)) {
+            setPkOptions((prev) => [formData.pkKelas, ...prev]);
+          }
+        }
+      } catch (error) {
+        console.error('Tidak dapat memuat pk.json:', error);
+        if (isMounted) {
+          setPkOptions([]);
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoadingPk(false);
+        }
+      }
+    };
+
+    loadPkOptions();
+
+    return () => {
+      isMounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,9 +94,21 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    if (name === 'absen') {
+      // Allow only digits for absen field
+      const numericValue = value.replace(/\D/g, '');
+      setFormData({
+        ...formData,
+        [name]: numericValue,
+      });
+      return;
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -92,12 +146,14 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
                   Nomor Absen:
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   id="absen"
                   name="absen"
                   value={formData.absen}
                   onChange={handleChange}
                   required
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors"
                 />
               </div>
@@ -154,15 +210,22 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
                   <i className="fas fa-chalkboard-teacher text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Nama Pembina Kelas (PK):
                 </label>
-                <input
-                  type="text"
+                <select
                   id="pkKelas"
                   name="pkKelas"
                   value={formData.pkKelas}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors"
-                />
+                  disabled={isLoadingPk}
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  <option value="">{isLoadingPk ? 'Memuat daftar PK...' : 'Pilih Pembina Kelas'}</option>
+                  {pkOptions.map((pk) => (
+                    <option key={pk} value={pk}>
+                      {pk}
+                    </option>
+                  ))}
+                </select>
               </div>
               
               <div className="md:col-span-2">
