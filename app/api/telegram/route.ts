@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
 
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-
 interface TelegramPayload {
   nama: string;
   absen: string;
@@ -14,6 +11,9 @@ interface TelegramPayload {
 
 export async function POST(request: Request) {
   try {
+    const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+    const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
     const payload = (await request.json()) as Partial<TelegramPayload>;
 
     const requiredFields: Array<keyof TelegramPayload> = [
