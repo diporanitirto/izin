@@ -22,19 +22,37 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
   const [previewUrl, setPreviewUrl] = useState<string>('');
 
   useEffect(() => {
+    // regenerate preview when form data changes
     generatePreview();
   }, [formData]);
 
-  const generatePreview = () => {
+  const generatePreview = async () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const baseWidth = 794;
-    const baseHeight = 1123;
-    const scale = 2480 / baseWidth;
+    // Try to load logo image from public assets; if it fails, continue with text-only watermark
+    let logoImg: HTMLImageElement | null = null;
+    try {
+      const img = new (window as any).Image() as HTMLImageElement;
+      // set crossOrigin to allow drawing into canvas without tainting in most dev setups
+      img.crossOrigin = 'anonymous';
+      img.src = '/assets/logo-diporani.png';
+      await new Promise((resolve, reject) => {
+        img.onload = () => resolve(true);
+        img.onerror = (e) => reject(e);
+      });
+      logoImg = img;
+    } catch (e) {
+      // image failed to load; keep logoImg as null and proceed
+      logoImg = null;
+    }
+
+  const baseWidth = 794;
+  const baseHeight = 1123;
+  const scale = 2000 / baseWidth; // ~200 DPI keeps readability while reducing file size
     canvas.width = baseWidth * scale;
     canvas.height = baseHeight * scale;
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
@@ -58,7 +76,24 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
         ctx.save();
         ctx.translate(x, y);
         ctx.rotate(-Math.PI / 8);
-        ctx.fillText('DIPORANI', 0, 0);
+        const rowIndex = Math.floor((y - startY) / wmSpacingY);
+        const colIndex = Math.floor((x - startX) / wmSpacingX);
+        const shouldDrawLogo = Boolean(logoImg) && ((rowIndex + colIndex) % 2 === 1);
+
+        if (shouldDrawLogo && logoImg) {
+          try {
+            ctx.save();
+            ctx.globalAlpha = 0.08;
+            const logoSize = 80;
+            ctx.drawImage(logoImg, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
+            ctx.restore();
+          } catch (e) {
+            ctx.fillText('DIPORANI', 0, 0);
+          }
+        } else {
+          ctx.fillText('DIPORANI', 0, 0);
+        }
+
         ctx.restore();
       }
     }
@@ -253,15 +288,15 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     lineY = y + lineHeight * 4;
     ctx.fillText('( ____________________ )', col3X, lineY);
 
-    setPreviewUrl(canvas.toDataURL());
+    setPreviewUrl(canvas.toDataURL('image/jpeg', 0.85));
   };
 
   const downloadSurat = async () => {
-    generatePreview();
+    await generatePreview();
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const imgData = canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL('image/jpeg', 0.85);
 
     const { jsPDF } = await import('jspdf');
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
