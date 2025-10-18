@@ -28,17 +28,32 @@ export default function Home() {
   });
 
   const handleFormSubmit = async (data: FormData) => {
-    const response = await fetch('/api/telegram', {
+    const headers = {
+      'Content-Type': 'application/json',
+    } as const;
+
+    const dbResponse = await fetch('/api/izin', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify(data),
     });
 
-    if (!response.ok) {
-      const errorPayload = await response.json().catch(() => null);
-      const message = errorPayload?.error ?? 'Gagal mengirim notifikasi Telegram.';
+    if (!dbResponse.ok) {
+      const errorPayload = await dbResponse.json().catch(() => null);
+      const message = errorPayload?.error ?? 'Gagal menyimpan data ke database.';
+      throw new Error(message);
+    }
+
+    const telegramResponse = await fetch('/api/telegram', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(data),
+    });
+
+    if (!telegramResponse.ok) {
+      const errorPayload = await telegramResponse.json().catch(() => null);
+      const message =
+        errorPayload?.error ?? 'Data tersimpan, tetapi notifikasi Telegram gagal dikirim.';
       throw new Error(message);
     }
 
