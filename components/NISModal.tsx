@@ -7,6 +7,7 @@ interface SiswaData {
   nama: string;
   presensi: number;
   nis: number;
+  sangga: string | null;
 }
 
 interface NISModalProps {

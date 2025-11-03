@@ -20,6 +20,7 @@ interface SuratFormProps {
     nama: string;
     kelas: string;
     absen: string;
+    sangga: string;
   };
 }
 
@@ -28,7 +29,7 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
     nama: siswaData.nama,
     absen: siswaData.absen,
     kelas: siswaData.kelas,
-    sangga: initialData?.sangga || '',
+    sangga: initialData?.sangga || siswaData.sangga || '',
     pkKelas: initialData?.pkKelas || '',
     alasan: initialData?.alasan || '',
     nis,
@@ -45,9 +46,10 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
       nama: siswaData.nama,
       absen: siswaData.absen,
       kelas: siswaData.kelas,
+      sangga: siswaData.sangga || prev.sangga,
       nis,
     }));
-  }, [siswaData.nama, siswaData.absen, siswaData.kelas, nis]);
+  }, [siswaData.nama, siswaData.absen, siswaData.kelas, siswaData.sangga, nis]);
 
   useEffect(() => {
     let isMounted = true;

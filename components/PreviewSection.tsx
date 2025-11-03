@@ -28,49 +28,44 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
   const [izinStatus, setIzinStatus] = useState<string>('pending');
   const [verifiedBy, setVerifiedBy] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [generatingPreview, setGeneratingPreview] = useState(false);
 
   useEffect(() => {
-    const initPreview = async () => {
-      setLoading(true);
-      try {
-        // Generate preview first
-        await generatePreview();
-        
-        // Then fetch status
-        if (propIzinId) {
-          await fetchIzinById(propIzinId);
-        } else {
-          await fetchIzinStatus();
-        }
-      } catch (error) {
-        console.error('Error initializing preview:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    initPreview();
+    // regenerate preview when form data changes
+    generatePreview();
+    // Only fetch status if izinId not provided (meaning it's a new submission)
+    if (!propIzinId) {
+      fetchIzinStatus();
+    }
   }, [formData, propIzinId]);
+
+  useEffect(() => {
+    // If izinId provided from props, fetch that specific izin's status
+    if (propIzinId) {
+      fetchIzinById(propIzinId);
+    }
+  }, [propIzinId]);
 
   const fetchIzinById = async (id: string) => {
     try {
+      setLoading(true);
       // Fetch langsung by ID
       const response = await fetch(`/api/izin/${id}`);
       const result = await response.json();
       
       if (result.success && result.data) {
-        setIzinId(id);
         setIzinStatus(result.data.status || 'pending');
         setVerifiedBy(result.data.verified_by || null);
       }
     } catch (error) {
       console.error('Error fetching izin by ID:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const fetchIzinStatus = async () => {
     try {
+      setLoading(true);
       // Cari izin berdasarkan absen (yang merupakan NIS)
       const response = await fetch(`/api/izin?nis=${formData.absen}`);
       const result = await response.json();
@@ -90,6 +85,8 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
       }
     } catch (error) {
       console.error('Error fetching izin status:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -411,70 +408,58 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
       return;
     }
 
-    try {
-      setGeneratingPreview(true);
-      await generatePreview();
-      const canvas = canvasRef.current;
-      if (!canvas) return;
+    await generatePreview();
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-      const imgData = canvas.toDataURL('image/jpeg', 0.85);
+    const imgData = canvas.toDataURL('image/jpeg', 0.85);
 
-      const { jsPDF } = await import('jspdf');
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-      const pdfWidth = 210;
-      const pdfHeight = 297;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      const filename = `Surat_Ijin_Pramuka_${formData.nama.replace(/\s/g, '_')}_${formData.kelas}.pdf`;
-      pdf.save(filename);
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Gagal membuat PDF. Silakan coba lagi.');
-    } finally {
-      setGeneratingPreview(false);
-    }
+    const { jsPDF } = await import('jspdf');
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const pdfWidth = 210;
+    const pdfHeight = 297;
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    const filename = `Surat_Ijin_Pramuka_${formData.nama.replace(/\s/g, '_')}_${formData.kelas}.pdf`;
+    pdf.save(filename);
   };
 
   return (
     <section className="fade-in" aria-label="Preview surat">
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="border border-[#BCAAA4] rounded-lg overflow-hidden bg-white">
-          <div className="bg-[#efe7d3] border-b border-[#BCAAA4] px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
-            <span className="font-bold text-mediumBrown text-sm sm:text-base">
-              <i className="fas fa-eye mr-1.5 sm:mr-2 text-xs sm:text-sm" aria-hidden="true"></i>
-              Preview Surat
-            </span>
-            <button
-              onClick={onBack}
-              className="px-3 py-2 bg-[#5D4037] text-white rounded text-sm cursor-pointer hover:bg-[#4E342E] transition-all flex items-center gap-2 font-semibold"
-              title="Kembali"
-            >
-              <i className="fas fa-arrow-left"></i>
-              <span>Kembali</span>
-            </button>
+      <div className="border border-[#BCAAA4] rounded-lg overflow-hidden bg-white">
+        <div className="bg-[#efe7d3] border-b border-[#BCAAA4] px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
+          <span className="font-bold text-mediumBrown text-sm sm:text-base">
+            <i className="fas fa-eye mr-1.5 sm:mr-2 text-xs sm:text-sm" aria-hidden="true"></i>
+            Preview Surat
+          </span>
+          <button
+            onClick={onBack}
+            className="px-3 py-2 bg-[#5D4037] text-white rounded text-sm cursor-pointer hover:bg-[#4E342E] transition-all flex items-center gap-2 font-semibold"
+            title="Kembali"
+          >
+            <i className="fas fa-arrow-left"></i>
+            <span>Kembali</span>
+          </button>
+        </div>
+        <div className="p-3 sm:p-4">
+          <canvas ref={canvasRef} className="hidden"></canvas>
+          
+          <div className="bg-[#f8f9fa] p-2 sm:p-5 rounded text-center mb-3 sm:mb-4">
+            {previewUrl && (
+              <Image
+                src={previewUrl}
+                alt="Preview Surat"
+                width={794}
+                height={1123}
+                className="max-w-full h-auto border border-[#ddd] rounded shadow-sm"
+                unoptimized
+              />
+            )}
           </div>
-          <div className="p-3 sm:p-4">
-            <canvas ref={canvasRef} className="hidden"></canvas>
-            
-            <div className="bg-[#f8f9fa] p-2 sm:p-5 rounded text-center mb-3 sm:mb-4">
-              {previewUrl ? (
-                <Image
-                  src={previewUrl}
-                  alt="Preview Surat"
-                  width={794}
-                  height={1123}
-                  className="max-w-full h-auto border border-[#ddd] rounded shadow-sm"
-                  unoptimized
-                />
-              ) : (
-                <div className="flex items-center justify-center h-96">
-                  <Loading />
-                </div>
-              )}
-            </div>
-            
-            {/* Status Verifikasi */}
+          
+          {/* Status Verifikasi */}
+          {loading ? (
+            <Loading />
+          ) : (
             <div className={`mb-4 p-4 rounded-lg ${
               izinStatus === 'approved' 
                 ? 'bg-green-50 border border-green-200' 
@@ -525,45 +510,36 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
                 </div>
               </div>
             </div>
-            
-            <button
-              onClick={downloadSurat}
-              disabled={izinStatus !== 'approved' || generatingPreview}
-              className={`w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all ${
-                izinStatus === 'approved' && !generatingPreview
-                  ? 'bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              {generatingPreview ? (
-                <>
-                  <i className="fas fa-spinner fa-spin mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-                  Membuat PDF...
-                </>
-              ) : (
-                <>
-                  <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-                  {izinStatus === 'approved' 
-                    ? 'Download Surat PDF' 
-                    : 'Download (Menunggu Verifikasi)'}
-                </>
-              )}
-            </button>
-            
-            {izinId && izinStatus === 'approved' && (
-              <a
-                href={`/verify/${izinId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block mt-3 text-center px-4 py-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-all text-sm"
-              >
-                <i className="fas fa-qrcode mr-2"></i>
-                Lihat Verifikasi Online
-              </a>
-            )}
-          </div>
+          )}
+          
+          <button
+            onClick={downloadSurat}
+            disabled={izinStatus !== 'approved' || loading}
+            className={`w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all ${
+              izinStatus === 'approved' && !loading
+                ? 'bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
+          >
+            <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
+            {izinStatus === 'approved' 
+              ? 'Download Surat PDF' 
+              : 'Download (Menunggu Verifikasi)'}
+          </button>
+          
+          {/* {izinId && izinStatus === 'approved' && (
+            // <a
+            //   href={`/verify/${izinId}`}
+            //   target="_blank"
+            //   rel="noopener noreferrer"
+            //   className="block mt-3 text-center px-4 py-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-all text-sm"
+            // >
+            //   <i className="fas fa-qrcode mr-2"></i>
+            //   Lihat Verifikasi Online
+            // </a>
+          )} */}
         </div>
-      )}
+      </div>
     </section>
   );
 }

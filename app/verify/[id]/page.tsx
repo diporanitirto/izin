@@ -56,7 +56,12 @@ export default function VerifyPage() {
       window.addEventListener('resize', updateQrSize);
       return () => window.removeEventListener('resize', updateQrSize);
     }
-    fetchIzin();
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      fetchIzin();
+    }
   }, [id]);
 
   const fetchIzin = async () => {

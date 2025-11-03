@@ -1,291 +1,2025 @@
 [
-{"kelas":"X1","nama":"NAYLA PUTRI FAWWAZAH","presensi":31,"nis":11803},
-{"kelas":"X1","nama":"NABILA AL KHALIFI","presensi":30,"nis":11787},
-{"kelas":"X1","nama":"BERNADETHA GRACE NATHANIA MAHARANI","presensi":15,"nis":11668},
-{"kelas":"X1","nama":"MUTIARA ADINDA MAYFINNA","presensi":29,"nis":11786},
-{"kelas":"X1","nama":"MUHAMMAD YUSUF AKBAR","presensi":28,"nis":11785},
-{"kelas":"X1","nama":"BASUNJAYA PRAYATASATYA","presensi":14,"nis":11667},
-{"kelas":"X1","nama":"ALLEA KIRA MEDINA","presensi":7,"nis":11619},
-{"kelas":"X1","nama":"LATHIFA WARDA MUTHMA'INNA","presensi":27,"nis":11752},
-{"kelas":"X1","nama":"KEANU ATHALLA NATANEGARA","presensi":26,"nis":11742},
-{"kelas":"X1","nama":"AWAN NIANDEWANTO","presensi":13,"nis":11657},
-{"kelas":"X1","nama":"JANEETA KHANSA SHALEHAH","presensi":25,"nis":11734},
-{"kelas":"X1","nama":"HANIFAH PUTRI AZZAHRA","presensi":24,"nis":11725},
-{"kelas":"X1","nama":"AVITA YESI ARMA WIBOWO","presensi":12,"nis":11656},
-{"kelas":"X1","nama":"ALKUIN GENDIS PENTA JUNIA","presensi":6,"nis":11618},
-{"kelas":"X1","nama":"AISHA NABILA AZALIA","presensi":3,"nis":11608},
-{"kelas":"X1","nama":"GIFTHA CHELSEA SANSIVERA SALSABILLA","presensi":23,"nis":11720},
-{"kelas":"X1","nama":"GEORGIANA ANGELIQUE CORINNA ANANDA NUGROHO","presensi":22,"nis":11718},
-{"kelas":"X1","nama":"AULISHA RINDA MALIKA","presensi":11,"nis":11654},
-{"kelas":"X1","nama":"FREDERICA BINTANG PEREIRA FERNANDEZ","presensi":21,"nis":11711},
-{"kelas":"X1","nama":"FLAVIANUS TEGAR CAHYOANANTA","presensi":20,"nis":11710},
-{"kelas":"X1","nama":"ATIKA TRI HAPSARI","presensi":10,"nis":11650},
-{"kelas":"X1","nama":"ALISSYA AZZAHRA","presensi":5,"nis":11616},
-{"kelas":"X1","nama":"FADLI ZAINNUR ROUF","presensi":19,"nis":11698},
-{"kelas":"X1","nama":"THALITA SHARLIZ GUSEL","presensi":36,"nis":11871},
-{"kelas":"X1","nama":"EVAN PRASETYA","presensi":18,"nis":11696},
-{"kelas":"X1","nama":"ARKAN MAIZA VALENS","presensi":9,"nis":11641},
-{"kelas":"X1","nama":"SUFYANNAFI' PUTRA SASMITA","presensi":35,"nis":11864},
-{"kelas":"X1","nama":"STEVANUS YUDY HENDRIANTO","presensi":34,"nis":11863},
-{"kelas":"X1","nama":"ELANG GANENDRA SAMUDRA","presensi":17,"nis":11692},
-{"kelas":"X1","nama":"SANIA AULIA DEWI","presensi":33,"nis":11850},
-{"kelas":"X1","nama":"REYZAL APRILIANO","presensi":32,"nis":11843},
-{"kelas":"X1","nama":"CAROLUS BANYU AJI WIBOWO","presensi":16,"nis":11679},
-{"kelas":"X1","nama":"ANNISAA YUNASTHISTI","presensi":8,"nis":11633},
-{"kelas":"X1","nama":"AKMAL RAJENDRA","presensi":4,"nis":11611},
-{"kelas":"X1","nama":"AILSATARA PUTRI JIANKA","presensi":2,"nis":11606},
-{"kelas":"X1","nama":"ADINDA SEKAR NOVISCHA","presensi":1,"nis":11602},
-{"kelas":"X2","nama":"NAYLA LAKSMITASANI","presensi":27,"nis":11802},
-{"kelas":"X2","nama":"NATHANAEL ARIF BUDIMAN","presensi":26,"nis":11799},
-{"kelas":"X2","nama":"NATANAEL CHRIZIO ALENATA","presensi":25,"nis":11797},
-{"kelas":"X2","nama":"NAJLA RAZITA KHAIRUNA","presensi":24,"nis":11791},
-{"kelas":"X2","nama":"LETA NAFISHA","presensi":23,"nis":11757},
-{"kelas":"X2","nama":"LATHIFATUL HALIM AL BATUL","presensi":22,"nis":11754},
-{"kelas":"X2","nama":"KAYLA ANANDITA DWI MARSHA","presensi":21,"nis":11741},
-{"kelas":"X2","nama":"JIHAN MAKAYLA FAKHIRAH","presensi":20,"nis":11737},
-{"kelas":"X2","nama":"JESSICA LAWRANCE CHRISTIAN HANS","presensi":19,"nis":11736},
-{"kelas":"X2","nama":"JESSICA ALENA PUTRI","presensi":18,"nis":11735},
-{"kelas":"X2","nama":"HERBUDI BAGOS CAHYO ENDARTO","presensi":17,"nis":11728},
-{"kelas":"X2","nama":"GHASY GHASSANO","presensi":16,"nis":11719},
-{"kelas":"X2","nama":"GAVIN AZARYA FATHIN","presensi":15,"nis":11717},
-{"kelas":"X2","nama":"FAYZA NAJWA TRIDYA RAMADHANI","presensi":14,"nis":11706},
-{"kelas":"X2","nama":"FAUZAN TSAQIF ATHARAYA","presensi":13,"nis":11705},
-{"kelas":"X2","nama":"FATIKA RIZQI SYARIFA","presensi":12,"nis":11704},
-{"kelas":"X2","nama":"FAISAL RAIS MAHENDRA","presensi":11,"nis":11701},
-{"kelas":"X2","nama":"DEFFA ZAKIA KHOIRUNNISA","presensi":10,"nis":11686},
-{"kelas":"X2","nama":"DANIEL ARRON DWIKA","presensi":9,"nis":11683},
-{"kelas":"X2","nama":"AZIZAH AZZAHRA PUTRI","presensi":8,"nis":11663},
-{"kelas":"X2","nama":"AYUDYA DWI PATRIANJANI","presensi":7,"nis":11660},
-{"kelas":"X2","nama":"AYOMI SEKAR MAHARANI","presensi":6,"nis":11659},
-{"kelas":"X2","nama":"AXEL REVANO PUTRA GETANA","presensi":5,"nis":11658},
-{"kelas":"X2","nama":"ANDREA GILCHRIST BRIDGET SETIAWAN","presensi":4,"nis":11628},
-{"kelas":"X2","nama":"ALYA SHAFIRA PURBANINGRUM","presensi":3,"nis":11623},
-{"kelas":"X2","nama":"ALYA NURUL AZIZAH","presensi":2,"nis":11622},
-{"kelas":"X2","nama":"AFNA PUTRI KHAIRUNNISA","presensi":1,"nis":11604},
-{"kelas":"X2","nama":"ZETH AMADEUS BUDIANTO","presensi":36,"nis":11884},
-{"kelas":"X2","nama":"YOSEFA AGARETHA AGNI APRILIA","presensi":35,"nis":11880},
-{"kelas":"X2","nama":"VINDY AULIA NIRWASITAATMAJA","presensi":34,"nis":11876},
-{"kelas":"X2","nama":"TALITHA MAULINDA RAHMA","presensi":33,"nis":11870},
-{"kelas":"X2","nama":"SURYA BAGUS PRASETYA","presensi":32,"nis":11866},
-{"kelas":"X2","nama":"SHAKIRA ADISTI FAJARIKA","presensi":31,"nis":11856},
-{"kelas":"X2","nama":"RENI JANUATI","presensi":30,"nis":11840},
-{"kelas":"X2","nama":"RAFKA NURI ARDIAN","presensi":29,"nis":11829},
-{"kelas":"X2","nama":"OCTAVIA NAILA PUTRI","presensi":28,"nis":11817},
-{"kelas":"X3","nama":"ZHIFARA QUEEN NABILA","presensi":36,"nis":11885},
-{"kelas":"X3","nama":"YURIN DWI MAHARANI","presensi":35,"nis":11883},
-{"kelas":"X3","nama":"YOSEFIN KEZIA AURELIA CHRISTY","presensi":34,"nis":11881},
-{"kelas":"X3","nama":"UMMU ZAHROTIL JANNAH","presensi":33,"nis":11873},
-{"kelas":"X3","nama":"TISA HERLIANA ADISTI","presensi":32,"nis":11872},
-{"kelas":"X3","nama":"STEPHANI KIARA DINANTI","presensi":31,"nis":11862},
-{"kelas":"X3","nama":"SHALOMITA JULIA ASRIANI","presensi":30,"nis":11857},
-{"kelas":"X3","nama":"PRAMA ABIMANYU","presensi":29,"nis":11818},
-{"kelas":"X3","nama":"NOVIA RAHMAWATI","presensi":28,"nis":11812},
-{"kelas":"X3","nama":"NARA TYAGA VIKOJAYANTA","presensi":27,"nis":11794},
-{"kelas":"X3","nama":"NADHIRA NURAZIZAH PUTRI","presensi":26,"nis":11788},
-{"kelas":"X3","nama":"MUHAMMAD NASHWAN SYAFIQ ZIYADATULLAH","presensi":25,"nis":11780},
-{"kelas":"X3","nama":"MONIKA PALMITA GREACE ANGELIKA SAPUTRI","presensi":24,"nis":11770},
-{"kelas":"X3","nama":"MARIA EMMANUELA PUTRI BERLIANA JATI","presensi":23,"nis":11763},
-{"kelas":"X3","nama":"KYLA ATHAYA ULIMA","presensi":22,"nis":11751},
-{"kelas":"X3","nama":"KARUNIA TRI ASTUTI","presensi":21,"nis":11740},
-{"kelas":"X3","nama":"IMAM ARIEF ARGIANSYAH","presensi":20,"nis":11732},
-{"kelas":"X3","nama":"IBRA FACHRIE RAMADHAN AL-HARRADA","presensi":19,"nis":11729},
-{"kelas":"X3","nama":"GALIH BAYU SAPUTRO","presensi":18,"nis":11715},
-{"kelas":"X3","nama":"FRIDAY AYUK NOVITASARI","presensi":17,"nis":11712},
-{"kelas":"X3","nama":"DHIKA FAJAR RAMADHAN","presensi":16,"nis":11689},
-{"kelas":"X3","nama":"DANTY NOOR RIKA","presensi":15,"nis":11684},
-{"kelas":"X3","nama":"AZIZ ASLAN HAKIM","presensi":14,"nis":11662},
-{"kelas":"X3","nama":"AURELIA PUTERI RINALDO","presensi":13,"nis":11655},
-{"kelas":"X3","nama":"ATALITHA DIAN WARA ARYANI","presensi":12,"nis":11648},
-{"kelas":"X3","nama":"ARUM WULANDARI","presensi":11,"nis":11645},
-{"kelas":"X3","nama":"ARSHAVIN TOMY PRASOJO","presensi":10,"nis":11644},
-{"kelas":"X3","nama":"ANANDA REIZKI FADDILLAH","presensi":9,"nis":11626},
-{"kelas":"X3","nama":"ALYSHA SHASTANIA ANNALANI","presensi":8,"nis":11624},
-{"kelas":"X3","nama":"ALIYYA TRISNANIA KHAIRANI","presensi":7,"nis":11617},
-{"kelas":"X3","nama":"Alifah Khansa","presensi":6,"nis":11615},
-{"kelas":"X3","nama":"ALHAFEZ FAEL SAPUTRA","presensi":5,"nis":11614},
-{"kelas":"X3","nama":"AKILA MONIFA AZALIA","presensi":4,"nis":11610},
-{"kelas":"X3","nama":"AKHTAR PRADITA DANISWARA","presensi":3,"nis":11609},
-{"kelas":"X3","nama":"ABDI GAYUH MUBAROK","presensi":2,"nis":11599},
-{"kelas":"X3","nama":"ABBEYGAIL RIVELI NOVIANTO","presensi":1,"nis":11598},
-{"kelas":"X4","nama":"MUHAMMAD AZRI SALMAN NUGROHO","presensi":19,"nis":11772},
-{"kelas":"X4","nama":"MOHAMAD SATRIA BAGASKARA DARMAWAN","presensi":18,"nis":11769},
-{"kelas":"X4","nama":"MARSITA PRADA","presensi":17,"nis":11765},
-{"kelas":"X4","nama":"MALIA KENESSA SWASTIA","presensi":16,"nis":11762},
-{"kelas":"X4","nama":"MAISIE AFRA PRAMUDITA","presensi":15,"nis":11761},
-{"kelas":"X4","nama":"M. FAUST PRADIPA","presensi":14,"nis":11759},
-{"kelas":"X4","nama":"GALIH PURNOMO","presensi":13,"nis":11716},
-{"kelas":"X4","nama":"FIOZA RAYHAN ATHALLA RAMADHAN","presensi":12,"nis":11709},
-{"kelas":"X4","nama":"ENDAH PRASMAWATI","presensi":11,"nis":11694},
-{"kelas":"X4","nama":"ELFRIDA AZALIA","presensi":10,"nis":11693},
-{"kelas":"X4","nama":"ELANG ARKAAN NAYAKA","presensi":9,"nis":11691},
-{"kelas":"X4","nama":"DERIEL TRIXIE NURILIA","presensi":8,"nis":11688},
-{"kelas":"X4","nama":"DELVIANY AGUSTYNA RAMADHANTY","presensi":7,"nis":11687},
-{"kelas":"X4","nama":"ASFA AULIA WULANDARI","presensi":6,"nis":11646},
-{"kelas":"X4","nama":"AQILA HILMI","presensi":5,"nis":11636},
-{"kelas":"X4","nama":"ANISA FITRIANA","presensi":4,"nis":11631},
-{"kelas":"X4","nama":"ANARGYA RIZQY PURWIKAN","presensi":3,"nis":11627},
-{"kelas":"X4","nama":"ALYSSA KYLA MAYDA","presensi":2,"nis":11625},
-{"kelas":"X4","nama":"ALMIRA ZIVARA AYUKUMALA","presensi":1,"nis":11621},
-{"kelas":"X4","nama":"YUAN KIRANA AZZAHRA","presensi":36,"nis":11882},
-{"kelas":"X4","nama":"VELISCA PRUDENCE KIRANI","presensi":35,"nis":11875},
-{"kelas":"X4","nama":"SHAFANA RAISAH BILLAH","presensi":34,"nis":11855},
-{"kelas":"X4","nama":"SATRIA BUDI PRATAMA","presensi":33,"nis":11852},
-{"kelas":"X4","nama":"ROIHANA SHAFA AZKA ATQIYA","presensi":32,"nis":11847},
-{"kelas":"X4","nama":"RAZMA JANITRA NEZARD SURYA","presensi":31,"nis":11837},
-{"kelas":"X4","nama":"RASDAN ADDIN NUGRAHA","presensi":30,"nis":11835},
-{"kelas":"X4","nama":"RANISSA INNAYA DEWI","presensi":29,"nis":11834},
-{"kelas":"X4","nama":"RAKHA BRAMANTYO ADHITYA PUTRA","presensi":28,"nis":11832},
-{"kelas":"X4","nama":"RADEN NAJASYI HAQQI MAJID","presensi":27,"nis":11825},
-{"kelas":"X4","nama":"QUEINZA AMADHITA PUTRI VINUA","presensi":26,"nis":11822},
-{"kelas":"X4","nama":"QISMIKA PUAN KAMAL","presensi":25,"nis":11820},
-{"kelas":"X4","nama":"NESYA KHANSA ASKIA DEVINTA","presensi":24,"nis":11807},
-{"kelas":"X4","nama":"NESWARA RAHMALISA","presensi":23,"nis":11806},
-{"kelas":"X4","nama":"NERISSA ARVIANA PUTRI SUSANTO","presensi":22,"nis":11805},
-{"kelas":"X4","nama":"MUHAMMAD WAHYU PRAMUKTI","presensi":21,"nis":11783},
-{"kelas":"X4","nama":"MUHAMMAD IRSYAD HARAIN PUTRA","presensi":20,"nis":11778},
-{"kelas":"X5","nama":"BILAL RAMADHAN BASYAR","presensi":7,"nis":11670},
-{"kelas":"X5","nama":"DAVINA ADELIA ZAHRA","presensi":11,"nis":11685},
-{"kelas":"X5","nama":"KARLINA","presensi":15,"nis":11738},
-{"kelas":"X5","nama":"SYAKIRA LARASATI RASYIDAH","presensi":36,"nis":11869},
-{"kelas":"X5","nama":"SEPTIA FITRIANI","presensi":35,"nis":11854},
-{"kelas":"X5","nama":"SAPHIRA NILAM CAHYA DILAGA","presensi":34,"nis":11851},
-{"kelas":"X5","nama":"SAID AFFANUR RULI","presensi":33,"nis":11848},
-{"kelas":"X5","nama":"RESTU ADITYA","presensi":32,"nis":11842},
-{"kelas":"X5","nama":"RAIHAN ZIDAN KHAIRY","presensi":30,"nis":11831},
-{"kelas":"X5","nama":"QUINNSA NASWA ARDONO","presensi":29,"nis":11823},
-{"kelas":"X5","nama":"PUSPITA RAHMA KUSUMANINGTYAS","presensi":28,"nis":11819},
-{"kelas":"X5","nama":"NAURA SALSABILA","presensi":26,"nis":11800},
-{"kelas":"X5","nama":"NASYWA AQILA KHOIRUNNISA","presensi":25,"nis":11796},
-{"kelas":"X5","nama":"NAILA ATAYA RADITA","presensi":24,"nis":11790},
-{"kelas":"X5","nama":"MUHAMMAD FARIS ARUWANTA","presensi":22,"nis":11775},
-{"kelas":"X5","nama":"MUHAMMAD BIMO ABDEE SANTOSO","presensi":21,"nis":11773},
-{"kelas":"X5","nama":"MUHAMAD FAHRIZAL BAYU SAPUTRA","presensi":20,"nis":11771},
-{"kelas":"X5","nama":"MARSHELLA AGHNIA MAWWADDAH","presensi":19,"nis":11764},
-{"kelas":"X5","nama":"KHAEMITA SUKMA BROTO","presensi":18,"nis":11748},
-{"kelas":"X5","nama":"KEYZA ASSYAUQI QOTRUNNADA MUZAKKI","presensi":17,"nis":11746},
-{"kelas":"X5","nama":"KARUNIA FITRI NUR HIDAYATI","presensi":16,"nis":11739},
-{"kelas":"X5","nama":"HELENA DEWI MAHARANI","presensi":14,"nis":11727},
-{"kelas":"X5","nama":"GAJAHMADA KAWISWARA RAMADHAN","presensi":13,"nis":11713},
-{"kelas":"X5","nama":"FAIRUZ FAKHRIYAH RIBBANI","presensi":12,"nis":11699},
-{"kelas":"X5","nama":"CINTA DASANOVIE NUR AFIFAH","presensi":10,"nis":11681},
-{"kelas":"X5","nama":"CIKAL DAYA GANTARI","presensi":9,"nis":11680},
-{"kelas":"X5","nama":"BIMO TANAYA SUSANTO","presensi":8,"nis":11673},
-{"kelas":"X5","nama":"ATTHIA PUTRI LESTARI","presensi":6,"nis":11652},
-{"kelas":"X5","nama":"ARKAN VALIANT AL-ZHAFRAN","presensi":5,"nis":11642},
-{"kelas":"X5","nama":"AQILAH ZULFA QONITAH","presensi":4,"nis":11637},
-{"kelas":"X5","nama":"MUHAMMAD RIZKY WIRANATA","presensi":23,"nis":11782},
-{"kelas":"X5","nama":"ANDRIAN YUDA SAPUTRA","presensi":3,"nis":11629},
-{"kelas":"X5","nama":"ALMIRA TUNGGADEWI NUGRAHA","presensi":2,"nis":11620},
-{"kelas":"X5","nama":"ALFANO RAZZA WINTOKO","presensi":1,"nis":11613},
-{"kelas":"X5","nama":"NISRINA NIDA MAHARANI","presensi":27,"nis":11810},
-{"kelas":"X5","nama":"RANGGA PUTRA NATHAN NUR MAHESYA","presensi":31,"nis":11833},
-{"kelas":"X6","nama":"SALWA KARISSA SEKAR AYU","presensi":33,"nis":11849},
-{"kelas":"X6","nama":"SHIREEN AYU AGUSTINA","presensi":35,"nis":11859},
-{"kelas":"X6","nama":"APUILA BERYL ARETA NUGRAHA","presensi":3,"nis":11635},
-{"kelas":"X6","nama":"SINTA FEBRIANA PUTRI","presensi":36,"nis":11860},
-{"kelas":"X6","nama":"RESIVA KAILA PUTRI DARMAWAN","presensi":32,"nis":11841},
-{"kelas":"X6","nama":"RAFAEL ADRIANO DUKE","presensi":30,"nis":11828},
-{"kelas":"X6","nama":"RADINKA KAERAFFA THYANDRIAN","presensi":29,"nis":11827},
-{"kelas":"X6","nama":"NUR SETYO WINDOKO","presensi":28,"nis":11816},
-{"kelas":"X6","nama":"MUHAMMAD ILHAM HIDAYAT","presensi":24,"nis":11777},
-{"kelas":"X6","nama":"LAURA GLADIS AZAHRA","presensi":22,"nis":11756},
-{"kelas":"X6","nama":"LATHIFAH VALDA SAHASIKA NURROCHMAH","presensi":20,"nis":11753},
-{"kelas":"X6","nama":"HAIDAR RAFA MIHADLOVIC","presensi":16,"nis":11722},
-{"kelas":"X6","nama":"KIFAYA NAILA RAIMA","presensi":19,"nis":11749},
-{"kelas":"X6","nama":"ETHEL KANDA KINOY","presensi":14,"nis":11695},
-{"kelas":"X6","nama":"DINDA PUTRI CAHYANI","presensi":13,"nis":11690},
-{"kelas":"X6","nama":"CALLISTA SALMA RUDIANTO","presensi":12,"nis":11678},
-{"kelas":"X6","nama":"BRIANA ALBA LUTFI","presensi":10,"nis":11674},
-{"kelas":"X6","nama":"BARA DEVADATTA","presensi":9,"nis":11666},
-{"kelas":"X6","nama":"AZZAHRA DELFINA PUTRI PHASA","presensi":8,"nis":11665},
-{"kelas":"X6","nama":"IJZLAL KENZIE FATHONI","presensi":17,"nis":11730},
-{"kelas":"X6","nama":"KETZIA AGASTYANINGRUM MAHARANI","presensi":18,"nis":11745},
-{"kelas":"X6","nama":"ASSYIFA ALANISSA WIJADMOKO","presensi":6,"nis":11647},
-{"kelas":"X6","nama":"BUNGA SYIFA AMINZAHRA","presensi":11,"nis":11676},
-{"kelas":"X6","nama":"LATIEF TRY HATMAJA","presensi":21,"nis":11755},
-{"kelas":"X6","nama":"ARKHA ADHI DEWANGGA","presensi":5,"nis":11643},
-{"kelas":"X6","nama":"ARFA AYDIN NAFI'","presensi":4,"nis":11639},
-{"kelas":"X6","nama":"ANTARESTI MANDA ANGGER ARIFIN","presensi":2,"nis":11634},
-{"kelas":"X6","nama":"ANNISA AULIA ISVANTI","presensi":1,"nis":11632},
-{"kelas":"X6","nama":"NATASYA ANINDYA SAKHI","presensi":26,"nis":11798},
-{"kelas":"X6","nama":"MUHAMMAD OCTAVIAN NARYAMA NUR WIJAYA","presensi":25,"nis":11781},
-{"kelas":"X6","nama":"AULIA PUTRI AZAHRA","presensi":7,"nis":11653},
-{"kelas":"X6","nama":"SHILA DINANTI THAHARAH","presensi":34,"nis":11858},
-{"kelas":"X6","nama":"NOVIANTO TAUFIQURRAHMAN","presensi":27,"nis":11813},
-{"kelas":"X6","nama":"REMANDA BELA ATHA","presensi":31,"nis":11839},
-{"kelas":"X6","nama":"MAS AYU KLARA MUJI RAHARJO","presensi":23,"nis":11766},
-{"kelas":"X6","nama":"FAJAR MANDALA PUTRA","presensi":15,"nis":11702},
-{"kelas":"X7","nama":"SITI RACHEL MADINA","presensi":32,"nis":11861},
-{"kelas":"X7","nama":"GISA APTA ZAAFARANI","presensi":14,"nis":11721},
-{"kelas":"X7","nama":"MUHAMMAD MAIYA ARENTIZA","presensi":24,"nis":11779},
-{"kelas":"X7","nama":"HASNA FARRAS AZIZAH","presensi":16,"nis":11726},
-{"kelas":"X7","nama":"FELDA FELITA HANA HIDAYAT","presensi":12,"nis":11708},
-{"kelas":"X7","nama":"BIMO AJI PRAYOGO","presensi":10,"nis":11672},
-{"kelas":"X7","nama":"BIANCA SHEILA ALTAIRA PUTRI","presensi":8,"nis":11669},
-{"kelas":"X7","nama":"BULAN JINGGA MAHARANI","presensi":11,"nis":11675},
-{"kelas":"X7","nama":"ADHWA RANNA RAIHANA","presensi":1,"nis":11600},
-{"kelas":"X7","nama":"AFRILDA AYUDIA SYAFI","presensi":4,"nis":11605},
-{"kelas":"X7","nama":"AFIFAH KHOIRUNISA","presensi":3,"nis":11603},
-{"kelas":"X7","nama":"BILQIS KHOIRUNNISA ZULAICHA PUTRI","presensi":9,"nis":11671},
-{"kelas":"X7","nama":"KIRANA SAVA RAYHANUN","presensi":20,"nis":11750},
-{"kelas":"X7","nama":"RASYA PUTRA SANDEJA","presensi":29,"nis":11836},
-{"kelas":"X7","nama":"MUHAMMAD YUDHA PRASETYA","presensi":25,"nis":11784},
-{"kelas":"X7","nama":"ATHAYA WYLDHAN ASHRAVIN","presensi":7,"nis":11649},
-{"kelas":"X7","nama":"QIYARA PRYTHA AYU PRAMANA","presensi":27,"nis":11821},
-{"kelas":"X7","nama":"LUCITA SABRINA SAKHI","presensi":21,"nis":11758},
-{"kelas":"X7","nama":"HANIFAH ISNAINI HUSNA","presensi":15,"nis":11724},
-{"kelas":"X7","nama":"RIFKY PRADANA SETIAWAN","presensi":30,"nis":11844},
-{"kelas":"X7","nama":"RACHMAWATI CAHYANINGNUR PUTRI SYAFI'I","presensi":28,"nis":11824},
-{"kelas":"X7","nama":"AIRA RIZKIA SALSABILA","presensi":5,"nis":11607},
-{"kelas":"X7","nama":"AL FACHRI ARYADUANA","presensi":6,"nis":11612},
-{"kelas":"X7","nama":"NUR AISYAH BILQIS SINTA KURNIA","presensi":26,"nis":11815},
-{"kelas":"X7","nama":"MAETALA KEN SERUNI WELING","presensi":22,"nis":11760},
-{"kelas":"X7","nama":"KEISHA HUMAIRA KHAIRANI","presensi":18,"nis":11744},
-{"kelas":"X7","nama":"RIZQI ALIFIAN CANDRA","presensi":31,"nis":11845},
-{"kelas":"X7","nama":"WILDAN FAIS RAJENDRA","presensi":35,"nis":11877},
-{"kelas":"X7","nama":"KHADIJAH NESHWAYYA LAEYLASSAF","presensi":19,"nis":11747},
-{"kelas":"X7","nama":"SYAKIRA IVANA UFAIMI","presensi":34,"nis":11868},
-{"kelas":"X7","nama":"ADI LUHUR KHALIFAH TUHAN","presensi":2,"nis":11601},
-{"kelas":"X7","nama":"SUTAN AKSAN AL FARIZI","presensi":33,"nis":11867},
-{"kelas":"X7","nama":"YASMIN KAMILA HASNA","presensi":36,"nis":11879},
-{"kelas":"X7","nama":"GALANG AJI SAPUTRO","presensi":13,"nis":11714},
-{"kelas":"X7","nama":"MUHAMMAD FARAND AXELLE RADITHYA","presensi":23,"nis":11774},
-{"kelas":"X7","nama":"IKHWAN ATHAULLAH","presensi":17,"nis":11731},
-{"kelas":"X8","nama":"FAISAL DANIEL SIRAJ","presensi":10,"nis":11700},
-{"kelas":"X8","nama":"WISNU WARDANA","presensi":36,"nis":11878},
-{"kelas":"X8","nama":"RM.  MOCH AULIA RIZQIE PRATAMA","presensi":32,"nis":11846},
-{"kelas":"X8","nama":"AZALEA KHIRAN FEBRIAN PUTRI","presensi":5,"nis":11661},
-{"kelas":"X8","nama":"NASRUL SATRIA ISLAMI","presensi":22,"nis":11795},
-{"kelas":"X8","nama":"NIRWASITA SAKANTI NUGROHO","presensi":26,"nis":11809},
-{"kelas":"X8","nama":"ARIKA ZAHRA","presensi":3,"nis":11640},
-{"kelas":"X8","nama":"MEYSA NUR AINI","presensi":17,"nis":11768},
-{"kelas":"X8","nama":"AZZAHRA ANANDITA PUTRI","presensi":6,"nis":11664},
-{"kelas":"X8","nama":"REGISTA REEMADEYNA MARITZA DAHAYU","presensi":31,"nis":11838},
-{"kelas":"X8","nama":"NADIA DAYYANA GASSANIA","presensi":19,"nis":11789},
-{"kelas":"X8","nama":"NUR AISYAH ASH SHUFIYAH","presensi":28,"nis":11814},
-{"kelas":"X8","nama":"AQILLA IHSANA LARASATI","presensi":2,"nis":11638},
-{"kelas":"X8","nama":"HANIFA SYAHLA MAULIDA","presensi":13,"nis":11723},
-{"kelas":"X8","nama":"ANINDYA BILQISH QUR'ANI","presensi":1,"nis":11630},
-{"kelas":"X8","nama":"INTAN MARSELIA SAPUTRI","presensi":14,"nis":11733},
-{"kelas":"X8","nama":"NOLAND WIYATA","presensi":27,"nis":11811},
-{"kelas":"X8","nama":"KEISHA ARDINA MARINE","presensi":15,"nis":11743},
-{"kelas":"X8","nama":"MEGA RISLAM ANGGISTA","presensi":16,"nis":11767},
-{"kelas":"X8","nama":"MUHAMMAD HAIDAR ALI","presensi":18,"nis":11776},
-{"kelas":"X8","nama":"NIKEISHA HASNA MAZAYA","presensi":25,"nis":11808},
-{"kelas":"X8","nama":"NAJWA MEUTIA KHAERANI","presensi":20,"nis":11792},
-{"kelas":"X8","nama":"CAHYANI DWI UTAMI","presensi":7,"nis":11677},
-{"kelas":"X8","nama":"NAJWA NUR KHUMAIROH","presensi":21,"nis":11793},
-{"kelas":"X8","nama":"VALDAN CAVANO PUTRA AGEZTA","presensi":35,"nis":11874},
-{"kelas":"X8","nama":"FALDINO GARDALEN DESTARAMA","presensi":11,"nis":11703},
-{"kelas":"X8","nama":"FEBYAN REKA IKSANDY","presensi":12,"nis":11707},
-{"kelas":"X8","nama":"RADEN RORO KARTIKA KUSUMA DEWI","presensi":29,"nis":11826},
-{"kelas":"X8","nama":"NAZHEERA AISYA ARINTOKO","presensi":24,"nis":11804},
-{"kelas":"X8","nama":"EZARO BANULAGAT ZAKI","presensi":9,"nis":11697},
-{"kelas":"X8","nama":"DANASTA AISHA MALVA","presensi":8,"nis":11682},
-{"kelas":"X8","nama":"NAVIRA MONAYA HAQQI","presensi":23,"nis":11801},
-{"kelas":"X8","nama":"SATRIA HARDI WICAKSANA","presensi":33,"nis":11853},
-{"kelas":"X8","nama":"SULTAN JAGAD SETIAWAN","presensi":34,"nis":11865},
-{"kelas":"X8","nama":"RAIHAN ZAHRON KHOIRY","presensi":30,"nis":11830},
-{"kelas":"X8","nama":"ATTA RIZKY MAHENDRA","presensi":4,"nis":11651},
-{"kelas":"X1","nama":"AKU ADMIN BERKUASA","presensi":99,"nis":99999}
+    {
+        "kelas": "X1",
+        "nama": "NAYLA PUTRI FAWWAZAH",
+        "presensi": 31,
+        "nis": 11803,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X1",
+        "nama": "NABILA AL KHALIFI",
+        "presensi": 30,
+        "nis": 11787,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X1",
+        "nama": "BERNADETHA GRACE NATHANIA MAHARANI",
+        "presensi": 15,
+        "nis": 11668,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X1",
+        "nama": "MUTIARA ADINDA MAYFINNA",
+        "presensi": 29,
+        "nis": 11786,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X1",
+        "nama": "MUHAMMAD YUSUF AKBAR",
+        "presensi": 28,
+        "nis": 11785,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "BASUNJAYA PRAYATASATYA",
+        "presensi": 14,
+        "nis": 11667,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ALLEA KIRA MEDINA",
+        "presensi": 7,
+        "nis": 11619,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X1",
+        "nama": "LATHIFA WARDA MUTHMA'INNA",
+        "presensi": 27,
+        "nis": 11752,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X1",
+        "nama": "KEANU ATHALLA NATANEGARA",
+        "presensi": 26,
+        "nis": 11742,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "AWAN NIANDEWANTO",
+        "presensi": 13,
+        "nis": 11657,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X1",
+        "nama": "JANEETA KHANSA SHALEHAH",
+        "presensi": 25,
+        "nis": 11734,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X1",
+        "nama": "HANIFAH PUTRI AZZAHRA",
+        "presensi": 24,
+        "nis": 11725,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X1",
+        "nama": "AVITA YESI ARMA WIBOWO",
+        "presensi": 12,
+        "nis": 11656,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ALKUIN GENDIS PENTA JUNIA",
+        "presensi": 6,
+        "nis": 11618,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X1",
+        "nama": "AISHA NABILA AZALIA",
+        "presensi": 3,
+        "nis": 11608,
+        "sangga": null
+    },
+    {
+        "kelas": "X1",
+        "nama": "GIFTHA CHELSEA SANSIVERA SALSABILLA",
+        "presensi": 23,
+        "nis": 11720,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X1",
+        "nama": "GEORGIANA ANGELIQUE CORINNA ANANDA NUGROHO",
+        "presensi": 22,
+        "nis": 11718,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X1",
+        "nama": "AULISHA RINDA MALIKA",
+        "presensi": 11,
+        "nis": 11654,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X1",
+        "nama": "FREDERICA BINTANG PEREIRA FERNANDEZ",
+        "presensi": 21,
+        "nis": 11711,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X1",
+        "nama": "FLAVIANUS TEGAR CAHYOANANTA",
+        "presensi": 20,
+        "nis": 11710,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ATIKA TRI HAPSARI",
+        "presensi": 10,
+        "nis": 11650,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ALISSYA AZZAHRA",
+        "presensi": 5,
+        "nis": 11616,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X1",
+        "nama": "FADLI ZAINNUR ROUF",
+        "presensi": 19,
+        "nis": 11698,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X1",
+        "nama": "THALITA SHARLIZ GUSEL",
+        "presensi": 36,
+        "nis": 11871,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X1",
+        "nama": "EVAN PRASETYA",
+        "presensi": 18,
+        "nis": 11696,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ARKAN MAIZA VALENS",
+        "presensi": 9,
+        "nis": 11641,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X1",
+        "nama": "SUFYANNAFI' PUTRA SASMITA",
+        "presensi": 35,
+        "nis": 11864,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X1",
+        "nama": "STEVANUS YUDY HENDRIANTO",
+        "presensi": 34,
+        "nis": 11863,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ELANG GANENDRA SAMUDRA",
+        "presensi": 17,
+        "nis": 11692,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "SANIA AULIA DEWI",
+        "presensi": 33,
+        "nis": 11850,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X1",
+        "nama": "REYZAL APRILIANO",
+        "presensi": 32,
+        "nis": 11843,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "CAROLUS BANYU AJI WIBOWO",
+        "presensi": 16,
+        "nis": 11679,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ANNISAA YUNASTHISTI",
+        "presensi": 8,
+        "nis": 11633,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X1",
+        "nama": "AKMAL RAJENDRA",
+        "presensi": 4,
+        "nis": 11611,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X1",
+        "nama": "AILSATARA PUTRI JIANKA",
+        "presensi": 2,
+        "nis": 11606,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X1",
+        "nama": "ADINDA SEKAR NOVISCHA",
+        "presensi": 1,
+        "nis": 11602,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "NAYLA LAKSMITASANI",
+        "presensi": 27,
+        "nis": 11802,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X2",
+        "nama": "NATHANAEL ARIF BUDIMAN",
+        "presensi": 26,
+        "nis": 11799,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X2",
+        "nama": "NATANAEL CHRIZIO ALENATA",
+        "presensi": 25,
+        "nis": 11797,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X2",
+        "nama": "NAJLA RAZITA KHAIRUNA",
+        "presensi": 24,
+        "nis": 11791,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "LETA NAFISHA",
+        "presensi": 23,
+        "nis": 11757,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "LATHIFATUL HALIM AL BATUL",
+        "presensi": 22,
+        "nis": 11754,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "KAYLA ANANDITA DWI MARSHA",
+        "presensi": 21,
+        "nis": 11741,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X2",
+        "nama": "JIHAN MAKAYLA FAKHIRAH",
+        "presensi": 20,
+        "nis": 11737,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X2",
+        "nama": "JESSICA LAWRANCE CHRISTIAN HANS",
+        "presensi": 19,
+        "nis": 11736,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "JESSICA ALENA PUTRI",
+        "presensi": 18,
+        "nis": 11735,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X2",
+        "nama": "HERBUDI BAGOS CAHYO ENDARTO",
+        "presensi": 17,
+        "nis": 11728,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X2",
+        "nama": "GHASY GHASSANO",
+        "presensi": 16,
+        "nis": 11719,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X2",
+        "nama": "GAVIN AZARYA FATHIN",
+        "presensi": 15,
+        "nis": 11717,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X2",
+        "nama": "FAYZA NAJWA TRIDYA RAMADHANI",
+        "presensi": 14,
+        "nis": 11706,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X2",
+        "nama": "FAUZAN TSAQIF ATHARAYA",
+        "presensi": 13,
+        "nis": 11705,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X2",
+        "nama": "FATIKA RIZQI SYARIFA",
+        "presensi": 12,
+        "nis": 11704,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "FAISAL RAIS MAHENDRA",
+        "presensi": 11,
+        "nis": 11701,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X2",
+        "nama": "DEFFA ZAKIA KHOIRUNNISA",
+        "presensi": 10,
+        "nis": 11686,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "DANIEL ARRON DWIKA",
+        "presensi": 9,
+        "nis": 11683,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X2",
+        "nama": "AZIZAH AZZAHRA PUTRI",
+        "presensi": 8,
+        "nis": 11663,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "AYUDYA DWI PATRIANJANI",
+        "presensi": 7,
+        "nis": 11660,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "AYOMI SEKAR MAHARANI",
+        "presensi": 6,
+        "nis": 11659,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X2",
+        "nama": "AXEL REVANO PUTRA GETANA",
+        "presensi": 5,
+        "nis": 11658,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X2",
+        "nama": "ANDREA GILCHRIST BRIDGET SETIAWAN",
+        "presensi": 4,
+        "nis": 11628,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "ALYA SHAFIRA PURBANINGRUM",
+        "presensi": 3,
+        "nis": 11623,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X2",
+        "nama": "ALYA NURUL AZIZAH",
+        "presensi": 2,
+        "nis": 11622,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "AFNA PUTRI KHAIRUNNISA",
+        "presensi": 1,
+        "nis": 11604,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "ZETH AMADEUS BUDIANTO",
+        "presensi": 36,
+        "nis": 11884,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X2",
+        "nama": "YOSEFA AGARETHA AGNI APRILIA",
+        "presensi": 35,
+        "nis": 11880,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "VINDY AULIA NIRWASITAATMAJA",
+        "presensi": 34,
+        "nis": 11876,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "TALITHA MAULINDA RAHMA",
+        "presensi": 33,
+        "nis": 11870,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X2",
+        "nama": "SURYA BAGUS PRASETYA",
+        "presensi": 32,
+        "nis": 11866,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X2",
+        "nama": "SHAKIRA ADISTI FAJARIKA",
+        "presensi": 31,
+        "nis": 11856,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "RENI JANUATI",
+        "presensi": 30,
+        "nis": 11840,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X2",
+        "nama": "RAFKA NURI ARDIAN",
+        "presensi": 29,
+        "nis": 11829,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X2",
+        "nama": "OCTAVIA NAILA PUTRI",
+        "presensi": 28,
+        "nis": 11817,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ZHIFARA QUEEN NABILA",
+        "presensi": 36,
+        "nis": 11885,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X3",
+        "nama": "YURIN DWI MAHARANI",
+        "presensi": 35,
+        "nis": 11883,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "YOSEFIN KEZIA AURELIA CHRISTY",
+        "presensi": 34,
+        "nis": 11881,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X3",
+        "nama": "UMMU ZAHROTIL JANNAH",
+        "presensi": 33,
+        "nis": 11873,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "TISA HERLIANA ADISTI",
+        "presensi": 32,
+        "nis": 11872,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X3",
+        "nama": "STEPHANI KIARA DINANTI",
+        "presensi": 31,
+        "nis": 11862,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X3",
+        "nama": "SHALOMITA JULIA ASRIANI",
+        "presensi": 30,
+        "nis": 11857,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "PRAMA ABIMANYU",
+        "presensi": 29,
+        "nis": 11818,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X3",
+        "nama": "NOVIA RAHMAWATI",
+        "presensi": 28,
+        "nis": 11812,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X3",
+        "nama": "NARA TYAGA VIKOJAYANTA",
+        "presensi": 27,
+        "nis": 11794,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X3",
+        "nama": "NADHIRA NURAZIZAH PUTRI",
+        "presensi": 26,
+        "nis": 11788,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "MUHAMMAD NASHWAN SYAFIQ ZIYADATULLAH",
+        "presensi": 25,
+        "nis": 11780,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X3",
+        "nama": "MONIKA PALMITA GREACE ANGELIKA SAPUTRI",
+        "presensi": 24,
+        "nis": 11770,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "MARIA EMMANUELA PUTRI BERLIANA JATI",
+        "presensi": 23,
+        "nis": 11763,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X3",
+        "nama": "KYLA ATHAYA ULIMA",
+        "presensi": 22,
+        "nis": 11751,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "KARUNIA TRI ASTUTI",
+        "presensi": 21,
+        "nis": 11740,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "IMAM ARIEF ARGIANSYAH",
+        "presensi": 20,
+        "nis": 11732,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X3",
+        "nama": "IBRA FACHRIE RAMADHAN AL-HARRADA",
+        "presensi": 19,
+        "nis": 11729,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X3",
+        "nama": "GALIH BAYU SAPUTRO",
+        "presensi": 18,
+        "nis": 11715,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X3",
+        "nama": "FRIDAY AYUK NOVITASARI",
+        "presensi": 17,
+        "nis": 11712,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "DHIKA FAJAR RAMADHAN",
+        "presensi": 16,
+        "nis": 11689,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X3",
+        "nama": "DANTY NOOR RIKA",
+        "presensi": 15,
+        "nis": 11684,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "AZIZ ASLAN HAKIM",
+        "presensi": 14,
+        "nis": 11662,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X3",
+        "nama": "AURELIA PUTERI RINALDO",
+        "presensi": 13,
+        "nis": 11655,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ATALITHA DIAN WARA ARYANI",
+        "presensi": 12,
+        "nis": 11648,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ARUM WULANDARI",
+        "presensi": 11,
+        "nis": 11645,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ARSHAVIN TOMY PRASOJO",
+        "presensi": 10,
+        "nis": 11644,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ANANDA REIZKI FADDILLAH",
+        "presensi": 9,
+        "nis": 11626,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ALYSHA SHASTANIA ANNALANI",
+        "presensi": 8,
+        "nis": 11624,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ALIYYA TRISNANIA KHAIRANI",
+        "presensi": 7,
+        "nis": 11617,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X3",
+        "nama": "Alifah Khansa",
+        "presensi": 6,
+        "nis": 11615,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ALHAFEZ FAEL SAPUTRA",
+        "presensi": 5,
+        "nis": 11614,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X3",
+        "nama": "AKILA MONIFA AZALIA",
+        "presensi": 4,
+        "nis": 11610,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X3",
+        "nama": "AKHTAR PRADITA DANISWARA",
+        "presensi": 3,
+        "nis": 11609,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ABDI GAYUH MUBAROK",
+        "presensi": 2,
+        "nis": 11599,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X3",
+        "nama": "ABBEYGAIL RIVELI NOVIANTO",
+        "presensi": 1,
+        "nis": 11598,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "MUHAMMAD AZRI SALMAN NUGROHO",
+        "presensi": 19,
+        "nis": 11772,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X4",
+        "nama": "MOHAMAD SATRIA BAGASKARA DARMAWAN",
+        "presensi": 18,
+        "nis": 11769,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X4",
+        "nama": "MARSITA PRADA",
+        "presensi": 17,
+        "nis": 11765,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X4",
+        "nama": "MALIA KENESSA SWASTIA",
+        "presensi": 16,
+        "nis": 11762,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "MAISIE AFRA PRAMUDITA",
+        "presensi": 15,
+        "nis": 11761,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X4",
+        "nama": "M. FAUST PRADIPA",
+        "presensi": 14,
+        "nis": 11759,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X4",
+        "nama": "GALIH PURNOMO",
+        "presensi": 13,
+        "nis": 11716,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X4",
+        "nama": "FIOZA RAYHAN ATHALLA RAMADHAN",
+        "presensi": 12,
+        "nis": 11709,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ENDAH PRASMAWATI",
+        "presensi": 11,
+        "nis": 11694,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ELFRIDA AZALIA",
+        "presensi": 10,
+        "nis": 11693,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ELANG ARKAAN NAYAKA",
+        "presensi": 9,
+        "nis": 11691,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X4",
+        "nama": "DERIEL TRIXIE NURILIA",
+        "presensi": 8,
+        "nis": 11688,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "DELVIANY AGUSTYNA RAMADHANTY",
+        "presensi": 7,
+        "nis": 11687,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ASFA AULIA WULANDARI",
+        "presensi": 6,
+        "nis": 11646,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X4",
+        "nama": "AQILA HILMI",
+        "presensi": 5,
+        "nis": 11636,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ANISA FITRIANA",
+        "presensi": 4,
+        "nis": 11631,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ANARGYA RIZQY PURWIKAN",
+        "presensi": 3,
+        "nis": 11627,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ALYSSA KYLA MAYDA",
+        "presensi": 2,
+        "nis": 11625,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ALMIRA ZIVARA AYUKUMALA",
+        "presensi": 1,
+        "nis": 11621,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X4",
+        "nama": "YUAN KIRANA AZZAHRA",
+        "presensi": 36,
+        "nis": 11882,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X4",
+        "nama": "VELISCA PRUDENCE KIRANI",
+        "presensi": 35,
+        "nis": 11875,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "SHAFANA RAISAH BILLAH",
+        "presensi": 34,
+        "nis": 11855,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X4",
+        "nama": "SATRIA BUDI PRATAMA",
+        "presensi": 33,
+        "nis": 11852,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X4",
+        "nama": "ROIHANA SHAFA AZKA ATQIYA",
+        "presensi": 32,
+        "nis": 11847,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X4",
+        "nama": "RAZMA JANITRA NEZARD SURYA",
+        "presensi": 31,
+        "nis": 11837,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X4",
+        "nama": "RASDAN ADDIN NUGRAHA",
+        "presensi": 30,
+        "nis": 11835,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X4",
+        "nama": "RANISSA INNAYA DEWI",
+        "presensi": 29,
+        "nis": 11834,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "RAKHA BRAMANTYO ADHITYA PUTRA",
+        "presensi": 28,
+        "nis": 11832,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X4",
+        "nama": "RADEN NAJASYI HAQQI MAJID",
+        "presensi": 27,
+        "nis": 11825,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X4",
+        "nama": "QUEINZA AMADHITA PUTRI VINUA",
+        "presensi": 26,
+        "nis": 11822,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X4",
+        "nama": "QISMIKA PUAN KAMAL",
+        "presensi": 25,
+        "nis": 11820,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X4",
+        "nama": "NESYA KHANSA ASKIA DEVINTA",
+        "presensi": 24,
+        "nis": 11807,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X4",
+        "nama": "NESWARA RAHMALISA",
+        "presensi": 23,
+        "nis": 11806,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X4",
+        "nama": "NERISSA ARVIANA PUTRI SUSANTO",
+        "presensi": 22,
+        "nis": 11805,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X4",
+        "nama": "MUHAMMAD WAHYU PRAMUKTI",
+        "presensi": 21,
+        "nis": 11783,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X4",
+        "nama": "MUHAMMAD IRSYAD HARAIN PUTRA",
+        "presensi": 20,
+        "nis": 11778,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X5",
+        "nama": "BILAL RAMADHAN BASYAR",
+        "presensi": 7,
+        "nis": 11670,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X5",
+        "nama": "DAVINA ADELIA ZAHRA",
+        "presensi": 11,
+        "nis": 11685,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "KARLINA",
+        "presensi": 15,
+        "nis": 11738,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X5",
+        "nama": "SYAKIRA LARASATI RASYIDAH",
+        "presensi": 36,
+        "nis": 11869,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X5",
+        "nama": "SEPTIA FITRIANI",
+        "presensi": 35,
+        "nis": 11854,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X5",
+        "nama": "SAPHIRA NILAM CAHYA DILAGA",
+        "presensi": 34,
+        "nis": 11851,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X5",
+        "nama": "SAID AFFANUR RULI",
+        "presensi": 33,
+        "nis": 11848,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X5",
+        "nama": "RESTU ADITYA",
+        "presensi": 32,
+        "nis": 11842,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X5",
+        "nama": "RAIHAN ZIDAN KHAIRY",
+        "presensi": 30,
+        "nis": 11831,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X5",
+        "nama": "QUINNSA NASWA ARDONO",
+        "presensi": 29,
+        "nis": 11823,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X5",
+        "nama": "PUSPITA RAHMA KUSUMANINGTYAS",
+        "presensi": 28,
+        "nis": 11819,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X5",
+        "nama": "NAURA SALSABILA",
+        "presensi": 26,
+        "nis": 11800,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X5",
+        "nama": "NASYWA AQILA KHOIRUNNISA",
+        "presensi": 25,
+        "nis": 11796,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "NAILA ATAYA RADITA",
+        "presensi": 24,
+        "nis": 11790,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X5",
+        "nama": "MUHAMMAD FARIS ARUWANTA",
+        "presensi": 22,
+        "nis": 11775,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X5",
+        "nama": "MUHAMMAD BIMO ABDEE SANTOSO",
+        "presensi": 21,
+        "nis": 11773,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X5",
+        "nama": "MUHAMAD FAHRIZAL BAYU SAPUTRA",
+        "presensi": 20,
+        "nis": 11771,
+        "sangga": null
+    },
+    {
+        "kelas": "X5",
+        "nama": "MARSHELLA AGHNIA MAWWADDAH",
+        "presensi": 19,
+        "nis": 11764,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X5",
+        "nama": "KHAEMITA SUKMA BROTO",
+        "presensi": 18,
+        "nis": 11748,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X5",
+        "nama": "KEYZA ASSYAUQI QOTRUNNADA MUZAKKI",
+        "presensi": 17,
+        "nis": 11746,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "KARUNIA FITRI NUR HIDAYATI",
+        "presensi": 16,
+        "nis": 11739,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "HELENA DEWI MAHARANI",
+        "presensi": 14,
+        "nis": 11727,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X5",
+        "nama": "GAJAHMADA KAWISWARA RAMADHAN",
+        "presensi": 13,
+        "nis": 11713,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X5",
+        "nama": "FAIRUZ FAKHRIYAH RIBBANI",
+        "presensi": 12,
+        "nis": 11699,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "CINTA DASANOVIE NUR AFIFAH",
+        "presensi": 10,
+        "nis": 11681,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X5",
+        "nama": "CIKAL DAYA GANTARI",
+        "presensi": 9,
+        "nis": 11680,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "BIMO TANAYA SUSANTO",
+        "presensi": 8,
+        "nis": 11673,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X5",
+        "nama": "ATTHIA PUTRI LESTARI",
+        "presensi": 6,
+        "nis": 11652,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X5",
+        "nama": "ARKAN VALIANT AL-ZHAFRAN",
+        "presensi": 5,
+        "nis": 11642,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X5",
+        "nama": "AQILAH ZULFA QONITAH",
+        "presensi": 4,
+        "nis": 11637,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X5",
+        "nama": "MUHAMMAD RIZKY WIRANATA",
+        "presensi": 23,
+        "nis": 11782,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X5",
+        "nama": "ANDRIAN YUDA SAPUTRA",
+        "presensi": 3,
+        "nis": 11629,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X5",
+        "nama": "ALMIRA TUNGGADEWI NUGRAHA",
+        "presensi": 2,
+        "nis": 11620,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "ALFANO RAZZA WINTOKO",
+        "presensi": 1,
+        "nis": 11613,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X5",
+        "nama": "NISRINA NIDA MAHARANI",
+        "presensi": 27,
+        "nis": 11810,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X5",
+        "nama": "RANGGA PUTRA NATHAN NUR MAHESYA",
+        "presensi": 31,
+        "nis": 11833,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X6",
+        "nama": "SALWA KARISSA SEKAR AYU",
+        "presensi": 33,
+        "nis": 11849,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X6",
+        "nama": "SHIREEN AYU AGUSTINA",
+        "presensi": 35,
+        "nis": 11859,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X6",
+        "nama": "APUILA BERYL ARETA NUGRAHA",
+        "presensi": 3,
+        "nis": 11635,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X6",
+        "nama": "SINTA FEBRIANA PUTRI",
+        "presensi": 36,
+        "nis": 11860,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "RESIVA KAILA PUTRI DARMAWAN",
+        "presensi": 32,
+        "nis": 11841,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X6",
+        "nama": "RAFAEL ADRIANO DUKE",
+        "presensi": 30,
+        "nis": 11828,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X6",
+        "nama": "RADINKA KAERAFFA THYANDRIAN",
+        "presensi": 29,
+        "nis": 11827,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X6",
+        "nama": "NUR SETYO WINDOKO",
+        "presensi": 28,
+        "nis": 11816,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X6",
+        "nama": "MUHAMMAD ILHAM HIDAYAT",
+        "presensi": 24,
+        "nis": 11777,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X6",
+        "nama": "LAURA GLADIS AZAHRA",
+        "presensi": 22,
+        "nis": 11756,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "LATHIFAH VALDA SAHASIKA NURROCHMAH",
+        "presensi": 20,
+        "nis": 11753,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "HAIDAR RAFA MIHADLOVIC",
+        "presensi": 16,
+        "nis": 11722,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X6",
+        "nama": "KIFAYA NAILA RAIMA",
+        "presensi": 19,
+        "nis": 11749,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X6",
+        "nama": "ETHEL KANDA KINOY",
+        "presensi": 14,
+        "nis": 11695,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X6",
+        "nama": "DINDA PUTRI CAHYANI",
+        "presensi": 13,
+        "nis": 11690,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X6",
+        "nama": "CALLISTA SALMA RUDIANTO",
+        "presensi": 12,
+        "nis": 11678,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "BRIANA ALBA LUTFI",
+        "presensi": 10,
+        "nis": 11674,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "BARA DEVADATTA",
+        "presensi": 9,
+        "nis": 11666,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X6",
+        "nama": "AZZAHRA DELFINA PUTRI PHASA",
+        "presensi": 8,
+        "nis": 11665,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X6",
+        "nama": "IJZLAL KENZIE FATHONI",
+        "presensi": 17,
+        "nis": 11730,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X6",
+        "nama": "KETZIA AGASTYANINGRUM MAHARANI",
+        "presensi": 18,
+        "nis": 11745,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X6",
+        "nama": "ASSYIFA ALANISSA WIJADMOKO",
+        "presensi": 6,
+        "nis": 11647,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X6",
+        "nama": "BUNGA SYIFA AMINZAHRA",
+        "presensi": 11,
+        "nis": 11676,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X6",
+        "nama": "LATIEF TRY HATMAJA",
+        "presensi": 21,
+        "nis": 11755,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X6",
+        "nama": "ARKHA ADHI DEWANGGA",
+        "presensi": 5,
+        "nis": 11643,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X6",
+        "nama": "ARFA AYDIN NAFI'",
+        "presensi": 4,
+        "nis": 11639,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X6",
+        "nama": "ANTARESTI MANDA ANGGER ARIFIN",
+        "presensi": 2,
+        "nis": 11634,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "ANNISA AULIA ISVANTI",
+        "presensi": 1,
+        "nis": 11632,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "NATASYA ANINDYA SAKHI",
+        "presensi": 26,
+        "nis": 11798,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X6",
+        "nama": "MUHAMMAD OCTAVIAN NARYAMA NUR WIJAYA",
+        "presensi": 25,
+        "nis": 11781,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X6",
+        "nama": "AULIA PUTRI AZAHRA",
+        "presensi": 7,
+        "nis": 11653,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X6",
+        "nama": "SHILA DINANTI THAHARAH",
+        "presensi": 34,
+        "nis": 11858,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X6",
+        "nama": "NOVIANTO TAUFIQURRAHMAN",
+        "presensi": 27,
+        "nis": 11813,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X6",
+        "nama": "REMANDA BELA ATHA",
+        "presensi": 31,
+        "nis": 11839,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X6",
+        "nama": "MAS AYU KLARA MUJI RAHARJO",
+        "presensi": 23,
+        "nis": 11766,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X6",
+        "nama": "FAJAR MANDALA PUTRA",
+        "presensi": 15,
+        "nis": 11702,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X7",
+        "nama": "SITI RACHEL MADINA",
+        "presensi": 32,
+        "nis": 11861,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X7",
+        "nama": "GISA APTA ZAAFARANI",
+        "presensi": 14,
+        "nis": 11721,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X7",
+        "nama": "MUHAMMAD MAIYA ARENTIZA",
+        "presensi": 24,
+        "nis": 11779,
+        "sangga": null
+    },
+    {
+        "kelas": "X7",
+        "nama": "HASNA FARRAS AZIZAH",
+        "presensi": 16,
+        "nis": 11726,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X7",
+        "nama": "FELDA FELITA HANA HIDAYAT",
+        "presensi": 12,
+        "nis": 11708,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "BIMO AJI PRAYOGO",
+        "presensi": 10,
+        "nis": 11672,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X7",
+        "nama": "BIANCA SHEILA ALTAIRA PUTRI",
+        "presensi": 8,
+        "nis": 11669,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X7",
+        "nama": "BULAN JINGGA MAHARANI",
+        "presensi": 11,
+        "nis": 11675,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "ADHWA RANNA RAIHANA",
+        "presensi": 1,
+        "nis": 11600,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X7",
+        "nama": "AFRILDA AYUDIA SYAFI",
+        "presensi": 4,
+        "nis": 11605,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "AFIFAH KHOIRUNISA",
+        "presensi": 3,
+        "nis": 11603,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "BILQIS KHOIRUNNISA ZULAICHA PUTRI",
+        "presensi": 9,
+        "nis": 11671,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "KIRANA SAVA RAYHANUN",
+        "presensi": 20,
+        "nis": 11750,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X7",
+        "nama": "RASYA PUTRA SANDEJA",
+        "presensi": 29,
+        "nis": 11836,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X7",
+        "nama": "MUHAMMAD YUDHA PRASETYA",
+        "presensi": 25,
+        "nis": 11784,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X7",
+        "nama": "ATHAYA WYLDHAN ASHRAVIN",
+        "presensi": 7,
+        "nis": 11649,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X7",
+        "nama": "QIYARA PRYTHA AYU PRAMANA",
+        "presensi": 27,
+        "nis": 11821,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "LUCITA SABRINA SAKHI",
+        "presensi": 21,
+        "nis": 11758,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X7",
+        "nama": "HANIFAH ISNAINI HUSNA",
+        "presensi": 15,
+        "nis": 11724,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X7",
+        "nama": "RIFKY PRADANA SETIAWAN",
+        "presensi": 30,
+        "nis": 11844,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X7",
+        "nama": "RACHMAWATI CAHYANINGNUR PUTRI SYAFI'I",
+        "presensi": 28,
+        "nis": 11824,
+        "sangga": null
+    },
+    {
+        "kelas": "X7",
+        "nama": "AIRA RIZKIA SALSABILA",
+        "presensi": 5,
+        "nis": 11607,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X7",
+        "nama": "AL FACHRI ARYADUANA",
+        "presensi": 6,
+        "nis": 11612,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X7",
+        "nama": "NUR AISYAH BILQIS SINTA KURNIA",
+        "presensi": 26,
+        "nis": 11815,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X7",
+        "nama": "MAETALA KEN SERUNI WELING",
+        "presensi": 22,
+        "nis": 11760,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X7",
+        "nama": "KEISHA HUMAIRA KHAIRANI",
+        "presensi": 18,
+        "nis": 11744,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X7",
+        "nama": "RIZQI ALIFIAN CANDRA",
+        "presensi": 31,
+        "nis": 11845,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X7",
+        "nama": "WILDAN FAIS RAJENDRA",
+        "presensi": 35,
+        "nis": 11877,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X7",
+        "nama": "KHADIJAH NESHWAYYA LAEYLASSAF",
+        "presensi": 19,
+        "nis": 11747,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "SYAKIRA IVANA UFAIMI",
+        "presensi": 34,
+        "nis": 11868,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X7",
+        "nama": "ADI LUHUR KHALIFAH TUHAN",
+        "presensi": 2,
+        "nis": 11601,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X7",
+        "nama": "SUTAN AKSAN AL FARIZI",
+        "presensi": 33,
+        "nis": 11867,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X7",
+        "nama": "YASMIN KAMILA HASNA",
+        "presensi": 36,
+        "nis": 11879,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X7",
+        "nama": "GALANG AJI SAPUTRO",
+        "presensi": 13,
+        "nis": 11714,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X7",
+        "nama": "MUHAMMAD FARAND AXELLE RADITHYA",
+        "presensi": 23,
+        "nis": 11774,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X7",
+        "nama": "IKHWAN ATHAULLAH",
+        "presensi": 17,
+        "nis": 11731,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X8",
+        "nama": "FAISAL DANIEL SIRAJ",
+        "presensi": 10,
+        "nis": 11700,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X8",
+        "nama": "WISNU WARDANA",
+        "presensi": 36,
+        "nis": 11878,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X8",
+        "nama": "RM.  MOCH AULIA RIZQIE PRATAMA",
+        "presensi": 32,
+        "nis": 11846,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X8",
+        "nama": "AZALEA KHIRAN FEBRIAN PUTRI",
+        "presensi": 5,
+        "nis": 11661,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NASRUL SATRIA ISLAMI",
+        "presensi": 22,
+        "nis": 11795,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NIRWASITA SAKANTI NUGROHO",
+        "presensi": 26,
+        "nis": 11809,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X8",
+        "nama": "ARIKA ZAHRA",
+        "presensi": 3,
+        "nis": 11640,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X8",
+        "nama": "MEYSA NUR AINI",
+        "presensi": 17,
+        "nis": 11768,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X8",
+        "nama": "AZZAHRA ANANDITA PUTRI",
+        "presensi": 6,
+        "nis": 11664,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X8",
+        "nama": "REGISTA REEMADEYNA MARITZA DAHAYU",
+        "presensi": 31,
+        "nis": 11838,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NADIA DAYYANA GASSANIA",
+        "presensi": 19,
+        "nis": 11789,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NUR AISYAH ASH SHUFIYAH",
+        "presensi": 28,
+        "nis": 11814,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X8",
+        "nama": "AQILLA IHSANA LARASATI",
+        "presensi": 2,
+        "nis": 11638,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X8",
+        "nama": "HANIFA SYAHLA MAULIDA",
+        "presensi": 13,
+        "nis": 11723,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "ANINDYA BILQISH QUR'ANI",
+        "presensi": 1,
+        "nis": 11630,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "INTAN MARSELIA SAPUTRI",
+        "presensi": 14,
+        "nis": 11733,
+        "sangga": "Pencoba"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NOLAND WIYATA",
+        "presensi": 27,
+        "nis": 11811,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X8",
+        "nama": "KEISHA ARDINA MARINE",
+        "presensi": 15,
+        "nis": 11743,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X8",
+        "nama": "MEGA RISLAM ANGGISTA",
+        "presensi": 16,
+        "nis": 11767,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "MUHAMMAD HAIDAR ALI",
+        "presensi": 18,
+        "nis": 11776,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NIKEISHA HASNA MAZAYA",
+        "presensi": 25,
+        "nis": 11808,
+        "sangga": null
+    },
+    {
+        "kelas": "X8",
+        "nama": "NAJWA MEUTIA KHAERANI",
+        "presensi": 20,
+        "nis": 11792,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "CAHYANI DWI UTAMI",
+        "presensi": 7,
+        "nis": 11677,
+        "sangga": null
+    },
+    {
+        "kelas": "X8",
+        "nama": "NAJWA NUR KHUMAIROH",
+        "presensi": 21,
+        "nis": 11793,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X8",
+        "nama": "VALDAN CAVANO PUTRA AGEZTA",
+        "presensi": 35,
+        "nis": 11874,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X8",
+        "nama": "FALDINO GARDALEN DESTARAMA",
+        "presensi": 11,
+        "nis": 11703,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X8",
+        "nama": "FEBYAN REKA IKSANDY",
+        "presensi": 12,
+        "nis": 11707,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X8",
+        "nama": "RADEN RORO KARTIKA KUSUMA DEWI",
+        "presensi": 29,
+        "nis": 11826,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NAZHEERA AISYA ARINTOKO",
+        "presensi": 24,
+        "nis": 11804,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "EZARO BANULAGAT ZAKI",
+        "presensi": 9,
+        "nis": 11697,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X8",
+        "nama": "DANASTA AISHA MALVA",
+        "presensi": 8,
+        "nis": 11682,
+        "sangga": "Pelaksana"
+    },
+    {
+        "kelas": "X8",
+        "nama": "NAVIRA MONAYA HAQQI",
+        "presensi": 23,
+        "nis": 11801,
+        "sangga": "Perintis"
+    },
+    {
+        "kelas": "X8",
+        "nama": "SATRIA HARDI WICAKSANA",
+        "presensi": 33,
+        "nis": 11853,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X8",
+        "nama": "SULTAN JAGAD SETIAWAN",
+        "presensi": 34,
+        "nis": 11865,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X8",
+        "nama": "RAIHAN ZAHRON KHOIRY",
+        "presensi": 30,
+        "nis": 11830,
+        "sangga": "Pendobrak"
+    },
+    {
+        "kelas": "X8",
+        "nama": "ATTA RIZKY MAHENDRA",
+        "presensi": 4,
+        "nis": 11651,
+        "sangga": "Penegas"
+    },
+    {
+        "kelas": "X1",
+        "nama": "AKU ADMIN BERKUASA",
+        "presensi": 99,
+        "nis": 99999,
+        "sangga": null
+    }
 ]

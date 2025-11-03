@@ -24,6 +24,7 @@ interface SiswaData {
   nama: string;
   presensi: number;
   nis: number;
+  sangga: string | null;
 }
 
 export default function Home() {
@@ -207,7 +208,8 @@ export default function Home() {
                 siswaData={{
                   nama: siswaData.nama,
                   kelas: siswaData.kelas.includes('-') ? siswaData.kelas : `X-${siswaData.kelas.replace('X', '')}`,
-                  absen: siswaData.presensi.toString()
+                  absen: siswaData.presensi.toString(),
+                  sangga: siswaData.sangga || ''
                 }}
               />
             ) : (
