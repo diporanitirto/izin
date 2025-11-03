@@ -326,17 +326,17 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
 
     y = signatureStartY + lineHeight * 6;
     
-    // Baris atas: Mabigus dan Judat
+    // Baris atas: PK (kiri) dan Judat (kanan)
     const topRowSpacing = (baseWidth - leftMargin - rightMargin) / 2;
-    const mabigusX = leftMargin + topRowSpacing * 0.5;
+    const pkX = leftMargin + topRowSpacing * 0.5;
     const judatX = leftMargin + topRowSpacing * 1.5;
 
     ctx.textAlign = 'center';
-    ctx.fillText('Mengetahui,', mabigusX, y);
+    ctx.fillText('Mengetahui,', pkX, y);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Mabigus', mabigusX, y + lineHeight);
+    ctx.fillText('Pembina Kelas', pkX, y + lineHeight);
     ctx.font = '16px Times New Roman';
-    ctx.fillText('( ____________________ )', mabigusX, y + lineHeight * 4);
+    ctx.fillText('( ' + formData.pkKelas + ' )', pkX, y + lineHeight * 4);
 
     ctx.fillText('Mengetahui,', judatX, y);
     ctx.font = 'bold 16px Times New Roman';
@@ -344,15 +344,15 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     ctx.font = '16px Times New Roman';
     ctx.fillText('( ____________________ )', judatX, y + lineHeight * 4);
 
-    // Baris bawah: Pembina Kelas (tengah)
-    const pkY = y + lineHeight * 6;
-    const pkX = (baseWidth - leftMargin - rightMargin) / 2 + leftMargin;
+    // Baris bawah: Mabigus (tengah)
+    const mabigusY = y + lineHeight * 6;
+    const mabigusX = (baseWidth - leftMargin - rightMargin) / 2 + leftMargin;
 
-    ctx.fillText('Mengetahui,', pkX, pkY);
+    ctx.fillText('Mengetahui,', mabigusX, mabigusY);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Pembina Kelas', pkX, pkY + lineHeight);
+    ctx.fillText('Mabigus', mabigusX, mabigusY + lineHeight);
     ctx.font = '16px Times New Roman';
-    ctx.fillText('( ' + formData.pkKelas + ' )', pkX, pkY + lineHeight * 4);
+    ctx.fillText('( ____________________ )', mabigusX, mabigusY + lineHeight * 4);
 
     // Tambahkan QR Code di pojok kanan atas jika izinId tersedia
     if (izinId) {
@@ -512,20 +512,30 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
             </div>
           )}
           
-          <button
-            onClick={downloadSurat}
-            disabled={izinStatus !== 'approved' || loading}
-            className={`w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all ${
-              izinStatus === 'approved' && !loading
-                ? 'bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-            {izinStatus === 'approved' 
-              ? 'Download Surat PDF' 
-              : 'Download (Menunggu Verifikasi)'}
-          </button>
+          <div className="space-y-3">
+            <button
+              onClick={downloadSurat}
+              disabled={izinStatus !== 'approved' || loading}
+              className={`w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all ${
+                izinStatus === 'approved' && !loading
+                  ? 'bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
+              {izinStatus === 'approved' 
+                ? 'Download Surat PDF' 
+                : 'Download (Menunggu Verifikasi)'}
+            </button>
+
+            <button
+              onClick={() => window.location.href = '/?showCekIzin=true'}
+              className="w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all bg-blue-600 text-white cursor-pointer hover:bg-blue-700"
+            >
+              <i className="fas fa-list mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
+              Cek Izin Saya
+            </button>
+          </div>
           
           {/* {izinId && izinStatus === 'approved' && (
             // <a
