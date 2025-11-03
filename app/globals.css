@@ -3,8 +3,27 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-khaki min-h-screen text-darkBrown;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  button, a {
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+  
+  input, textarea, select {
+    font-size: 16px; /* Prevent zoom on iOS */
   }
 }
 
@@ -34,4 +53,24 @@
 
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out;
+}
+
+/* Improve scrollbar on desktop */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #8D6E63;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6D4C41;
+  }
 }

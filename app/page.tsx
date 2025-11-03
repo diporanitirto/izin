@@ -156,24 +156,24 @@ export default function Home() {
           
           {/* Info Bar dengan Data Siswa dan Tombol Ganti NIS */}
           {!showPreview && siswaData && (
-            <div className="max-w-[900px] mx-auto px-4 sm:px-8 md:px-10 py-4">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-md p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <div className="flex items-center gap-3 text-white">
-                  <div className="bg-white/20 p-3 rounded-full">
-                    <i className="fas fa-user-circle text-2xl"></i>
+            <div className="max-w-[900px] mx-auto px-3 sm:px-4 md:px-10 py-3 sm:py-4">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 text-white w-full sm:w-auto">
+                  <div className="bg-white/20 p-2 sm:p-3 rounded-full flex-shrink-0">
+                    <i className="fas fa-user-circle text-xl sm:text-2xl"></i>
                   </div>
-                  <div>
-                    <p className="text-sm opacity-90">Logged in as</p>
-                    <p className="font-bold text-lg">{siswaData.nama}</p>
-                    <p className="text-xs opacity-80">NIS: {nis} | Kelas: {siswaData.kelas}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs sm:text-sm opacity-90 mb-0.5">Logged in as</p>
+                    <p className="font-bold text-base sm:text-lg truncate">{siswaData.nama}</p>
+                    <p className="text-[10px] sm:text-xs opacity-80">NIS: {nis} | Kelas: {siswaData.kelas}</p>
                   </div>
                 </div>
                 <button
                   onClick={handleChangeNIS}
-                  className="bg-white text-blue-700 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors shadow-md flex items-center gap-2 text-sm"
+                  className="w-full sm:w-auto bg-white text-blue-700 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors shadow-md flex items-center justify-center gap-2 text-sm whitespace-nowrap"
                 >
-                  <i className="fas fa-sync-alt"></i>
-                  Ganti NIS
+                  <i className="fas fa-sync-alt text-xs sm:text-sm"></i>
+                  <span>Ganti NIS</span>
                 </button>
               </div>
             </div>
@@ -181,22 +181,22 @@ export default function Home() {
           
           {/* Tombol Cek Izin */}
           {!showPreview && siswaData && (
-            <div className="max-w-[900px] mx-auto px-4 sm:px-8 md:px-10 pb-4 flex justify-center">
+            <div className="max-w-[900px] mx-auto px-3 sm:px-4 md:px-10 pb-3 sm:pb-4 flex justify-center">
               <button
                 onClick={() => setShowCekIzin(!showCekIzin)}
-                className={`px-6 py-3 rounded-lg font-semibold transition-colors shadow-md ${
+                className={`w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all shadow-md active:scale-95 ${
                   showCekIzin
                     ? 'bg-red-600 hover:bg-red-700 text-white'
                     : 'bg-green-600 hover:bg-green-700 text-white'
                 }`}
               >
-                <i className={`fas ${showCekIzin ? 'fa-times' : 'fa-list'} mr-2`}></i>
-                {showCekIzin ? 'Tutup' : 'Cek Izin Saya'}
+                <i className={`fas ${showCekIzin ? 'fa-times' : 'fa-list'} mr-2 text-sm`}></i>
+                <span className="text-sm sm:text-base">{showCekIzin ? 'Tutup Riwayat Izin' : 'Cek Izin Saya'}</span>
               </button>
             </div>
           )}
           
-          <main className="max-w-[900px] mx-auto bg-[#fdfaf4] px-4 sm:px-8 md:px-10 py-6 sm:py-8 md:py-10 rounded-lg shadow-lg border-2 border-mediumBrown" role="main">
+          <main className="max-w-[900px] mx-auto bg-[#fdfaf4] px-3 sm:px-4 md:px-10 py-4 sm:py-6 md:py-10 rounded-xl shadow-xl border-2 border-mediumBrown mb-4 sm:mb-6" role="main">
             {showCekIzin && !showPreview && siswaData ? (
               <CekIzin nis={nis} />
             ) : !showPreview && siswaData ? (
