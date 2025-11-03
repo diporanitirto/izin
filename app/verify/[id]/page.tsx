@@ -34,10 +34,27 @@ export default function VerifyPage() {
   const [loading, setLoading] = useState(true);
   const [verifyUrl, setVerifyUrl] = useState('');
   const [showPreview, setShowPreview] = useState(false);
+  const [qrSize, setQrSize] = useState(280);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setVerifyUrl(window.location.href);
+      
+      // Set QR size based on screen width
+      const updateQrSize = () => {
+        const width = window.innerWidth;
+        if (width < 400) {
+          setQrSize(200);
+        } else if (width < 640) {
+          setQrSize(240);
+        } else {
+          setQrSize(280);
+        }
+      };
+      
+      updateQrSize();
+      window.addEventListener('resize', updateQrSize);
+      return () => window.removeEventListener('resize', updateQrSize);
     }
     fetchIzin();
   }, [id]);
@@ -88,11 +105,11 @@ export default function VerifyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8 px-3 sm:px-4">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Header */}
-          <div className={`p-6 text-white ${
+          <div className={`p-4 sm:p-6 text-white ${
             izin.status === 'approved' ? 'bg-green-600' : 
             izin.status === 'rejected' ? 'bg-red-600' : 'bg-yellow-600'
           }`}>
@@ -100,103 +117,109 @@ export default function VerifyPage() {
               <i className={`fas ${
                 izin.status === 'approved' ? 'fa-check-circle' : 
                 izin.status === 'rejected' ? 'fa-times-circle' : 'fa-clock'
-              } text-6xl mb-4`}></i>
-              <h1 className="text-3xl font-bold mb-2">
+              } text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4`}></i>
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 px-2">
                 {izin.status === 'approved' ? 'Surat Izin Terverifikasi' : 
                  izin.status === 'rejected' ? 'Surat Izin Ditolak' : 'Menunggu Verifikasi'}
               </h1>
-              <p className="text-lg opacity-90">
-                Dewan Ambalan DIPORANI · Gudep 3089/3090 · SMA Negeri 1 Kasihan
+              <p className="text-xs sm:text-sm md:text-base opacity-90 px-2 leading-relaxed">
+                Dewan Ambalan DIPORANI<br className="sm:hidden" />
+                <span className="hidden sm:inline"> · </span>
+                Gudep 3089/3090<br className="sm:hidden" />
+                <span className="hidden sm:inline"> · </span>
+                SMA Negeri 1 Kasihan
               </p>
             </div>
           </div>
 
           {/* QR Code */}
           {izin.status === 'approved' && verifyUrl && (
-            <div className="bg-gray-50 p-6 text-center border-b">
-              <div className="inline-block bg-white p-4 rounded-lg shadow">
+            <div className="bg-gray-50 p-4 sm:p-6 flex flex-col items-center justify-center border-b">
+              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md flex items-center justify-center">
                 <QRCodeCanvas
                   value={verifyUrl}
-                  size={300}
+                  size={qrSize}
                   level="H"
                   includeMargin={true}
                 />
               </div>
-              <p className="text-sm text-gray-600 mt-3">Scan QR Code untuk verifikasi</p>
+              <p className="text-xs sm:text-sm text-gray-600 mt-3 text-center px-2">
+                Scan QR Code untuk verifikasi
+              </p>
             </div>
           )}
 
           {/* Data Siswa */}
-          <div className="p-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-              <i className="fas fa-user mr-2"></i>
+          <div className="p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center">
+              <i className="fas fa-user mr-2 text-sm sm:text-base"></i>
               Data Siswa
             </h2>
             
-            <div className="space-y-3">
-              <div className="flex border-b pb-2">
-                <span className="w-32 text-gray-600 font-semibold">Nama:</span>
-                <span className="flex-1 text-gray-800">{izin.nama}</span>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex flex-col sm:flex-row sm:border-b pb-2">
+                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">Nama:</span>
+                <span className="text-sm sm:text-base flex-1 text-gray-800 break-words">{izin.nama}</span>
               </div>
-              <div className="flex border-b pb-2">
-                <span className="w-32 text-gray-600 font-semibold">NIS:</span>
-                <span className="flex-1 text-gray-800">{izin.nis}</span>
+              <div className="flex flex-col sm:flex-row sm:border-b pb-2">
+                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">NIS:</span>
+                <span className="text-sm sm:text-base flex-1 text-gray-800">{izin.nis}</span>
               </div>
-              <div className="flex border-b pb-2">
-                <span className="w-32 text-gray-600 font-semibold">Absen:</span>
-                <span className="flex-1 text-gray-800">{izin.absen}</span>
+              <div className="flex flex-col sm:flex-row sm:border-b pb-2">
+                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">Absen:</span>
+                <span className="text-sm sm:text-base flex-1 text-gray-800">{izin.absen}</span>
               </div>
-              <div className="flex border-b pb-2">
-                <span className="w-32 text-gray-600 font-semibold">Kelas:</span>
-                <span className="flex-1 text-gray-800">{izin.kelas}</span>
+              <div className="flex flex-col sm:flex-row sm:border-b pb-2">
+                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">Kelas:</span>
+                <span className="text-sm sm:text-base flex-1 text-gray-800">{izin.kelas}</span>
               </div>
-              <div className="flex border-b pb-2">
-                <span className="w-32 text-gray-600 font-semibold">Sangga:</span>
-                <span className="flex-1 text-gray-800">{izin.sangga || '-'}</span>
+              <div className="flex flex-col sm:flex-row sm:border-b pb-2">
+                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">Sangga:</span>
+                <span className="text-sm sm:text-base flex-1 text-gray-800">{izin.sangga || '-'}</span>
               </div>
-              <div className="flex border-b pb-2">
-                <span className="w-32 text-gray-600 font-semibold">PK Kelas:</span>
-                <span className="flex-1 text-gray-800">{izin.pk_kelas || '-'}</span>
+              <div className="flex flex-col sm:flex-row sm:border-b pb-2">
+                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">PK Kelas:</span>
+                <span className="text-sm sm:text-base flex-1 text-gray-800 break-words">{izin.pk_kelas || '-'}</span>
               </div>
             </div>
 
-            <h3 className="text-lg font-bold text-gray-800 mt-6 mb-2">Alasan Izin:</h3>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700">{izin.alasan}</p>
+            <h3 className="text-base sm:text-lg font-bold text-gray-800 mt-4 sm:mt-6 mb-2">Alasan Izin:</h3>
+            <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-wrap">{izin.alasan}</p>
             </div>
 
             {/* Info Verifikasi */}
             {izin.verified_by && (
-              <div className="mt-6 bg-blue-50 border-l-4 border-blue-600 p-4">
-                <h3 className="font-bold text-blue-800 mb-2">
-                  <i className="fas fa-certificate mr-2"></i>
+              <div className="mt-4 sm:mt-6 bg-blue-50 border-l-4 border-blue-600 p-3 sm:p-4">
+                <h3 className="text-sm sm:text-base font-bold text-blue-800 mb-2">
+                  <i className="fas fa-certificate mr-2 text-xs sm:text-sm"></i>
                   Informasi Verifikasi
                 </h3>
-                <p className="text-blue-700">
+                <p className="text-xs sm:text-sm text-blue-700">
                   <strong>Diverifikasi oleh:</strong> {izin.verified_by}
                 </p>
                 {izin.verified_at && (
-                  <p className="text-blue-700 text-sm mt-1">
+                  <p className="text-xs sm:text-sm text-blue-700 mt-1">
                     <strong>Waktu:</strong> {formatDate(izin.verified_at)}
                   </p>
                 )}
               </div>
             )}
 
-            <div className="mt-6 text-center text-sm text-gray-500">
+            <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-500 space-y-1">
               <p>Dibuat pada: {formatDate(izin.created_at)}</p>
-              <p className="mt-2">ID Izin: {izin.id}</p>
+              <p className="break-all px-2">ID Izin: {izin.id}</p>
             </div>
 
             {/* Tombol untuk melihat preview - untuk semua status */}
             {!showPreview && (
-              <div className="mt-6">
+              <div className="mt-4 sm:mt-6">
                 <button
                   onClick={() => setShowPreview(true)}
-                  className={`w-full px-6 py-3 rounded-lg transition-colors font-semibold ${
+                  className={`w-full px-4 sm:px-6 py-3 rounded-lg transition-colors text-sm sm:text-base font-semibold ${
                     izin.status === 'approved'
-                      ? 'bg-green-600 hover:bg-green-700 text-white'
-                      : 'bg-blue-600 hover:bg-blue-700 text-white'
+                      ? 'bg-green-600 hover:bg-green-700 text-white active:scale-95'
+                      : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95'
                   }`}
                 >
                   <i className={`fas ${izin.status === 'approved' ? 'fa-file-pdf' : 'fa-eye'} mr-2`}></i>
@@ -211,7 +234,7 @@ export default function VerifyPage() {
 
         {/* Preview Section - untuk semua status */}
         {showPreview && (
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <PreviewSection
               formData={{
                 nama: izin.nama,
@@ -227,18 +250,18 @@ export default function VerifyPage() {
           </div>
         )}
 
-        <div className="mt-6">
-          <div className="flex gap-3 items-stretch">
+        <div className="mt-4 sm:mt-6">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <a
               href="/"
-              className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold flex items-center justify-center"
+              className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold flex items-center justify-center active:scale-95"
             >
               <i className="fas fa-home mr-2"></i>
               Halaman Utama
             </a>
             <a
               href="/?showCekIzin=true"
-              className="flex-1 px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold flex items-center justify-center"
+              className="flex-1 px-4 sm:px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold flex items-center justify-center active:scale-95"
             >
               <i className="fas fa-list mr-2"></i>
               Kembali ke Riwayat Izin
