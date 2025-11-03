@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { QRCodeSVG } from 'qrcode.react';
+import QRCode from 'qrcode';
+import Loading from './Loading';
 
 interface FormData {
   nama: string;
@@ -15,16 +18,77 @@ interface FormData {
 interface PreviewSectionProps {
   formData: FormData;
   onBack: () => void;
+  izinId?: string | null;  // Optional: ID dari database untuk generate QR
 }
 
-export default function PreviewSection({ formData, onBack }: PreviewSectionProps) {
+export default function PreviewSection({ formData, onBack, izinId: propIzinId }: PreviewSectionProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
+  const [izinId, setIzinId] = useState<string | null>(propIzinId || null);
+  const [izinStatus, setIzinStatus] = useState<string>('pending');
+  const [verifiedBy, setVerifiedBy] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // regenerate preview when form data changes
     generatePreview();
-  }, [formData]);
+    // Only fetch status if izinId not provided (meaning it's a new submission)
+    if (!propIzinId) {
+      fetchIzinStatus();
+    }
+  }, [formData, propIzinId]);
+
+  useEffect(() => {
+    // If izinId provided from props, fetch that specific izin's status
+    if (propIzinId) {
+      fetchIzinById(propIzinId);
+    }
+  }, [propIzinId]);
+
+  const fetchIzinById = async (id: string) => {
+    try {
+      setLoading(true);
+      // Fetch langsung by ID
+      const response = await fetch(`/api/izin/${id}`);
+      const result = await response.json();
+      
+      if (result.success && result.data) {
+        setIzinStatus(result.data.status || 'pending');
+        setVerifiedBy(result.data.verified_by || null);
+      }
+    } catch (error) {
+      console.error('Error fetching izin by ID:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchIzinStatus = async () => {
+    try {
+      setLoading(true);
+      // Cari izin berdasarkan absen (yang merupakan NIS)
+      const response = await fetch(`/api/izin?nis=${formData.absen}`);
+      const result = await response.json();
+      
+      if (result.success && result.data.length > 0) {
+        // Ambil izin terbaru yang sesuai dengan data form
+        const latestIzin = result.data.find((item: any) => 
+          item.nama === formData.nama && 
+          item.kelas === formData.kelas
+        );
+        
+        if (latestIzin) {
+          setIzinId(latestIzin.id);
+          setIzinStatus(latestIzin.status || 'pending');
+          setVerifiedBy(latestIzin.verified_by || null);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching izin status:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const generatePreview = async () => {
     const canvas = canvasRef.current;
@@ -261,37 +325,89 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
     ctx.fillText('( ' + formData.nama + ' )', hormatSayaX, lineY);
 
     y = signatureStartY + lineHeight * 6;
-    const colSpacing = (baseWidth - leftMargin - rightMargin) / 3;
-    const col1X = leftMargin + colSpacing * 0.5;
-    const col2X = leftMargin + colSpacing * 1.5;
-    const col3X = leftMargin + colSpacing * 2.5;
+    
+    // Baris atas: Mabigus dan Judat
+    const topRowSpacing = (baseWidth - leftMargin - rightMargin) / 2;
+    const mabigusX = leftMargin + topRowSpacing * 0.5;
+    const judatX = leftMargin + topRowSpacing * 1.5;
 
     ctx.textAlign = 'center';
-    ctx.fillText('Mengetahui,', col1X, y);
+    ctx.fillText('Mengetahui,', mabigusX, y);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Pembina Kelas', col1X, y + lineHeight);
+    ctx.fillText('Mabigus', mabigusX, y + lineHeight);
     ctx.font = '16px Times New Roman';
-    lineY = y + lineHeight * 4;
-    ctx.fillText('( ' + formData.pkKelas + ' )', col1X, lineY);
+    ctx.fillText('( ____________________ )', mabigusX, y + lineHeight * 4);
 
-    ctx.fillText('Mengetahui,', col2X, y);
+    ctx.fillText('Mengetahui,', judatX, y);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Mabigus', col2X, y + lineHeight);
+    ctx.fillText('Judat', judatX, y + lineHeight);
     ctx.font = '16px Times New Roman';
-    lineY = y + lineHeight * 4;
-    ctx.fillText('( ____________________ )', col2X, lineY);
+    ctx.fillText('( ____________________ )', judatX, y + lineHeight * 4);
 
-    ctx.fillText('Mengetahui,', col3X, y);
+    // Baris bawah: Pembina Kelas (tengah)
+    const pkY = y + lineHeight * 6;
+    const pkX = (baseWidth - leftMargin - rightMargin) / 2 + leftMargin;
+
+    ctx.fillText('Mengetahui,', pkX, pkY);
     ctx.font = 'bold 16px Times New Roman';
-    ctx.fillText('Judat', col3X, y + lineHeight);
+    ctx.fillText('Pembina Kelas', pkX, pkY + lineHeight);
     ctx.font = '16px Times New Roman';
-    lineY = y + lineHeight * 4;
-    ctx.fillText('( ____________________ )', col3X, lineY);
+    ctx.fillText('( ' + formData.pkKelas + ' )', pkX, pkY + lineHeight * 4);
+
+    // Tambahkan QR Code di pojok kanan atas jika izinId tersedia
+    if (izinId) {
+      try {
+        const verifyUrl = `${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'}/verify/${izinId}`;
+        const qrDataUrl = await QRCode.toDataURL(verifyUrl, {
+          width: 120,
+          margin: 1,
+          color: {
+            dark: '#000000',
+            light: '#FFFFFF'
+          }
+        });
+        
+        const qrImage = new (window as any).Image() as HTMLImageElement;
+        qrImage.src = qrDataUrl;
+        await new Promise((resolve) => {
+          qrImage.onload = resolve;
+        });
+        
+        // Posisi QR di pojok kanan, diturunkan sedikit
+        const qrSize = 100;
+        const qrX = baseWidth - rightMargin - qrSize - 10;
+        const qrY = 150; // Diturunkan dari 60 ke 150
+        
+        // Background putih untuk QR
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 10);
+        ctx.strokeStyle = '#4CAF50';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 10);
+        
+        // Draw QR code
+        ctx.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
+        
+        // Label di bawah QR
+        ctx.fillStyle = '#000000';
+        ctx.font = '10px Times New Roman';
+        ctx.textAlign = 'center';
+        ctx.fillText('Scan untuk verifikasi', qrX + qrSize / 2, qrY + qrSize + 15);
+        ctx.textAlign = 'left';
+      } catch (error) {
+        console.error('Error generating QR code:', error);
+      }
+    }
 
     setPreviewUrl(canvas.toDataURL('image/jpeg', 0.85));
   };
 
   const downloadSurat = async () => {
+    if (izinStatus !== 'approved') {
+      alert('⚠️ Surat izin belum diverifikasi oleh Judat.\n\nAnda dapat melihat preview surat, tetapi download hanya tersedia setelah izin disetujui.\n\nMohon tunggu persetujuan terlebih dahulu atau hubungi Judat untuk informasi lebih lanjut.');
+      return;
+    }
+
     await generatePreview();
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -317,11 +433,11 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
           </span>
           <button
             onClick={onBack}
-            className="px-2 py-1.5 bg-[#a1887f] text-white rounded text-xs sm:text-sm cursor-pointer hover:bg-lightBrown transition-all flex items-center gap-1"
-            title="Kembali ke Form"
+            className="px-3 py-2 bg-[#5D4037] text-white rounded text-sm cursor-pointer hover:bg-[#4E342E] transition-all flex items-center gap-2 font-semibold"
+            title="Kembali"
           >
-            <i className="fas fa-arrow-left text-xs"></i>
-            <span className="hidden sm:inline">Kembali</span>
+            <i className="fas fa-arrow-left"></i>
+            <span>Kembali</span>
           </button>
         </div>
         <div className="p-3 sm:p-4">
@@ -340,13 +456,88 @@ export default function PreviewSection({ formData, onBack }: PreviewSectionProps
             )}
           </div>
           
+          {/* Status Verifikasi */}
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className={`mb-4 p-4 rounded-lg ${
+              izinStatus === 'approved' 
+                ? 'bg-green-50 border border-green-200' 
+                : izinStatus === 'rejected'
+                ? 'bg-red-50 border border-red-200'
+                : 'bg-yellow-50 border border-yellow-200'
+            }`}>
+              <div className="flex items-start gap-3">
+                <i className={`fas ${
+                  izinStatus === 'approved' 
+                    ? 'fa-check-circle text-green-600' 
+                    : izinStatus === 'rejected'
+                    ? 'fa-times-circle text-red-600'
+                    : 'fa-clock text-yellow-600'
+                } text-2xl`}></i>
+                <div className="flex-1">
+                  <h3 className={`font-bold text-lg mb-1 ${
+                    izinStatus === 'approved' 
+                      ? 'text-green-800' 
+                      : izinStatus === 'rejected'
+                      ? 'text-red-800'
+                      : 'text-yellow-800'
+                  }`}>
+                    {izinStatus === 'approved' 
+                      ? '✓ Izin Terverifikasi' 
+                      : izinStatus === 'rejected'
+                      ? '✗ Izin Ditolak'
+                      : '⏳ Menunggu Verifikasi'}
+                  </h3>
+                  <p className={`text-sm ${
+                    izinStatus === 'approved' 
+                      ? 'text-green-700' 
+                      : izinStatus === 'rejected'
+                      ? 'text-red-700'
+                      : 'text-yellow-700'
+                  }`}>
+                    {izinStatus === 'approved' 
+                      ? `Izin Anda telah disetujui oleh${verifiedBy ? `: ${verifiedBy}` : ''}. Silakan download surat PDF.`
+                      : izinStatus === 'rejected'
+                      ? 'Izin Anda ditolak. Silakan hubungi Judat untuk informasi lebih lanjut.'
+                      : 'Izin Anda sedang menunggu persetujuan dari Judat. Anda dapat download surat setelah diverifikasi.'}
+                  </p>
+                  {izinStatus === 'pending' && (
+                    <p className="text-xs text-yellow-600 mt-2">
+                      💡 Tips: Cek status izin secara berkala menggunakan tombol "Cek Izin Saya" di halaman utama.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+          
           <button
             onClick={downloadSurat}
-            className="w-full px-4 py-3 sm:py-3.5 bg-scoutGreen text-white rounded font-medium text-sm sm:text-base cursor-pointer hover:bg-[#388E3C] transition-all"
+            disabled={izinStatus !== 'approved' || loading}
+            className={`w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all ${
+              izinStatus === 'approved' && !loading
+                ? 'bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
           >
             <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-            Download Surat PDF
+            {izinStatus === 'approved' 
+              ? 'Download Surat PDF' 
+              : 'Download (Menunggu Verifikasi)'}
           </button>
+          
+          {izinId && izinStatus === 'approved' && (
+            <a
+              href={`/verify/${izinId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-3 text-center px-4 py-2 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-all text-sm"
+            >
+              <i className="fas fa-qrcode mr-2"></i>
+              Lihat Verifikasi Online
+            </a>
+          )}
         </div>
       </div>
     </section>

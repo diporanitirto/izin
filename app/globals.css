@@ -31,3 +31,7 @@
 .fade-in {
   animation: fadeIn 0.3s ease-in;
 }
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}

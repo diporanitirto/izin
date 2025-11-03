@@ -1,1 +1,1 @@
-export { POST } from '../database/route';
+export { POST, GET } from '../database/route';

@@ -5,7 +5,10 @@ interface IzinPayload {
   nama: string;
   absen: string | number;
   kelas: string;
+  sangga?: string;
+  pkKelas?: string;
   alasan: string;
+  nis?: string | number;
 }
 
 const ALLOWED_KELAS = new Set([
@@ -56,6 +59,14 @@ export async function POST(request: Request) {
     const kelasNormalized = String(payload.kelas)
       .replace(/[^0-9A-Z]/gi, '')
       .toUpperCase();
+    
+    console.log('DEBUG - Kelas validation:', {
+      original: payload.kelas,
+      normalized: kelasNormalized,
+      isValid: ALLOWED_KELAS.has(kelasNormalized),
+      allowedKelas: Array.from(ALLOWED_KELAS)
+    });
+    
     if (!ALLOWED_KELAS.has(kelasNormalized)) {
       return NextResponse.json(
         { error: 'Kelas tidak valid.' },
@@ -68,13 +79,18 @@ export async function POST(request: Request) {
       global: { headers: { 'x-client-info': 'izin-app/1.0.0' } },
     });
 
+    const nisValue = payload.nis ? String(payload.nis) : String(absenNumber);
+
     const { data, error } = await supabase
       .from('izin')
       .insert({
         nama: payload.nama,
         absen: absenNumber,
         kelas: kelasNormalized,
+        sangga: payload.sangga || '',
+        pk_kelas: payload.pkKelas || '',
         alasan: payload.alasan,
+        nis: nisValue,
         status: 'pending',
       })
       .select()
@@ -95,6 +111,59 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error('Database route error:', error);
+    return NextResponse.json(
+      { error: 'Terjadi kesalahan saat memproses permintaan.' },
+      { status: 500 },
+    );
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+      return NextResponse.json(
+        { error: 'Konfigurasi database belum lengkap.' },
+        { status: 500 },
+      );
+    }
+
+    const { searchParams } = new URL(request.url);
+    const status = searchParams.get('status');
+    const nis = searchParams.get('nis');
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
+      auth: { persistSession: false },
+      global: { headers: { 'x-client-info': 'izin-app/1.0.0' } },
+    });
+
+    let query = supabase.from('izin').select('*');
+
+    if (status && status !== 'all') {
+      query = query.eq('status', status);
+    }
+
+    if (nis) {
+      query = query.eq('nis', nis);
+    }
+
+    query = query.order('created_at', { ascending: false });
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error('Supabase query error:', error);
+      return NextResponse.json(
+        { error: 'Gagal mengambil data dari database.' },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json({ success: true, data });
+  } catch (error) {
+    console.error('Database GET route error:', error);
     return NextResponse.json(
       { error: 'Terjadi kesalahan saat memproses permintaan.' },
       { status: 500 },

@@ -9,34 +9,45 @@ interface FormData {
   sangga: string;
   pkKelas: string;
   alasan: string;
+  nis?: string;
 }
 
 interface SuratFormProps {
   onSubmit: (data: FormData) => Promise<void>;
   initialData?: FormData;
+  nis: string;
+  siswaData: {
+    nama: string;
+    kelas: string;
+    absen: string;
+  };
 }
 
-export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
-  const [formData, setFormData] = useState<FormData>(
-    initialData || {
-      nama: '',
-      absen: '',
-      kelas: '',
-      sangga: '',
-      pkKelas: '',
-      alasan: '',
-    },
-  );
+export default function SuratForm({ onSubmit, initialData, nis, siswaData }: SuratFormProps) {
+  const [formData, setFormData] = useState<FormData>({
+    nama: siswaData.nama,
+    absen: siswaData.absen,
+    kelas: siswaData.kelas,
+    sangga: initialData?.sangga || '',
+    pkKelas: initialData?.pkKelas || '',
+    alasan: initialData?.alasan || '',
+    nis,
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [pkOptions, setPkOptions] = useState<string[]>([]);
   const [isLoadingPk, setIsLoadingPk] = useState(true);
 
+  // Update form data when siswaData or nis changes
   useEffect(() => {
-    if (initialData) {
-      setFormData(initialData);
-    }
-  }, [initialData]);
+    setFormData((prev) => ({
+      ...prev,
+      nama: siswaData.nama,
+      absen: siswaData.absen,
+      kelas: siswaData.kelas,
+      nis,
+    }));
+  }, [siswaData.nama, siswaData.absen, siswaData.kelas, nis]);
 
   useEffect(() => {
     let isMounted = true;
@@ -84,7 +95,20 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
     setIsSubmitting(true);
 
     try {
-      await onSubmit(formData);
+      // Normalize kelas format untuk API (X-1 → X1)
+      const normalizedData = {
+        ...formData,
+        kelas: formData.kelas.replace(/-/g, ''),  // Replace all dashes
+        nis
+      };
+      
+      console.log('🔍 Form Submit Debug:', {
+        originalKelas: formData.kelas,
+        normalizedKelas: normalizedData.kelas,
+        fullData: normalizedData
+      });
+      
+      await onSubmit(normalizedData);
     } catch (error) {
       console.error('Gagal mengirim data ke Telegram:', error);
       setErrorMessage('Terjadi kendala saat mengirim data. Silakan coba lagi.');
@@ -124,6 +148,14 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
         <div className="p-3 sm:p-4">
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+              {/* Info NIS */}
+              <div className="md:col-span-2 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <p className="text-sm text-blue-800">
+                  <i className="fas fa-info-circle mr-2"></i>
+                  Data Anda: <strong>{siswaData.nama}</strong> - NIS <strong>{nis}</strong>
+                </p>
+              </div>
+
               <div className="form-group">
                 <label htmlFor="nama" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
                   <i className="fas fa-user text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
@@ -134,9 +166,8 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
                   id="nama"
                   name="nama"
                   value={formData.nama}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors"
+                  readOnly
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-gray-50 text-darkBrown text-sm sm:text-base cursor-not-allowed"
                 />
               </div>
               
@@ -146,15 +177,12 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
                   Nomor Absen:
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   id="absen"
                   name="absen"
                   value={formData.absen}
-                  onChange={handleChange}
-                  required
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors"
+                  readOnly
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-gray-50 text-darkBrown text-sm sm:text-base cursor-not-allowed"
                 />
               </div>
               
@@ -163,24 +191,14 @@ export default function SuratForm({ onSubmit, initialData }: SuratFormProps) {
                   <i className="fas fa-school text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
                   Kelas:
                 </label>
-                <select
+                <input
+                  type="text"
                   id="kelas"
                   name="kelas"
                   value={formData.kelas}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer"
-                >
-                  <option value="">Pilih Kelas</option>
-                  <option value="X-1">X-1</option>
-                  <option value="X-2">X-2</option>
-                  <option value="X-3">X-3</option>
-                  <option value="X-4">X-4</option>
-                  <option value="X-5">X-5</option>
-                  <option value="X-6">X-6</option>
-                  <option value="X-7">X-7</option>
-                  <option value="X-8">X-8</option>
-                </select>
+                  readOnly
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-gray-50 text-darkBrown text-sm sm:text-base cursor-not-allowed"
+                />
               </div>
               
               <div className="form-group">
