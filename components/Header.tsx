@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -33,6 +34,27 @@ export default function Header() {
           />
         </div>
       </div>
+      
+      {/* Navigation */}
+      <div className="px-4 pb-3">
+        <div className="flex items-center justify-center gap-2 sm:gap-4">
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/50 hover:bg-white border border-mediumBrown/30 hover:border-mediumBrown transition-all text-xs sm:text-sm font-medium text-mediumBrown hover:shadow-md"
+          >
+            <i className="fas fa-home text-[0.7rem] sm:text-xs"></i>
+            <span className="hidden sm:inline">Beranda</span>
+          </Link>
+          <Link 
+            href="/workflow"
+            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-amber-500 hover:bg-amber-600 border border-amber-600 transition-all text-xs sm:text-sm font-semibold text-white hover:shadow-md"
+          >
+            <i className="fas fa-question-circle text-[0.7rem] sm:text-xs"></i>
+            <span>Cara Pakai</span>
+          </Link>
+        </div>
+      </div>
+      
       <div className="rope-divider" aria-hidden="true"></div>
     </header>
   );

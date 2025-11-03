@@ -28,9 +28,10 @@ interface SiswaData {
 }
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
   const [showPreview, setShowPreview] = useState(false);
   const [showCekIzin, setShowCekIzin] = useState(false);
-  const [showNISModal, setShowNISModal] = useState(true);
+  const [showNISModal, setShowNISModal] = useState(false);
   const [nis, setNis] = useState('');
   const [siswaData, setSiswaData] = useState<SiswaData | null>(null);
   const [previewIzinId, setPreviewIzinId] = useState<string | null>(null);
@@ -49,10 +50,25 @@ export default function Home() {
     const storedSiswaData = sessionStorage.getItem('siswaData');
     
     if (storedNis && storedSiswaData) {
-      setNis(storedNis);
-      setSiswaData(JSON.parse(storedSiswaData));
-      setShowNISModal(false);
+      try {
+        const parsedData = JSON.parse(storedSiswaData);
+        setNis(storedNis);
+        setSiswaData(parsedData);
+        setShowNISModal(false);
+      } catch (error) {
+        console.error('Error parsing stored siswa data:', error);
+        // Clear corrupted data
+        sessionStorage.removeItem('nis');
+        sessionStorage.removeItem('siswaData');
+        setShowNISModal(true);
+      }
+    } else {
+      // No stored data, show modal
+      setShowNISModal(true);
     }
+
+    // Finish loading check
+    setIsLoading(false);
 
     // Check if URL has showCekIzin parameter
     if (typeof window !== 'undefined') {
@@ -141,6 +157,18 @@ export default function Home() {
     setShowPreview(false);
     setPreviewIzinId(null);
   };
+
+  // Show loading spinner while checking session
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-amber-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 text-lg">Memuat...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
