@@ -42,7 +42,7 @@ DEBUG - Kelas validation: {
    - Absen: (otomatis terisi)
    - Kelas: (otomatis terisi)
    - Sangga: pilih salah satu
-   - PK Kelas: pilih salah satu
+   - PK: pilih salah satu
    - Alasan: isi alasan
 4. **Klik "Buat Surat"**
 5. **Perhatikan Console Log** - cari emoji:

@@ -3,482 +3,351 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function WorkflowPage() {
     const router = useRouter();
     const [isChecking, setIsChecking] = useState(true);
+    const [loadingProgress, setLoadingProgress] = useState(0);
 
     useEffect(() => {
-        // Check if user has NIS in session
+        const intervals = [
+            { time: 100, progress: 30 },
+            { time: 150, progress: 60 },
+            { time: 120, progress: 90 },
+            { time: 100, progress: 100 },
+        ];
+
+        let currentStep = 0;
+        const runProgress = () => {
+            if (currentStep < intervals.length) {
+                const { time, progress } = intervals[currentStep];
+                setTimeout(() => {
+                    setLoadingProgress(progress);
+                    currentStep++;
+                    runProgress();
+                }, time);
+            }
+        };
+
+        runProgress();
+
         const storedNis = sessionStorage.getItem('nis');
         
         if (!storedNis) {
-            // No NIS found, redirect to home
             router.push('/');
         } else {
-            // Has NIS, allow access to workflow page
-            setIsChecking(false);
+            setTimeout(() => {
+                setIsChecking(false);
+            }, 500);
         }
     }, [router]);
 
-    // Show loading while checking
     if (isChecking) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Memuat...</p>
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-scoutKhaki-50 to-scoutBrown-100">
+                <div className="w-full max-w-md px-6">
+                    <div className="text-center mb-8 animate-scale-in">
+                        <h2 className="text-xl sm:text-2xl font-bold text-scoutBrown-900 mb-2">
+                            Memuat Panduan
+                        </h2>
+                        <p className="text-scoutBrown-600 text-sm">
+                            Mohon tunggu sebentar...
+                        </p>
+                    </div>
+                    <div className="relative">
+                        <div className="w-full h-3 bg-scoutBrown-200/50 rounded-full overflow-hidden shadow-inner">
+                            <div 
+                                className="h-full bg-gradient-to-r from-scoutBrown-700 via-scoutBrown-800 to-scoutBrown-900 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
+                                style={{ width: `${loadingProgress}%` }}
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_1.5s_ease-in-out_infinite]"></div>
+                            </div>
+                        </div>
+                        <div className="mt-3 text-center">
+                            <span className="text-sm font-bold text-scoutBrown-800">
+                                {loadingProgress}%
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
-            {/* Header */}
-            <div className="bg-gradient-to-r from-amber-700 to-orange-700 text-white py-6 px-4 shadow-lg">
-                <div className="max-w-4xl mx-auto">
-                    <Link href="/" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 mb-4 border border-white/20 hover:border-white/40">
-                        <i className="fas fa-home"></i>
-                        <span>Home</span>
-                    </Link>
-                    <h1 className="text-3xl sm:text-4xl font-bold mb-2">
-                        📋 Cara Membuat Surat Izin
-                    </h1>
-                    <p className="text-amber-100 text-sm sm:text-base">
-                        Panduan lengkap penggunaan sistem izin pramuka DIPORANI
-                    </p>
-                </div>
+        <>
+            <Header />
+            
+            <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 mt-3 sm:mt-4 mb-4 sm:mb-6 animate-slide-up">
+                <Link 
+                    href="/"
+                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-white hover:bg-scoutKhaki-50 border border-scoutBrown-300 hover:border-scoutBrown-500 rounded-lg transition-all text-xs sm:text-sm font-semibold text-scoutBrown-800 shadow-sm hover:shadow-md"
+                >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span className="hidden xs:inline">Kembali ke Beranda</span>
+                    <span className="xs:hidden">Kembali</span>
+                </Link>
             </div>
-
-            {/* Content */}
-            <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
-
-                {/* Intro Card */}
-                <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-8 border-l-4 border-amber-500">
-                    <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
-                            <i className="fas fa-info-circle text-amber-600 text-xl"></i>
+            <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pb-8 sm:pb-12">
+                <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 animate-scale-in">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                        <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-scoutBrown-700 to-scoutBrown-900 rounded-lg flex items-center justify-center">
+                            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
                         </div>
-                        <div>
-                            <h2 className="text-xl font-bold text-gray-800 mb-2">Selamat Datang!</h2>
-                            <p className="text-gray-600 leading-relaxed">
-                                Sistem ini memudahkan kamu untuk membuat surat izin pramuka secara online.
-                                Ikuti langkah-langkah di bawah ini dengan mudah dan cepat.
+                        <div className="flex-1 min-w-0">
+                            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-scoutBrown-900 mb-2 sm:mb-3">Panduan Penggunaan</h2>
+                            <p className="text-sm sm:text-base text-scoutBrown-700 leading-relaxed">
+                                Sistem ini memudahkan kamu untuk membuat surat izin pramuka secara online. Surat izin yang dibuat akan direview oleh admin terlebih dahulu sebelum bisa digunakan. Ikuti langkah-langkah berikut dengan lengkap.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                {/* Steps */}
-                <div className="space-y-6">
-
-                    {/* Step 1 */}
-                    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg">
+                <div className="space-y-4 sm:space-y-6">
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up">
+                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     1
                                 </div>
-                                <h3 className="text-xl font-bold">Buka Website & Masukkan NIS</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Masukkan NIS</h3>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                                    <i className="fas fa-id-card text-blue-600 text-xl"></i>
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-gray-700 leading-relaxed mb-3">
-                                        Saat pertama kali membuka website, kamu akan diminta memasukkan <strong>NIS (Nomor Induk Siswa)</strong>.
-                                    </p>
-                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                                        <p className="text-sm text-blue-800 font-medium mb-2">💡 Tips:</p>
-                                        <ul className="text-sm text-blue-700 space-y-1 ml-4 list-disc">
-                                            <li>NIS minimal 4 digit</li>
-                                            <li>Pastikan NIS yang kamu masukkan benar</li>
-                                            <li>NIS akan digunakan untuk mengisi data otomatis</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Saat pertama kali membuka website, kamu akan diminta memasukkan <strong>NIS (Nomor Induk Siswa)</strong>.
+                            </p>
+                            <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">💡 Tips:</p>
+                                <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc">
+                                    <li>NIS minimal 4 digit</li>
+                                    <li>Pastikan NIS yang kamu masukkan benar</li>
+                                    <li>Data akan terisi otomatis setelah NIS divalidasi</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    {/* Step 2 */}
-                    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                        <div className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     2
                                 </div>
-                                <h3 className="text-xl font-bold">Data Otomatis Terisi</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Isi Form Izin</h3>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
-                                    <i className="fas fa-check-circle text-green-600 text-xl"></i>
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-gray-700 leading-relaxed mb-3">
-                                        Setelah NIS tervalidasi, sistem akan otomatis mengisi data kamu:
-                                    </p>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-                                        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                                            <p className="text-xs text-gray-500 mb-1">Nama Lengkap</p>
-                                            <p className="font-semibold text-gray-800">✅ Terisi otomatis</p>
-                                        </div>
-                                        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                                            <p className="text-xs text-gray-500 mb-1">Nomor Absen</p>
-                                            <p className="font-semibold text-gray-800">✅ Terisi otomatis</p>
-                                        </div>
-                                        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                                            <p className="text-xs text-gray-500 mb-1">Kelas</p>
-                                            <p className="font-semibold text-gray-800">✅ Terisi otomatis</p>
-                                        </div>
-                                        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                                            <p className="text-xs text-gray-500 mb-1">Sangga</p>
-                                            <p className="font-semibold text-gray-800">✅ Terisi otomatis</p>
-                                        </div>
-                                    </div>
-                                    <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                                        <p className="text-sm text-green-700">
-                                            <i className="fas fa-info-circle mr-2"></i>
-                                            Data ini <strong>tidak bisa diubah</strong> karena diambil langsung dari database sekolah
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Lengkapi formulir surat izin dengan informasi yang dibutuhkan:
+                            </p>
+                            <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1.5 sm:space-y-2 ml-4 list-disc">
+                                <li>Pilih PK yang bertugas</li>
+                                <li>Tulis alasan izin dengan jelas dan lengkap</li>
+                                <li>Pastikan semua data sudah benar sebelum submit</li>
+                            </ul>
                         </div>
                     </div>
 
-                    {/* Step 3 */}
-                    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                        <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     3
                                 </div>
-                                <h3 className="text-xl font-bold">Isi Form Izin</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Preview & Submit</h3>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center">
-                                    <i className="fas fa-edit text-purple-600 text-xl"></i>
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-gray-700 leading-relaxed mb-4">
-                                        Sekarang tinggal isi beberapa informasi yang dibutuhkan:
-                                    </p>
-
-                                    <div className="space-y-3">
-                                        <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
-                                            <h4 className="font-semibold text-purple-900 mb-2">
-                                                <i className="fas fa-users mr-2"></i>Sangga
-                                            </h4>
-                                            <p className="text-sm text-purple-800">
-                                                Sudah terisi otomatis, tapi bisa kamu ubah jika ada kesalahan data.
-                                                Pilih dari dropdown: Pendobrak, Penegas, Perintis, Pencoba, atau Pelaksana.
-                                            </p>
-                                        </div>
-
-                                        <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
-                                            <h4 className="font-semibold text-purple-900 mb-2">
-                                                <i className="fas fa-chalkboard-teacher mr-2"></i>Pembina Kelas (PK)
-                                            </h4>
-                                            <p className="text-sm text-purple-800">
-                                                Pilih nama Pembina Kelas kamu dari dropdown yang tersedia.
-                                            </p>
-                                        </div>
-
-                                        <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
-                                            <h4 className="font-semibold text-purple-900 mb-2">
-                                                <i className="fas fa-comment-dots mr-2"></i>Alasan Izin
-                                            </h4>
-                                            <p className="text-sm text-purple-800">
-                                                Tulis alasan izin kamu dengan jelas (minimal 10 karakter).
-                                                Contoh: "Sakit demam dan perlu istirahat di rumah"
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Setelah submit, kamu akan melihat preview surat izin yang telah dibuat. <strong className="text-red-700">Surat masih berstatus "Pending"</strong> dan menunggu review dari admin.
+                            </p>
+                            <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
+                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">⏳ Status Surat:</p>
+                                <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc">
+                                    <li><strong>Pending:</strong> Menunggu review admin</li>
+                                    <li><strong>Approved:</strong> Disetujui, bisa didownload</li>
+                                    <li><strong>Rejected:</strong> Ditolak, harus buat ulang</li>
+                                </ul>
+                            </div>
+                            <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-red-900 mb-1">⚠️ Penting:</p>
+                                <p className="text-xs sm:text-sm text-red-700">
+                                    Tombol download akan <strong>muncul setelah surat di-ACC</strong> oleh admin.
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Step 4 */}
-                    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                        <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.3s' }}>
+                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     4
                                 </div>
-                                <h3 className="text-xl font-bold">Submit & Lihat Preview</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Tunggu ACC dari Admin</h3>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center">
-                                    <i className="fas fa-paper-plane text-orange-600 text-xl"></i>
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-gray-700 leading-relaxed mb-3">
-                                        Setelah semua terisi, klik tombol <strong>"Submit"</strong>.
-                                        Kamu akan langsung melihat preview surat izin lengkap dengan QR Code.
-                                    </p>
-                                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                                        <p className="text-sm text-orange-800 font-medium mb-2">📌 Yang muncul di preview:</p>
-                                        <ul className="text-sm text-orange-700 space-y-1 ml-4 list-disc">
-                                            <li>Surat izin dengan semua data kamu</li>
-                                            <li>QR Code untuk verifikasi online</li>
-                                            <li>Status: <strong>Menunggu Verifikasi</strong></li>
-                                            <li>Tombol download <strong>(belum aktif)</strong></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Admin akan mereview surat izin kamu. Pastikan alasan izin yang ditulis sudah jelas dan valid.
+                            </p>
+                            <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">✅ Jika di-ACC:</p>
+                                <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc mb-3">
+                                    <li>Status berubah menjadi "Approved"</li>
+                                    <li>Tombol download akan muncul</li>
+                                    <li>Surat siap untuk didownload dan diprint</li>
+                                </ul>
+                                <p className="text-xs sm:text-sm font-semibold text-red-900 mb-2">❌ Jika di-Reject:</p>
+                                <ul className="text-xs sm:text-sm text-red-700 space-y-1 ml-4 list-disc">
+                                    <li>Surat ditolak dan tidak bisa digunakan</li>
+                                    <li>Buat surat izin baru dengan alasan yang lebih valid</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    {/* Step 5 */}
-                    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                        <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.4s' }}>
+                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     5
                                 </div>
-                                <h3 className="text-xl font-bold">Tunggu Approval Admin</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Download & Print Surat</h3>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center">
-                                    <i className="fas fa-clock text-amber-600 text-xl"></i>
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-gray-700 leading-relaxed mb-4">
-                                        Izin kamu akan diverifikasi oleh admin.
-                                        Kamu bisa cek status izin kapan saja dengan klik <strong>"Cek Izin Saya"</strong>.
-                                    </p>
-
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                        <div className="bg-yellow-50 rounded-lg p-3 border-2 border-yellow-300">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                                                    <i className="fas fa-clock text-yellow-800 text-sm"></i>
-                                                </div>
-                                                <span className="font-semibold text-yellow-800">PENDING</span>
-                                            </div>
-                                            <p className="text-xs text-yellow-700">Menunggu verifikasi admin</p>
-                                        </div>
-
-                                        <div className="bg-green-50 rounded-lg p-3 border-2 border-green-300">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
-                                                    <i className="fas fa-check text-green-800 text-sm"></i>
-                                                </div>
-                                                <span className="font-semibold text-green-800">APPROVED</span>
-                                            </div>
-                                            <p className="text-xs text-green-700">Izin disetujui, bisa download!</p>
-                                        </div>
-
-                                        <div className="bg-red-50 rounded-lg p-3 border-2 border-red-300">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <div className="w-8 h-8 bg-red-400 rounded-full flex items-center justify-center">
-                                                    <i className="fas fa-times text-red-800 text-sm"></i>
-                                                </div>
-                                                <span className="font-semibold text-red-800">REJECTED</span>
-                                            </div>
-                                            <p className="text-xs text-red-700">Izin ditolak, izinmu tidak valid.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Setelah surat di-ACC, klik tombol <strong>"Download Surat Izin"</strong> dan print surat tersebut.
+                            </p>
+                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-blue-900 mb-2">🖨️ Tips Print:</p>
+                                <ul className="text-xs sm:text-sm text-blue-700 space-y-1 ml-4 list-disc">
+                                    <li>Print dalam format A4</li>
+                                    <li>Pastikan hasil print jelas dan tidak blur</li>
+                                    <li>Bawa surat yang sudah diprint</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    {/* Step 6 */}
-                    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                        <div className="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.5s' }}>
+                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     6
                                 </div>
-                                <h3 className="text-xl font-bold">Download Surat PDF</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Minta Tanda Tangan</h3>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-teal-50 rounded-lg flex items-center justify-center">
-                                    <i className="fas fa-file-pdf text-teal-600 text-xl"></i>
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-gray-700 leading-relaxed mb-3">
-                                        Setelah status berubah menjadi <strong className="text-green-600">APPROVED</strong>,
-                                        tombol download akan aktif. Kamu bisa download surat dalam format PDF yang sudah lengkap dengan QR Code.
-                                    </p>
-                                    <div className="bg-teal-50 border border-teal-200 rounded-lg p-4 mb-3">
-                                        <p className="text-sm text-teal-800 font-medium mb-2">📄 Kegunaan Surat PDF:</p>
-                                        <ul className="text-sm text-teal-700 space-y-2 ml-4 list-disc">
-                                            <li><strong>Cetak surat PDF</strong> yang sudah kamu download</li>
-                                            <li><strong>Minta tanda tangan</strong> dari Pembina Kelas (PK) kamu</li>
-                                            <li><strong>Minta tanda tangan</strong> dari Judat</li>
-                                            <li><strong>Minta tanda tangan</strong> dari Mabigus</li>
-                                            <li>Surat yang sudah ditandatangani dapat <strong>diserahkan ke penjaga gerbang dan ditaruh di kelas</strong></li>
-                                            <li>QR Code di surat dapat discan untuk <strong>verifikasi keaslian</strong> oleh penjaga gerbang</li>
-                                        </ul>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Surat izin harus ditandatangani oleh <strong>3 pihak</strong> secara berurutan:
+                            </p>
+                            <div className="space-y-2 sm:space-y-3">
+                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gradient-to-r from-scoutKhaki-50 to-white border border-scoutBrown-200 rounded-lg">
+                                    <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-scoutBrown-700 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm">
+                                        1
                                     </div>
-                                    <div className="bg-amber-50 border border-amber-300 rounded-lg p-3">
-                                        <p className="text-xs text-amber-800">
-                                            <i className="fas fa-exclamation-triangle mr-2"></i>
-                                            <strong>Penting:</strong> Surat yang sudah didownload harus dicetak dan ditandatangani oleh PK, Judat, dan Mabigus sebelum diserahkan.
-                                        </p>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="font-bold text-scoutBrown-900 text-sm sm:text-base">PK</p>
+                                        <p className="text-xs sm:text-sm text-scoutBrown-600">Minta tanda tangan ke PK kamu</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gradient-to-r from-scoutKhaki-50 to-white border border-scoutBrown-200 rounded-lg">
+                                    <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-scoutBrown-700 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm">
+                                        2
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="font-bold text-scoutBrown-900 text-sm sm:text-base">JUDAT</p>
+                                        <p className="text-xs sm:text-sm text-scoutBrown-600">Setelah PK, minta tanda tangan JUDAT</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gradient-to-r from-scoutKhaki-50 to-white border border-scoutBrown-200 rounded-lg">
+                                    <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-scoutBrown-700 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm">
+                                        3
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="font-bold text-scoutBrown-900 text-sm sm:text-base">MABIGUS</p>
+                                        <p className="text-xs sm:text-sm text-scoutBrown-600">Terakhir, minta tanda tangan MABIGUS</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Step 7 */}
-                    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border-2 border-amber-300">
-                        <div className="bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-6 py-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.6s' }}>
+                        <div className="bg-gradient-to-r from-green-700 to-green-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     7
                                 </div>
-                                <h3 className="text-xl font-bold">Cetak & Minta Tanda Tangan</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Serahkan ke Penjaga Gerbang</h3>
                             </div>
                         </div>
-                        <div className="p-6">
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center">
-                                    <i className="fas fa-signature text-amber-600 text-xl"></i>
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-gray-700 leading-relaxed mb-4">
-                                        Setelah download PDF, <strong>cetak surat</strong> tersebut dan minta tanda tangan dari 3 pihak berikut secara berurutan:
-                                    </p>
-
-                                    <div className="space-y-3 mb-4">
-                                        <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
-                                                    1
-                                                </div>
-                                                <h4 className="font-semibold text-blue-900">
-                                                    <i className="fas fa-chalkboard-teacher mr-2"></i>Pembina Kelas (PK)
-                                                </h4>
-                                            </div>
-                                            <p className="text-sm text-blue-800 ml-11">
-                                                Minta tanda tangan PK kamu terlebih dahulu sebagai verifikasi awal
-                                            </p>
-                                        </div>
-
-                                        <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
-                                                    2
-                                                </div>
-                                                <h4 className="font-semibold text-purple-900">
-                                                    <i className="fas fa-user-tie mr-2"></i>Judat
-                                                </h4>
-                                            </div>
-                                            <p className="text-sm text-purple-800 ml-11">
-                                                Setelah ditandatangani PK, minta tanda tangan Judat
-                                            </p>
-                                        </div>
-
-                                        <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
-                                                    3
-                                                </div>
-                                                <h4 className="font-semibold text-green-900">
-                                                    <i className="fas fa-user-shield mr-2"></i>Mabigus
-                                                </h4>
-                                            </div>
-                                            <p className="text-sm text-green-800 ml-11">
-                                                Terakhir, minta tanda tangan Mabigus untuk pengesahan final
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-lg p-4">
-                                        <p className="text-sm text-amber-900 font-semibold mb-2">
-                                            <i className="fas fa-star mr-2"></i>Setelah semua tanda tangan terkumpul:
-                                        </p>
-                                        <p className="text-sm text-amber-800">
-                                            Surat sudah <strong>resmi dan valid</strong> untuk diserahkan ke penjaga gerbang dan ditaruh di kelas.
-                                        </p>
-                                    </div>
-                                </div>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Setelah semua tanda tangan lengkap, <strong>serahkan surat izin ke penjaga gerbang</strong> saat kamu akan izin keluar.
+                            </p>
+                            <div className="bg-green-50 border border-green-300 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-2">✅ Checklist Akhir:</p>
+                                <ul className="text-xs sm:text-sm text-green-800 space-y-1 ml-4 list-disc">
+                                    <li>Surat sudah di-ACC admin (status Approved)</li>
+                                    <li>Sudah didownload dan diprint</li>
+                                    <li>Ada tanda tangan PK, JUDAT, dan MABIGUS</li>
+                                    <li>Surat dalam kondisi baik dan lengkap</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-                {/* Tips Section */}
-                <div className="mt-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 sm:p-8 border border-blue-200">
-                    <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i className="fas fa-lightbulb text-blue-600 text-xl"></i>
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.7s' }}>
+                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
+                                    8
+                                </div>
+                                <h3 className="text-base sm:text-lg font-bold">Cek Riwayat Izin</h3>
+                            </div>
                         </div>
-                        <div className="flex-1">
-                            <h3 className="text-xl font-bold text-blue-900 mb-3">💡 Tips Penting</h3>
-                            <ul className="space-y-2 text-blue-800">
-                                <li className="flex items-start gap-2">
-                                    <i className="fas fa-check-circle text-blue-600 mt-1 flex-shrink-0"></i>
-                                    <span>Pastikan NIS yang kamu masukkan sudah benar sejak awal</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <i className="fas fa-check-circle text-blue-600 mt-1 flex-shrink-0"></i>
-                                    <span>Tulis alasan izin dengan jelas dan sopan</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <i className="fas fa-check-circle text-blue-600 mt-1 flex-shrink-0"></i>
-                                    <span>Cek status izin secara berkala di menu "Cek Izin Saya"</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <i className="fas fa-check-circle text-blue-600 mt-1 flex-shrink-0"></i>
-                                    <span>Data NIS tersimpan di browser, jadi kamu tidak perlu input ulang setiap kali buka website</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <i className="fas fa-check-circle text-blue-600 mt-1 flex-shrink-0"></i>
-                                    <span>Jika ingin ganti NIS, klik tombol "Ganti NIS" di info bar</span>
-                                </li>
+                        <div className="p-4 sm:p-6">
+                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
+                                Kamu bisa melihat semua riwayat izin yang pernah dibuat dengan klik tombol <strong>"Lihat Riwayat Izin"</strong>.
+                            </p>
+                            <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1.5 sm:space-y-2 ml-4 list-disc">
+                                <li>Lihat semua izin yang pernah dibuat</li>
+                                <li>Cek status verifikasi (Pending/Approved/Rejected)</li>
+                                <li>Akses kembali surat izin lama</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                {/* CTA */}
-                <div className="mt-8 text-center">
-                    <Link
-                        href="/"
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:from-amber-700 hover:to-orange-700 transition-all duration-300 transform hover:scale-105"
-                    >
-                        <i className="fas fa-rocket"></i>
-                        <span>Mulai Buat Surat Izin</span>
-                        <i className="fas fa-arrow-right"></i>
-                    </Link>
-                    <p className="text-gray-500 text-sm mt-4">
-                        Butuh bantuan? Hubungi admin DIPORANI
-                    </p>
-                </div>
-
-            </div>
-
-            {/* Footer */}
-            <div className="bg-gray-800 text-white py-6 px-4 mt-12">
-                <div className="max-w-4xl mx-auto text-center">
-                    <p className="text-gray-400 text-sm">
-                        © 2025 Dewan Ambalan DIPORANI · Gudep 3089/3090 · SMA Negeri 1 Kasihan
-                    </p>
+                                <div className="bg-gradient-to-br from-scoutBrown-50 to-scoutKhaki-50 border border-scoutBrown-300 rounded-lg p-4 sm:p-6 mt-6 sm:mt-8 animate-scale-in">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                        <div className="flex-shrink-0">
+                            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-scoutBrown-700" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <h3 className="text-base sm:text-lg font-bold text-scoutBrown-900 mb-1.5 sm:mb-2">Butuh Bantuan?</h3>
+                            <p className="text-scoutBrown-700 text-xs sm:text-sm">
+                                Jika ada kendala atau pertanyaan, hubungi PK XII atau admin Pramuka Diporani.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <Footer />
+        </>
     );
 }

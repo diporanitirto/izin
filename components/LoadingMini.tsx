@@ -1,64 +1,66 @@
 'use client';
 
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 export default function LoadingMini() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Faster loading for mini version
+    const intervals = [
+      { time: 80, progress: 30 },
+      { time: 100, progress: 60 },
+      { time: 120, progress: 90 },
+      { time: 80, progress: 100 },
+    ];
+
+    let currentStep = 0;
+    const runProgress = () => {
+      if (currentStep < intervals.length) {
+        const { time, progress: prog } = intervals[currentStep];
+        setTimeout(() => {
+          setProgress(prog);
+          currentStep++;
+          runProgress();
+        }, time);
+      }
+    };
+
+    runProgress();
+  }, []);
+
   return (
     <div className="flex items-center justify-center py-8">
-      <div className="text-center">
-        {/* Logo with scale animation */}
-        <div className="mb-3">
-          <Image
-            src="/assets/logo-diporani.png"
-            alt="DIPORANI"
-            width={60}
-            height={60}
-            className="mx-auto animate-scale"
-            priority
-          />
+      <div className="w-full max-w-xs">
+        {/* Progress Bar Container */}
+        <div className="relative">
+          {/* Background track */}
+          <div className="w-full h-2 bg-scoutBrown-200/50 rounded-full overflow-hidden shadow-inner">
+            {/* Progress fill */}
+            <div 
+              className="h-full bg-gradient-to-r from-scoutBrown-700 via-scoutBrown-800 to-scoutBrown-900 rounded-full transition-all duration-200 ease-out relative overflow-hidden"
+              style={{ width: `${progress}%` }}
+            >
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_1.2s_ease-in-out_infinite]"></div>
+            </div>
+          </div>
+
+          {/* Percentage text */}
+          <div className="mt-2 text-center">
+            <span className="text-xs font-semibold text-scoutBrown-700">
+              {progress}%
+            </span>
+          </div>
         </div>
 
-        {/* Loading Text */}
-        <p className="text-gray-500 text-sm">
-          Memuat<span className="animate-dots"></span>
-        </p>
+        {/* Loading text */}
+        <div className="mt-3 text-center">
+          <p className="text-xs text-scoutBrown-500 font-medium">
+            Memuat...
+          </p>
+        </div>
       </div>
-
-      <style jsx>{`
-        @keyframes scale {
-          0%, 100% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.15);
-          }
-        }
-        
-        @keyframes dots {
-          0% {
-            content: '.';
-          }
-          33% {
-            content: '..';
-          }
-          66% {
-            content: '...';
-          }
-          100% {
-            content: '.';
-          }
-        }
-        
-        .animate-scale {
-          animation: scale 1.2s ease-in-out infinite;
-          will-change: transform;
-        }
-        
-        .animate-dots::after {
-          content: '.';
-          animation: dots 1.2s steps(3, end) infinite;
-        }
-      `}</style>
     </div>
   );
 }

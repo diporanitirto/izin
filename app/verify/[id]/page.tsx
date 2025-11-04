@@ -183,7 +183,7 @@ export default function VerifyPage() {
                 <span className="text-sm sm:text-base flex-1 text-gray-800">{izin.sangga || '-'}</span>
               </div>
               <div className="flex flex-col sm:flex-row sm:border-b pb-2">
-                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">PK Kelas:</span>
+                <span className="text-sm sm:text-base text-gray-600 font-semibold sm:w-32 mb-1 sm:mb-0">PK:</span>
                 <span className="text-sm sm:text-base flex-1 text-gray-800 break-words">{izin.pk_kelas || '-'}</span>
               </div>
             </div>
@@ -255,23 +255,15 @@ export default function VerifyPage() {
           </div>
         )}
 
+        {/* Tombol Navigasi */}
         <div className="mt-4 sm:mt-6">
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-            <a
-              href="/"
-              className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold flex items-center justify-center active:scale-95"
-            >
-              <i className="fas fa-home mr-2"></i>
-              Halaman Utama
-            </a>
-            <a
-              href="/?showCekIzin=true"
-              className="flex-1 px-4 sm:px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold flex items-center justify-center active:scale-95"
-            >
-              <i className="fas fa-list mr-2"></i>
-              Kembali ke Riwayat Izin
-            </a>
-          </div>
+          <a
+            href="/"
+            className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold flex items-center justify-center active:scale-95"
+          >
+            <i className="fas fa-home mr-2"></i>
+            Kembali ke Beranda
+          </a>
         </div>
       </div>
     </div>
