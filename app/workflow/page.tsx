@@ -166,20 +166,12 @@ export default function WorkflowPage() {
                         </div>
                         <div className="p-4 sm:p-6">
                             <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
-                                Setelah submit, kamu akan melihat preview surat izin yang telah dibuat. <strong className="text-red-700">Surat masih berstatus "Pending"</strong> dan menunggu review dari admin.
+                                Setelah submit, kamu akan langsung melihat preview surat izin yang telah dibuat. <strong className="text-green-700">Tombol download akan langsung tersedia!</strong>
                             </p>
-                            <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
-                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">⏳ Status Surat:</p>
-                                <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc">
-                                    <li><strong>Pending:</strong> Menunggu review admin</li>
-                                    <li><strong>Approved:</strong> Disetujui, bisa didownload</li>
-                                    <li><strong>Rejected:</strong> Ditolak, harus buat ulang</li>
-                                </ul>
-                            </div>
-                            <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-red-900 mb-1">⚠️ Penting:</p>
-                                <p className="text-xs sm:text-sm text-red-700">
-                                    Tombol download akan <strong>muncul setelah surat di-ACC</strong> oleh admin.
+                            <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-1">✅ Langkah Selanjutnya:</p>
+                                <p className="text-xs sm:text-sm text-green-700">
+                                    Klik tombol <strong>"Download Surat PDF"</strong> untuk mengunduh surat izin kamu, kemudian print dan kumpulkan tanda tangan yang diperlukan.
                                 </p>
                             </div>
                         </div>
@@ -191,41 +183,12 @@ export default function WorkflowPage() {
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     4
                                 </div>
-                                <h3 className="text-base sm:text-lg font-bold">Tunggu ACC dari Admin</h3>
-                            </div>
-                        </div>
-                        <div className="p-4 sm:p-6">
-                            <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
-                                Admin akan mereview surat izin kamu. Pastikan alasan izin yang ditulis sudah jelas dan valid.
-                            </p>
-                            <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">✅ Jika di-ACC:</p>
-                                <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc mb-3">
-                                    <li>Status berubah menjadi "Approved"</li>
-                                    <li>Tombol download akan muncul</li>
-                                    <li>Surat siap untuk didownload dan diprint</li>
-                                </ul>
-                                <p className="text-xs sm:text-sm font-semibold text-red-900 mb-2">❌ Jika di-Reject:</p>
-                                <ul className="text-xs sm:text-sm text-red-700 space-y-1 ml-4 list-disc">
-                                    <li>Surat ditolak dan tidak bisa digunakan</li>
-                                    <li>Buat surat izin baru dengan alasan yang lebih valid</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.4s' }}>
-                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
-                            <div className="flex items-center gap-2 sm:gap-3">
-                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
-                                    5
-                                </div>
                                 <h3 className="text-base sm:text-lg font-bold">Download & Print Surat</h3>
                             </div>
                         </div>
                         <div className="p-4 sm:p-6">
                             <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
-                                Setelah surat di-ACC, klik tombol <strong>"Download Surat Izin"</strong> dan print surat tersebut.
+                                Klik tombol <strong>"Download Surat PDF"</strong> di preview, kemudian print surat tersebut.
                             </p>
                             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
                                 <p className="text-xs sm:text-sm font-semibold text-blue-900 mb-2">🖨️ Tips Print:</p>
@@ -238,11 +201,11 @@ export default function WorkflowPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.5s' }}>
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.4s' }}>
                         <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
-                                    6
+                                    5
                                 </div>
                                 <h3 className="text-base sm:text-lg font-bold">Minta Tanda Tangan</h3>
                             </div>
@@ -283,11 +246,11 @@ export default function WorkflowPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.6s' }}>
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.5s' }}>
                         <div className="bg-gradient-to-r from-green-700 to-green-900 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
-                                    7
+                                    6
                                 </div>
                                 <h3 className="text-base sm:text-lg font-bold">Serahkan ke Penjaga Gerbang</h3>
                             </div>
@@ -299,8 +262,7 @@ export default function WorkflowPage() {
                             <div className="bg-green-50 border border-green-300 rounded-lg p-3 sm:p-4">
                                 <p className="text-xs sm:text-sm font-semibold text-green-900 mb-2">✅ Checklist Akhir:</p>
                                 <ul className="text-xs sm:text-sm text-green-800 space-y-1 ml-4 list-disc">
-                                    <li>Surat sudah di-ACC admin (status Approved)</li>
-                                    <li>Sudah didownload dan diprint</li>
+                                    <li>Surat sudah didownload dan diprint</li>
                                     <li>Ada tanda tangan PK, JUDAT, dan MABIGUS</li>
                                     <li>Surat dalam kondisi baik dan lengkap</li>
                                 </ul>
@@ -308,11 +270,11 @@ export default function WorkflowPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.7s' }}>
+                    <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.6s' }}>
                         <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
-                                    8
+                                    7
                                 </div>
                                 <h3 className="text-base sm:text-lg font-bold">Cek Riwayat Izin</h3>
                             </div>
@@ -323,8 +285,7 @@ export default function WorkflowPage() {
                             </p>
                             <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1.5 sm:space-y-2 ml-4 list-disc">
                                 <li>Lihat semua izin yang pernah dibuat</li>
-                                <li>Cek status verifikasi (Pending/Approved/Rejected)</li>
-                                <li>Akses kembali surat izin lama</li>
+                                <li>Akses kembali surat izin untuk didownload ulang</li>
                             </ul>
                         </div>
                     </div>

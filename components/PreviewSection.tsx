@@ -25,23 +25,24 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [izinId, setIzinId] = useState<string | null>(propIzinId || null);
-  const [izinStatus, setIzinStatus] = useState<string>('pending');
+  const [izinStatus, setIzinStatus] = useState<string>('approved'); // Langsung approved
   const [verifiedBy, setVerifiedBy] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Tidak perlu loading
 
   useEffect(() => {
     // regenerate preview when form data changes
     generatePreview();
-    // Only fetch status if izinId not provided (meaning it's a new submission)
+    // Fetch izinId jika belum ada
     if (!propIzinId) {
       fetchIzinStatus();
     }
   }, [formData, propIzinId]);
 
   useEffect(() => {
-    // If izinId provided from props, fetch that specific izin's status
+    // If izinId provided from props, set it
     if (propIzinId) {
-      fetchIzinById(propIzinId);
+      setIzinId(propIzinId);
+      setLoading(false);
     }
   }, [propIzinId]);
 
@@ -65,7 +66,6 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
 
   const fetchIzinStatus = async () => {
     try {
-      setLoading(true);
       // Cari izin berdasarkan absen (yang merupakan NIS)
       const response = await fetch(`/api/izin?nis=${formData.absen}`);
       const result = await response.json();
@@ -79,14 +79,11 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
         
         if (latestIzin) {
           setIzinId(latestIzin.id);
-          setIzinStatus(latestIzin.status || 'pending');
-          setVerifiedBy(latestIzin.verified_by || null);
+          // Status tetap approved, tidak perlu update dari database
         }
       }
     } catch (error) {
-      console.error('Error fetching izin status:', error);
-    } finally {
-      setLoading(false);
+      console.error('Error fetching izin ID:', error);
     }
   };
 
@@ -403,11 +400,6 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
   };
 
   const downloadSurat = async () => {
-    if (izinStatus !== 'approved') {
-      alert('⚠️ Surat izin belum diverifikasi oleh Judat.\n\nAnda dapat melihat preview surat, tetapi download hanya tersedia setelah izin disetujui.\n\nMohon tunggu persetujuan terlebih dahulu atau hubungi Judat untuk informasi lebih lanjut.');
-      return;
-    }
-
     await generatePreview();
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -457,75 +449,36 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
           </div>
           
           {/* Status Verifikasi */}
-          {loading ? (
-            <Loading />
-          ) : (
-            <div className={`mb-4 p-4 rounded-lg ${
-              izinStatus === 'approved' 
-                ? 'bg-green-50 border border-green-200' 
-                : izinStatus === 'rejected'
-                ? 'bg-red-50 border border-red-200'
-                : 'bg-yellow-50 border border-yellow-200'
-            }`}>
-              <div className="flex items-start gap-3">
-                <i className={`fas ${
-                  izinStatus === 'approved' 
-                    ? 'fa-check-circle text-green-600' 
-                    : izinStatus === 'rejected'
-                    ? 'fa-times-circle text-red-600'
-                    : 'fa-clock text-yellow-600'
-                } text-2xl`}></i>
-                <div className="flex-1">
-                  <h3 className={`font-bold text-lg mb-1 ${
-                    izinStatus === 'approved' 
-                      ? 'text-green-800' 
-                      : izinStatus === 'rejected'
-                      ? 'text-red-800'
-                      : 'text-yellow-800'
-                  }`}>
-                    {izinStatus === 'approved' 
-                      ? '✓ Izin Terverifikasi' 
-                      : izinStatus === 'rejected'
-                      ? '✗ Izin Ditolak'
-                      : '⏳ Menunggu Verifikasi'}
-                  </h3>
-                  <p className={`text-sm ${
-                    izinStatus === 'approved' 
-                      ? 'text-green-700' 
-                      : izinStatus === 'rejected'
-                      ? 'text-red-700'
-                      : 'text-yellow-700'
-                  }`}>
-                    {izinStatus === 'approved' 
-                      ? `Izin Anda telah disetujui oleh${verifiedBy ? `: ${verifiedBy}` : ''}. Silakan download surat PDF.`
-                      : izinStatus === 'rejected'
-                      ? 'Izin Anda ditolak. Silakan hubungi Judat untuk informasi lebih lanjut.'
-                      : 'Izin Anda sedang menunggu persetujuan dari Judat. Anda dapat download surat setelah diverifikasi.'}
-                  </p>
-                  {izinStatus === 'pending' && (
-                    <p className="text-xs text-yellow-600 mt-2">
-                      💡 Tips: Cek status izin secara berkala menggunakan tombol "Cek Izin Saya" di halaman utama.
-                    </p>
-                  )}
+          <div className="mb-4 p-4 rounded-lg bg-green-50 border border-green-200">
+            <div className="flex items-start gap-3">
+              <i className="fas fa-check-circle text-green-600 text-2xl"></i>
+              <div className="flex-1">
+                <h3 className="font-bold text-lg mb-1 text-green-800">
+                  ✓ Surat Izin Siap Didownload
+                </h3>
+                <p className="text-sm text-green-700">
+                  Surat izin Anda telah berhasil dibuat. Silakan download dalam format PDF untuk dicetak dan ditandatangani.
+                </p>
+                <div className="mt-3 bg-green-100 rounded-lg p-3">
+                  <p className="text-xs text-green-800 font-semibold mb-1">📝 Langkah Selanjutnya:</p>
+                  <ol className="text-xs text-green-700 ml-4 list-decimal space-y-1">
+                    <li>Download surat PDF</li>
+                    <li>Cetak surat tersebut</li>
+                    <li>Minta tanda tangan PK, Judat, dan Mabigus</li>
+                    <li>Serahkan ke penjaga gerbang</li>
+                  </ol>
                 </div>
               </div>
             </div>
-          )}
+          </div>
           
           <div className="space-y-3">
             <button
               onClick={downloadSurat}
-              disabled={izinStatus !== 'approved' || loading}
-              className={`w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all ${
-                izinStatus === 'approved' && !loading
-                  ? 'bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
+              className="w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]"
             >
               <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-              {izinStatus === 'approved' 
-                ? 'Download Surat PDF' 
-                : 'Download (Menunggu Verifikasi)'}
+              Download Surat PDF
             </button>
 
             <button

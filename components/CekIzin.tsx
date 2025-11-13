@@ -121,12 +121,9 @@ export default function CekIzin({ nis }: CekIzinProps) {
           <div className="space-y-4">
           {izinList.map((izin) => (
             <div key={izin.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-              <div className="flex justify-between items-start mb-3">
-                <div>
-                  <h3 className="font-bold text-gray-800">{izin.nama}</h3>
-                  <p className="text-sm text-gray-500">{formatDate(izin.created_at)}</p>
-                </div>
-                {getStatusBadge(izin.status)}
+              <div className="mb-3">
+                <h3 className="font-bold text-gray-800">{izin.nama}</h3>
+                <p className="text-sm text-gray-500">{formatDate(izin.created_at)}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-2 mb-3 text-sm">
@@ -138,54 +135,14 @@ export default function CekIzin({ nis }: CekIzinProps) {
                 <strong>Alasan:</strong> {izin.alasan}
               </p>
 
-              {izin.verified_by && (
-                <div className="bg-blue-50 p-2 rounded text-sm text-blue-800 mb-3">
-                  <i className="fas fa-user-check mr-1"></i>
-                  Diverifikasi oleh: <strong>{izin.verified_by}</strong>
-                </div>
-              )}
-
-              {izin.status === 'approved' && (
-                <a
-                  href={`/verify/${izin.id}`}
-                  className="mt-3 block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-semibold"
-                >
-                  <i className="fas fa-file-download mr-2"></i>
-                  Lihat & Download Surat
-                </a>
-              )}
-
-              {izin.status === 'pending' && (
-                <>
-                  <div className="mt-3 text-center px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
-                    <i className="fas fa-clock mr-2"></i>
-                    Menunggu verifikasi dari Judat
-                  </div>
-                  <a
-                    href={`/verify/${izin.id}`}
-                    className="mt-3 block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold"
-                  >
-                    <i className="fas fa-eye mr-2"></i>
-                    Lihat Preview Surat
-                  </a>
-                </>
-              )}
-
-              {izin.status === 'rejected' && (
-                <>
-                  <div className="mt-3 text-center px-4 py-2 bg-red-50 border border-red-200 rounded-lg text-sm text-red-800">
-                    <i className="fas fa-times-circle mr-2"></i>
-                    Izin ditolak
-                  </div>
-                  <a
-                    href={`/verify/${izin.id}`}
-                    className="mt-3 block w-full text-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-semibold"
-                  >
-                    <i className="fas fa-eye mr-2"></i>
-                    Lihat Detail Surat
-                  </a>
-                </>
-              )}
+              {/* Tombol download selalu tersedia untuk semua izin */}
+              <a
+                href={`/verify/${izin.id}`}
+                className="mt-3 block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-semibold"
+              >
+                <i className="fas fa-file-download mr-2"></i>
+                Lihat & Download Surat
+              </a>
             </div>
           ))}
         </div>
