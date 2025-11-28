@@ -6,10 +6,29 @@ import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+type Step = {
+    id: number;
+    title: string;
+    color: 'brown' | 'green';
+    content: React.ReactNode;
+};
+
+const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
+    <svg 
+        className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+);
+
 export default function WorkflowPage() {
     const router = useRouter();
     const [isChecking, setIsChecking] = useState(true);
     const [loadingProgress, setLoadingProgress] = useState(0);
+    const [expandedSteps, setExpandedSteps] = useState<Set<number>>(new Set([1])); // Step 1 open by default
 
     useEffect(() => {
         const intervals = [
@@ -301,7 +320,7 @@ export default function WorkflowPage() {
                         <div className="flex-1 min-w-0">
                             <h3 className="text-base sm:text-lg font-bold text-scoutBrown-900 mb-1.5 sm:mb-2">Butuh Bantuan?</h3>
                             <p className="text-scoutBrown-700 text-xs sm:text-sm">
-                                Jika ada kendala atau pertanyaan, hubungi PK XII atau admin Pramuka Diporani.
+                                Jika ada kendala atau pertanyaan, hubungi kakak-kakak PK.
                             </p>
                         </div>
                     </div>
