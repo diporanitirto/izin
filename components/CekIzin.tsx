@@ -25,6 +25,7 @@ interface CekIzinProps {
 export default function CekIzin({ nis }: CekIzinProps) {
   const [izinList, setIzinList] = useState<IzinData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
     loadIzinData();
@@ -35,21 +36,16 @@ export default function CekIzin({ nis }: CekIzinProps) {
     setLoading(true);
 
     try {
-      console.log('🔄 Loading izin data for NIS:', nis);
       const response = await fetch(`/api/izin?nis=${nis}`);
       const result = await response.json();
       
-      console.log('📊 Izin data result:', result);
-      
       if (result.success) {
         setIzinList(result.data);
-        console.log(`✅ Found ${result.data.length} izin records`);
       } else {
-        console.error('❌ Failed to load data:', result);
         setIzinList([]);
       }
     } catch (error) {
-      console.error('❌ Error loading izin:', error);
+      console.error('Error loading izin:', error);
       setIzinList([]);
     } finally {
       setLoading(false);
@@ -60,94 +56,141 @@ export default function CekIzin({ nis }: CekIzinProps) {
     const date = new Date(dateString);
     return date.toLocaleDateString('id-ID', {
       day: 'numeric',
-      month: 'long',
+      month: 'short',
       year: 'numeric',
+    });
+  };
+
+  const formatTime = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('id-ID', {
       hour: '2-digit',
       minute: '2-digit',
     });
   };
 
-  const getStatusBadge = (status: string) => {
-    const badges = {
-      pending: 'bg-yellow-200 text-yellow-800',
-      approved: 'bg-green-200 text-green-800',
-      rejected: 'bg-red-200 text-red-800',
-    };
-    const labels = {
-      pending: 'Menunggu',
-      approved: 'Disetujui',
-      rejected: 'Ditolak',
-    };
-    return (
-      <span className={`px-3 py-1 rounded-full text-sm font-semibold ${badges[status as keyof typeof badges] || 'bg-gray-200 text-gray-800'}`}>
-        {labels[status as keyof typeof labels] || status}
-      </span>
-    );
+  const toggleExpand = (id: string) => {
+    setExpandedId(expandedId === id ? null : id);
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">
-          <i className="fas fa-list mr-2"></i>
-          Riwayat Izin Saya
-        </h2>
-        <button
-          onClick={loadIzinData}
-          disabled={loading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors text-sm font-semibold"
-        >
-          <i className={`fas fa-sync-alt mr-2 ${loading ? 'fa-spin' : ''}`}></i>
-          Refresh
-        </button>
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-scoutBrown-800 to-scoutBrown-900 px-6 py-5">
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-xl font-bold text-white">Riwayat Izin</h2>
+            <p className="text-scoutBrown-200 text-sm mt-1">NIS: {nis}</p>
+          </div>
+          <button
+            onClick={loadIzinData}
+            disabled={loading}
+            className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors text-sm font-semibold backdrop-blur-sm border border-white/20 disabled:opacity-50"
+          >
+            <span className={loading ? 'animate-spin inline-block' : ''}>↻</span>
+            <span className="ml-2">Refresh</span>
+          </button>
+        </div>
       </div>
 
-      {loading ? (
-        <Loading />
-      ) : izinList.length === 0 ? (
-        <div className="text-center py-12 bg-gray-50 rounded-lg">
-          <i className="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
-          <p className="text-gray-600 text-lg">Anda belum pernah membuat izin</p>
-          <p className="text-gray-500 text-sm mt-2">NIS: {nis}</p>
-        </div>
-      ) : (
-        <>
-          <div className="mb-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
-            <p className="text-sm text-blue-800">
-              <i className="fas fa-info-circle mr-2"></i>
-              Ditemukan <strong>{izinList.length}</strong> izin untuk NIS <strong>{nis}</strong>
-            </p>
-          </div>
-          <div className="space-y-4">
-          {izinList.map((izin) => (
-            <div key={izin.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-              <div className="mb-3">
-                <h3 className="font-bold text-gray-800">{izin.nama}</h3>
-                <p className="text-sm text-gray-500">{formatDate(izin.created_at)}</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2 mb-3 text-sm">
-                <p className="text-gray-600"><strong>Kelas:</strong> {izin.kelas}</p>
-                <p className="text-gray-600"><strong>Sangga:</strong> {izin.sangga || '-'}</p>
-              </div>
-
-              <p className="text-sm text-gray-700 bg-gray-50 p-2 rounded mb-3">
-                <strong>Alasan:</strong> {izin.alasan}
-              </p>
-
-              {/* Tombol download selalu tersedia untuk semua izin */}
-              <a
-                href={`/verify/${izin.id}`}
-                className="mt-3 block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-semibold"
-              >
-                <i className="fas fa-file-download mr-2"></i>
-                Lihat & Download Surat
-              </a>
+      <div className="p-4 sm:p-6">
+        {loading ? (
+          <Loading />
+        ) : izinList.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-scoutKhaki-100 flex items-center justify-center">
+              <span className="text-3xl">📭</span>
             </div>
-          ))}
-        </div>
-        </>
-      )}
+            <p className="text-scoutBrown-800 font-semibold">Belum Ada Riwayat</p>
+            <p className="text-scoutBrown-500 text-sm mt-1">Anda belum pernah mengajukan izin</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {izinList.map((izin) => {
+              const isExpanded = expandedId === izin.id;
+              
+              return (
+                <div 
+                  key={izin.id} 
+                  className="border border-scoutBrown-200 rounded-xl overflow-hidden"
+                >
+                  {/* Row - Always Visible */}
+                  <div 
+                    className="flex items-center gap-3 p-4 cursor-pointer hover:bg-scoutKhaki-50 transition-colors"
+                    onClick={() => toggleExpand(izin.id)}
+                  >
+                    {/* Status Badge */}
+                    <span className="shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-700">
+                      Terkirim
+                    </span>
+                    
+                    {/* Main Info */}
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-scoutBrown-900 truncate">{izin.nama}</p>
+                      <p className="text-sm text-scoutBrown-500">
+                        {izin.kelas} • Absen {izin.absen} • {izin.sangga || '-'}
+                      </p>
+                    </div>
+
+                    {/* Date */}
+                    <span className="hidden sm:block text-sm text-scoutBrown-400">
+                      {formatDate(izin.created_at)}
+                    </span>
+
+                    {/* Expand Button */}
+                    <button className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full hover:bg-scoutBrown-100 transition-colors">
+                      <span className={`text-scoutBrown-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+                        ▼
+                      </span>
+                    </button>
+                  </div>
+
+                  {/* Expanded Detail */}
+                  {isExpanded && (
+                    <div className="border-t border-scoutBrown-200 bg-scoutKhaki-50/50 p-4 space-y-4">
+                      {/* Info Grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+                        <div>
+                          <p className="text-scoutBrown-500 text-xs">Tanggal</p>
+                          <p className="font-medium text-scoutBrown-800">{formatDate(izin.created_at)}</p>
+                        </div>
+                        <div>
+                          <p className="text-scoutBrown-500 text-xs">Waktu</p>
+                          <p className="font-medium text-scoutBrown-800">{formatTime(izin.created_at)}</p>
+                        </div>
+                        <div>
+                          <p className="text-scoutBrown-500 text-xs">No. Absen</p>
+                          <p className="font-medium text-scoutBrown-800">{izin.absen || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-scoutBrown-500 text-xs">PK Kelas</p>
+                          <p className="font-medium text-scoutBrown-800 truncate">{izin.pk_kelas || '-'}</p>
+                        </div>
+                      </div>
+
+                      {/* Alasan */}
+                      <div>
+                        <p className="text-scoutBrown-500 text-xs mb-1">Alasan Izin</p>
+                        <p className="text-sm text-scoutBrown-800 bg-white rounded-lg p-3 border border-scoutBrown-100">
+                          {izin.alasan}
+                        </p>
+                      </div>
+
+                      {/* Action Button */}
+                      <a
+                        href={`/verify/${izin.id}`}
+                        className="block w-full text-center px-4 py-2.5 bg-scoutBrown-800 text-white rounded-xl hover:bg-scoutBrown-900 transition-colors text-sm font-semibold"
+                      >
+                        📄 Lihat & Download Surat
+                      </a>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
