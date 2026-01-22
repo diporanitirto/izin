@@ -52,7 +52,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
       // Fetch langsung by ID
       const response = await fetch(`/api/izin/${id}`);
       const result = await response.json();
-      
+
       if (result.success && result.data) {
         setIzinStatus(result.data.status || 'pending');
         setVerifiedBy(result.data.verified_by || null);
@@ -69,14 +69,14 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
       // Cari izin berdasarkan absen (yang merupakan NIS)
       const response = await fetch(`/api/izin?nis=${formData.absen}`);
       const result = await response.json();
-      
+
       if (result.success && result.data.length > 0) {
         // Ambil izin terbaru yang sesuai dengan data form
-        const latestIzin = result.data.find((item: any) => 
-          item.nama === formData.nama && 
+        const latestIzin = result.data.find((item: any) =>
+          item.nama === formData.nama &&
           item.kelas === formData.kelas
         );
-        
+
         if (latestIzin) {
           setIzinId(latestIzin.id);
           // Status tetap approved, tidak perlu update dari database
@@ -111,9 +111,9 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
       logoImg = null;
     }
 
-  const baseWidth = 794;
-  const baseHeight = 1123;
-  const scale = 2000 / baseWidth; // ~200 DPI keeps readability while reducing file size
+    const baseWidth = 794;
+    const baseHeight = 1123;
+    const scale = 2000 / baseWidth; // ~200 DPI keeps readability while reducing file size
     canvas.width = baseWidth * scale;
     canvas.height = baseHeight * scale;
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
@@ -126,12 +126,12 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     ctx.textAlign = 'center';
     ctx.font = 'bold 72px Times New Roman';
     ctx.fillStyle = '#7b5b46';
-    
+
     const wmSpacingX = 280;
     const wmSpacingY = 200;
     const startX = -100;
     const startY = 100;
-    
+
     for (let y = startY; y < baseHeight + 100; y += wmSpacingY) {
       for (let x = startX; x < baseWidth + 100; x += wmSpacingX) {
         ctx.save();
@@ -158,7 +158,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
         ctx.restore();
       }
     }
-    
+
     ctx.restore();
 
     ctx.fillStyle = '#000000';
@@ -177,7 +177,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     ctx.fillText(`${location}, ${dateStr}`, baseWidth - rightMargin, y);
     ctx.textAlign = 'left';
     y += lineHeight * 1.2;
-    
+
     ctx.fillText('Perihal', leftMargin, y);
     ctx.fillText(': Permohonan ijin tidak mengikuti kegiatan pramuka', leftMargin + 80, y);
     y += lineHeight * 1.8;
@@ -224,11 +224,11 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
         ctx.fillText(text, x, yPos);
         return;
       }
-      
+
       const totalTextWidth = ctx.measureText(words.join('')).width;
       const totalSpaces = words.length - 1;
       const spaceWidth = (maxW - totalTextWidth) / totalSpaces;
-      
+
       let currentX = x;
       words.forEach((word, index) => {
         ctx.fillText(word, currentX, yPos);
@@ -241,7 +241,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     let words = reasonIntro.split(' ');
     let line = '';
     let lines: string[] = [];
-    
+
     for (let word of words) {
       const testLine = line + word + ' ';
       const m = ctx.measureText(testLine);
@@ -255,7 +255,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     if (line.trim() !== '') {
       lines.push(line.trim());
     }
-    
+
     lines.forEach((l, index) => {
       const isLast = index === lines.length - 1;
       drawJustifiedText(l, leftMargin, y, maxWidth, isLast);
@@ -266,7 +266,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     words = formData.alasan.split(' ');
     line = '';
     lines = [];
-    
+
     for (let word of words) {
       const testLine = line + word + ' ';
       const m = ctx.measureText(testLine);
@@ -280,7 +280,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     if (line.trim() !== '') {
       lines.push(line.trim());
     }
-    
+
     lines.forEach((l, index) => {
       const isLast = index === lines.length - 1;
       drawJustifiedText(l, leftMargin, y, maxWidth, isLast);
@@ -292,7 +292,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     words = closing.split(' ');
     line = '';
     lines = [];
-    
+
     for (let word of words) {
       const testLine = line + word + ' ';
       const m = ctx.measureText(testLine);
@@ -306,7 +306,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     if (line.trim() !== '') {
       lines.push(line.trim());
     }
-    
+
     lines.forEach((l, index) => {
       const isLast = index === lines.length - 1;
       drawJustifiedText(l, leftMargin, y, maxWidth, isLast);
@@ -322,7 +322,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     ctx.fillText('( ' + formData.nama + ' )', hormatSayaX, lineY);
 
     y = signatureStartY + lineHeight * 6;
-    
+
     // Baris atas: PK (kiri) dan Judat (kanan)
     const topRowSpacing = (baseWidth - leftMargin - rightMargin) / 2;
     const pkX = leftMargin + topRowSpacing * 0.5;
@@ -363,28 +363,28 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
             light: '#FFFFFF'
           }
         });
-        
+
         const qrImage = new (window as any).Image() as HTMLImageElement;
         qrImage.src = qrDataUrl;
         await new Promise((resolve) => {
           qrImage.onload = resolve;
         });
-        
+
         // Posisi QR di pojok kanan, diturunkan sedikit
         const qrSize = 100;
         const qrX = baseWidth - rightMargin - qrSize - 10;
         const qrY = 150; // Diturunkan dari 60 ke 150
-        
+
         // Background putih untuk QR
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 10);
         ctx.strokeStyle = '#4CAF50';
         ctx.lineWidth = 2;
         ctx.strokeRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 10);
-        
+
         // Draw QR code
         ctx.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
-        
+
         // Label di bawah QR
         ctx.fillStyle = '#000000';
         ctx.font = '10px Times New Roman';
@@ -434,7 +434,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
         </div>
         <div className="p-3 sm:p-4">
           <canvas ref={canvasRef} className="hidden"></canvas>
-          
+
           <div className="bg-[#f8f9fa] p-2 sm:p-5 rounded text-center mb-3 sm:mb-4">
             {previewUrl && (
               <Image
@@ -447,7 +447,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
               />
             )}
           </div>
-          
+
           {/* Status Verifikasi */}
           <div className="mb-4 p-4 rounded-lg bg-green-50 border border-green-200">
             <div className="flex items-start gap-3">
@@ -471,25 +471,29 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
               </div>
             </div>
           </div>
-          
-          <div className="space-y-3">
+
+          <div className="flex gap-3">
             <button
               onClick={downloadSurat}
-              className="w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all bg-scoutGreen text-white cursor-pointer hover:bg-[#388E3C]"
+              className="flex-[2] px-4 py-3 sm:py-3.5 rounded-lg font-bold text-sm sm:text-base transition-all bg-scoutGreen-600 text-white cursor-pointer hover:bg-scoutGreen-700 flex items-center justify-center gap-2 shadow-lg"
             >
-              <i className="fas fa-download mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-              Download Surat PDF
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download PDF
             </button>
 
             <button
               onClick={() => window.location.href = '/?showCekIzin=true'}
-              className="w-full px-4 py-3 sm:py-3.5 rounded font-medium text-sm sm:text-base transition-all bg-blue-600 text-white cursor-pointer hover:bg-blue-700"
+              className="flex-1 px-3 py-3 sm:py-3.5 rounded-lg font-semibold text-xs sm:text-sm transition-all bg-scoutBrown-500 text-white cursor-pointer hover:bg-scoutBrown-600 flex items-center justify-center gap-1.5 shadow-md"
             >
-              <i className="fas fa-list mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
-              Cek Izin Saya
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Cek Izin
             </button>
           </div>
-          
+
           {/* {izinId && izinStatus === 'approved' && (
             // <a
             //   href={`/verify/${izinId}`}

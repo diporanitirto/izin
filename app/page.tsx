@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SuratForm from '@/components/SuratForm';
@@ -75,7 +76,7 @@ export default function Home() {
     // Check if NIS is already stored in sessionStorage
     const storedNis = sessionStorage.getItem('nis');
     const storedSiswaData = sessionStorage.getItem('siswaData');
-    
+
     if (storedNis && storedSiswaData) {
       try {
         const parsedData = JSON.parse(storedSiswaData);
@@ -114,7 +115,7 @@ export default function Home() {
     setNis(submittedNis);
     setSiswaData(data);
     setShowNISModal(false);
-    
+
     // Store in sessionStorage
     sessionStorage.setItem('nis', submittedNis);
     sessionStorage.setItem('siswaData', JSON.stringify(data));
@@ -134,7 +135,7 @@ export default function Home() {
 
   const handleFormSubmit = async (data: FormData) => {
     console.log('📤 Sending to API:', data);
-    
+
     const headers = {
       'Content-Type': 'application/json',
     } as const;
@@ -184,28 +185,41 @@ export default function Home() {
   // Show loading spinner while checking session
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-scoutKhaki-50 to-scoutBrown-100">
-        <div className="w-full max-w-md px-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-scoutKhaki-50 to-scoutBrown-100 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 compass-pattern opacity-10 pointer-events-none"></div>
+
+        <div className="w-full max-w-md px-6 relative z-10">
           <div className="text-center mb-8 animate-scale-in">
-            <h2 className="text-2xl sm:text-3xl font-bold text-scoutBrown-900 mb-2">
-              Memuat Aplikasi
+            <div className="inline-block p-3 rounded-2xl bg-gradient-to-br from-white to-scoutKhaki-50 mb-4 shadow-xl ring-4 ring-scoutBrown-100 border border-scoutBrown-200">
+              <Image
+                src="/assets/logo-diporani.png"
+                alt="Logo Diporani"
+                width={64}
+                height={64}
+                className="object-contain mix-blend-multiply animate-pulse"
+                priority
+              />
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-scoutBrown-900 mb-2 font-display">
+              SIAP SEDIA
             </h2>
-            <p className="text-scoutBrown-600 text-sm">
-              Mohon tunggu sebentar...
+            <p className="text-scoutBrown-600 text-sm font-medium">
+              Mempersiapkan kelengkapan...
             </p>
           </div>
 
           {/* Progress Bar Container */}
           <div className="relative">
             {/* Background track */}
-            <div className="w-full h-3 bg-scoutBrown-200/50 rounded-full overflow-hidden shadow-inner">
+            <div className="w-full h-4 bg-scoutBrown-100 rounded-full overflow-hidden shadow-inner border border-scoutBrown-300">
               {/* Progress fill */}
-              <div 
-                className="h-full bg-gradient-to-r from-scoutBrown-700 via-scoutBrown-800 to-scoutBrown-900 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
+              <div
+                className="h-full bg-gradient-to-r from-scoutBrown-600 via-scoutBrown-500 to-scoutBrown-600 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
                 style={{ width: `${loadingProgress}%` }}
               >
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_1.5s_ease-in-out_infinite]"></div>
+                {/* Hasduk Pattern on Progress Bar */}
+                <div className="absolute inset-0 opacity-20 pattern-hasduk"></div>
               </div>
             </div>
 
@@ -219,11 +233,11 @@ export default function Home() {
 
           {/* Loading messages based on progress */}
           <div className="mt-6 text-center animate-fade-in">
-            <p className="text-xs text-scoutBrown-500 font-medium">
-              {loadingProgress < 30 && "Memulai aplikasi..."}
-              {loadingProgress >= 30 && loadingProgress < 60 && "Memeriksa sesi..."}
-              {loadingProgress >= 60 && loadingProgress < 90 && "Memuat data..."}
-              {loadingProgress >= 90 && "Hampir selesai..."}
+            <p className="text-xs text-scoutBrown-600 font-semibold uppercase tracking-wider">
+              {loadingProgress < 30 && "Menyiapkan..."}
+              {loadingProgress >= 30 && loadingProgress < 60 && "Mengecek Atribut..."}
+              {loadingProgress >= 60 && loadingProgress < 90 && "Menyiapkan Surat..."}
+              {loadingProgress >= 90 && "Siap!"}
             </p>
           </div>
         </div>
@@ -237,51 +251,76 @@ export default function Home() {
         src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         strategy="beforeInteractive"
       />
-      
+
       <NISModal isOpen={showNISModal} onSubmit={handleNISSubmit} />
-      
-      <ChangeNISModal 
+
+      <ChangeNISModal
         isOpen={showChangeNISModal}
         currentNIS={nis}
         currentName={siswaData?.nama || ''}
         onConfirm={handleChangeNIS}
         onCancel={() => setShowChangeNISModal(false)}
       />
-      
+
       {!showNISModal && (
         <>
           <Header />
-          
+
           {/* Info Bar & Riwayat - Side by Side Compact */}
           {!showPreview && siswaData && (
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-4 animate-slide-up">
               {/* Profile Card */}
-              <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 border border-scoutBrown-200/50">
-                <div className="flex items-center gap-3">
-                  {/* Icon & User Info */}
-                  <div className="bg-gradient-to-br from-scoutBrown-700 to-scoutBrown-900 p-2.5 rounded-lg flex-shrink-0">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+              {/* Profile Card - KTA Style */}
+              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all p-0 border-2 border-scoutBrown-800 overflow-hidden relative group">
+                {/* Header KTA */}
+                <div className="bg-scoutBrown-800 p-2 flex justify-between items-center pattern-hasduk relative">
+                  <div className="absolute inset-0 bg-scoutBrown-900/40 backdrop-blur-[1px]"></div>
+                  <h3 className="text-white font-bold text-sm z-10 relative px-2 tracking-wider">KARTU TANDA ANGGOTA</h3>
+                  <div className="w-2 h-2 rounded-full bg-scoutGreen-500 z-10 relative animate-pulse"></div>
+                </div>
+
+                <div className="p-4 relative">
+                  {/* Watermark */}
+                  <div className="absolute right-0 bottom-0 opacity-[0.03] pointer-events-none transform translate-y-4 translate-x-4">
+                    <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2zm0 3.5l6 10.5H6L12 5.5z" /></svg>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-sm sm:text-base text-scoutBrown-900 truncate">{siswaData.nama}</p>
-                    <p className="text-xs text-scoutBrown-600 mt-0.5">NIS: {nis} • {siswaData.kelas}</p>
+
+                  <div className="flex items-center gap-4">
+                    {/* Photo Placeholder / Icon */}
+                    <div className="bg-gradient-to-br from-scoutKhaki-100 to-white p-3 rounded-lg border-2 border-scoutBrown-200 shadow-inner flex-shrink-0">
+                      <svg className="w-10 h-10 text-scoutBrown-700" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                      </svg>
+                    </div>
+
+                    <div className="flex-1 min-w-0 font-mono">
+                      <p className="font-bold text-base sm:text-lg text-scoutBrown-900 truncate uppercase">{siswaData.nama}</p>
+                      <div className="flex flex-col gap-0.5 mt-1">
+                        <div className="flex text-xs text-scoutBrown-700">
+                          <span className="w-12 opacity-70">NIA</span>
+                          <span className="font-semibold">: {nis}</span>
+                        </div>
+                        <div className="flex text-xs text-scoutBrown-700">
+                          <span className="w-12 opacity-70">KELAS</span>
+                          <span className="font-semibold">: {siswaData.kelas}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Button Ganti NIS */}
+                    <button
+                      onClick={() => setShowChangeNISModal(true)}
+                      className="group bg-scoutKhaki-50 hover:bg-scoutBrown-50 text-scoutBrown-700 p-2 rounded-lg border border-scoutBrown-200 transition-all flex-shrink-0"
+                      title="Ganti Akun"
+                    >
+                      <svg className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    </button>
                   </div>
-                  
-                  {/* Button Ganti NIS - Icon Only */}
-                  <button
-                    onClick={() => setShowChangeNISModal(true)}
-                    className="group bg-scoutKhaki-100 hover:bg-scoutBrown-800 text-scoutBrown-800 hover:text-white p-2 rounded-lg transition-all border border-scoutBrown-300 hover:border-scoutBrown-800 flex items-center justify-center flex-shrink-0"
-                    title="Ganti NIS"
-                  >
-                    <svg className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                  </button>
                 </div>
               </div>
-              
+
               {/* Action Buttons - Below card on mobile, inside on desktop */}
               <div className="flex sm:hidden items-center gap-2 mt-3">
                 {/* Button Panduan - Mobile */}
@@ -294,7 +333,7 @@ export default function Home() {
                   </svg>
                   <span>Panduan</span>
                 </Link>
-                
+
                 {/* Button Lihat/Tutup Riwayat Izin - Mobile */}
                 <button
                   onClick={() => setShowCekIzin(!showCekIzin)}
@@ -310,7 +349,7 @@ export default function Home() {
                   <span>{showCekIzin ? 'Tutup Riwayat' : 'Lihat Riwayat'}</span>
                 </button>
               </div>
-              
+
               {/* Desktop Buttons - Inside extended card */}
               <div className="hidden sm:flex items-center gap-2 mt-3">
                 {/* Button Panduan - Desktop */}
@@ -323,7 +362,7 @@ export default function Home() {
                   </svg>
                   <span>Panduan</span>
                 </Link>
-                
+
                 {/* Button Lihat/Tutup Riwayat Izin - Desktop */}
                 <button
                   onClick={() => setShowCekIzin(!showCekIzin)}
@@ -343,29 +382,33 @@ export default function Home() {
               </div>
             </div>
           )}
-          
+
           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8" role="main">
-            <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 p-5 sm:p-6 animate-fade-in">
-              {showCekIzin && !showPreview && siswaData ? (
-                <CekIzin nis={nis} />
-              ) : !showPreview && siswaData ? (
-                <SuratForm 
-                  onSubmit={handleFormSubmit} 
-                  initialData={formData} 
-                  nis={nis}
-                  siswaData={{
-                    nama: siswaData.nama,
-                    kelas: siswaData.kelas.includes('-') ? siswaData.kelas : `X-${siswaData.kelas.replace('X', '')}`,
-                    absen: siswaData.presensi.toString(),
-                    sangga: siswaData.sangga || ''
-                  }}
-                />
-              ) : (
-                <PreviewSection formData={formData} onBack={handleBack} izinId={previewIzinId} />
-              )}
+            <div className="bg-white rounded-xl shadow-xl border-2 border-scoutBrown-200 p-5 sm:p-6 animate-fade-in relative z-10 wood-texture">
+              {/* Paper effect overlay */}
+              <div className="absolute inset-0 bg-white/95 rounded-[10px]"></div>
+              <div className="relative z-10">
+                {showCekIzin && !showPreview && siswaData ? (
+                  <CekIzin nis={nis} />
+                ) : !showPreview && siswaData ? (
+                  <SuratForm
+                    onSubmit={handleFormSubmit}
+                    initialData={formData}
+                    nis={nis}
+                    siswaData={{
+                      nama: siswaData.nama,
+                      kelas: siswaData.kelas.includes('-') ? siswaData.kelas : `X-${siswaData.kelas.replace('X', '')}`,
+                      absen: siswaData.presensi.toString(),
+                      sangga: siswaData.sangga || ''
+                    }}
+                  />
+                ) : (
+                  <PreviewSection formData={formData} onBack={handleBack} izinId={previewIzinId} />
+                )}
+              </div>
             </div>
           </main>
-          
+
           <Footer />
         </>
       )}

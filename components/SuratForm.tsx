@@ -103,13 +103,13 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
         kelas: formData.kelas.replace(/-/g, ''),  // Replace all dashes
         nis
       };
-      
+
       console.log('🔍 Form Submit Debug:', {
         originalKelas: formData.kelas,
         normalizedKelas: normalizedData.kelas,
         fullData: normalizedData
       });
-      
+
       await onSubmit(normalizedData);
     } catch (error) {
       console.error('Gagal mengirim data ke Telegram:', error);
@@ -140,10 +140,13 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
 
   return (
     <section className="fade-in" aria-label="Form pembuatan surat">
-      <div className="border border-[#BCAAA4] rounded-lg overflow-hidden bg-white">
-        <div className="bg-[#efe7d3] border-b border-[#BCAAA4] px-3 sm:px-4 py-2 sm:py-3">
-          <span className="font-bold text-mediumBrown text-sm sm:text-base">
-            <i className="fas fa-clipboard-list mr-1.5 sm:mr-2 text-xs sm:text-sm" aria-hidden="true"></i>
+      <div className="border-2 border-scoutBrown-700 rounded-lg overflow-hidden bg-white shadow-md">
+        <div className="bg-scoutBrown-800 border-b border-scoutBrown-700 px-3 sm:px-4 py-2 sm:py-3 pattern-hasduk relative">
+          <div className="absolute inset-0 bg-scoutBrown-900/30"></div>
+          <span className="font-bold text-white text-sm sm:text-base relative z-10 flex items-center">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
             Form Izin Pramuka
           </span>
         </div>
@@ -151,16 +154,18 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               {/* Info NIS */}
-              <div className="md:col-span-2 bg-blue-50 border border-blue-200 rounded-lg p-3">
-                <p className="text-sm text-blue-800">
-                  <i className="fas fa-info-circle mr-2"></i>
+              {/* Info NIS */}
+              <div className="md:col-span-2 bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 flex gap-3 items-start">
+                <svg className="w-5 h-5 text-scoutBrown-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div className="text-sm text-scoutBrown-800">
                   Data Anda: <strong>{siswaData.nama}</strong> - NIS <strong>{nis}</strong>
-                </p>
+                </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="nama" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
-                  <i className="fas fa-user text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
+                <label htmlFor="nama" className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
                   Nama Lengkap:
                 </label>
                 <input
@@ -169,13 +174,12 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   name="nama"
                   value={formData.nama}
                   readOnly
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-gray-50 text-darkBrown text-sm sm:text-base cursor-not-allowed"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-200 rounded bg-scoutBrown-50 text-scoutBrown-800 text-sm sm:text-base cursor-not-allowed font-mono"
                 />
               </div>
-              
+
               <div className="form-group">
-                <label htmlFor="absen" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
-                  <i className="fas fa-hashtag text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
+                <label htmlFor="absen" className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
                   Nomor Absen:
                 </label>
                 <input
@@ -184,13 +188,12 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   name="absen"
                   value={formData.absen}
                   readOnly
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-gray-50 text-darkBrown text-sm sm:text-base cursor-not-allowed"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-200 rounded bg-scoutBrown-50 text-scoutBrown-800 text-sm sm:text-base cursor-not-allowed font-mono"
                 />
               </div>
-              
+
               <div className="form-group">
-                <label htmlFor="kelas" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
-                  <i className="fas fa-school text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
+                <label htmlFor="kelas" className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
                   Kelas:
                 </label>
                 <input
@@ -199,13 +202,12 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   name="kelas"
                   value={formData.kelas}
                   readOnly
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-gray-50 text-darkBrown text-sm sm:text-base cursor-not-allowed"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-200 rounded bg-scoutBrown-50 text-scoutBrown-800 text-sm sm:text-base cursor-not-allowed font-mono"
                 />
               </div>
-              
+
               <div className="form-group">
-                <label htmlFor="sangga" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
-                  <i className="fas fa-users text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
+                <label htmlFor="sangga" className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
                   Sangga:
                 </label>
                 <select
@@ -214,7 +216,7 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   value={formData.sangga}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-300 rounded bg-white text-scoutBrown-900 text-sm sm:text-base focus:outline-none focus:border-scoutBrown-600 focus:ring-1 focus:ring-scoutBrown-600 transition-all cursor-pointer shadow-sm"
                 >
                   <option value="">Pilih Sangga</option>
                   <option value="Pendobrak">Pendobrak</option>
@@ -224,10 +226,9 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   <option value="Pelaksana">Pelaksana</option>
                 </select>
               </div>
-              
+
               <div className="md:col-span-2">
-                <label htmlFor="pkKelas" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
-                  <i className="fas fa-chalkboard-teacher text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
+                <label htmlFor="pkKelas" className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
                   Nama Pembina Kelas (PK):
                 </label>
                 <select
@@ -237,7 +238,7 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   onChange={handleChange}
                   required
                   disabled={isLoadingPk}
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-300 rounded bg-white text-scoutBrown-900 text-sm sm:text-base focus:outline-none focus:border-scoutBrown-600 focus:ring-1 focus:ring-scoutBrown-600 transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed shadow-sm"
                 >
                   <option value="">{isLoadingPk ? 'Memuat daftar PK...' : 'Pilih Pembina Kelas'}</option>
                   {pkOptions.map((pk) => (
@@ -247,10 +248,9 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   ))}
                 </select>
               </div>
-              
+
               <div className="md:col-span-2">
-                <label htmlFor="alasan" className="block mb-1.5 sm:mb-2 text-[#2c3e50] font-medium text-sm sm:text-[0.95em]">
-                  <i className="fas fa-comment-alt text-lightBrown mr-1.5 sm:mr-2 w-3 sm:w-4 inline-block text-center text-xs sm:text-sm"></i>
+                <label htmlFor="alasan" className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
                   Alasan Tidak Mengikuti:
                 </label>
                 <textarea
@@ -261,17 +261,19 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   rows={4}
                   placeholder="Jelaskan alasan Anda tidak dapat mengikuti kegiatan pramuka..."
                   required
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border border-[#BCAAA4] rounded bg-white text-darkBrown text-sm sm:text-base focus:outline-none focus:border-mediumBrown transition-colors resize-vertical min-h-[100px]"
+                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-300 rounded bg-white text-scoutBrown-900 text-sm sm:text-base focus:outline-none focus:border-scoutBrown-600 focus:ring-1 focus:ring-scoutBrown-600 transition-all resize-vertical min-h-[100px] shadow-sm"
                 />
               </div>
             </div>
-            
+
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-4 py-3 sm:py-3.5 bg-mediumBrown text-white rounded font-medium text-sm sm:text-base cursor-pointer hover:bg-darkBrown active:scale-[0.98] transition-all mt-2 sm:mt-2.5 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 sm:py-3.5 bg-scoutBrown-600 text-white rounded font-bold text-sm sm:text-base cursor-pointer hover:bg-scoutBrown-800 active:scale-[0.98] transition-all mt-2 sm:mt-2.5 disabled:opacity-60 disabled:cursor-not-allowed shadow-md flex items-center justify-center transform hover:-translate-y-0.5"
             >
-              <i className="fas fa-file-alt mr-1.5 sm:mr-2 text-xs sm:text-sm"></i>
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
               {isSubmitting ? 'Mengirim...' : 'Buat Surat'}
             </button>
 

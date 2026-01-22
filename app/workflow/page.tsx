@@ -2,49 +2,20 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default function WorkflowPage() {
-    const router = useRouter();
-    const [isChecking, setIsChecking] = useState(true);
-    const [loadingProgress, setLoadingProgress] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const intervals = [
-            { time: 100, progress: 30 },
-            { time: 150, progress: 60 },
-            { time: 120, progress: 90 },
-            { time: 100, progress: 100 },
-        ];
+        // Simple loading delay for smooth transition
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 300);
+    }, []);
 
-        let currentStep = 0;
-        const runProgress = () => {
-            if (currentStep < intervals.length) {
-                const { time, progress } = intervals[currentStep];
-                setTimeout(() => {
-                    setLoadingProgress(progress);
-                    currentStep++;
-                    runProgress();
-                }, time);
-            }
-        };
-
-        runProgress();
-
-        const storedNis = sessionStorage.getItem('nis');
-        
-        if (!storedNis) {
-            router.push('/');
-        } else {
-            setTimeout(() => {
-                setIsChecking(false);
-            }, 500);
-        }
-    }, [router]);
-
-    if (isChecking) {
+    if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-scoutKhaki-50 to-scoutBrown-100">
                 <div className="w-full max-w-md px-6">
@@ -56,21 +27,6 @@ export default function WorkflowPage() {
                             Mohon tunggu sebentar...
                         </p>
                     </div>
-                    <div className="relative">
-                        <div className="w-full h-3 bg-scoutBrown-200/50 rounded-full overflow-hidden shadow-inner">
-                            <div 
-                                className="h-full bg-gradient-to-r from-scoutBrown-700 via-scoutBrown-800 to-scoutBrown-900 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
-                                style={{ width: `${loadingProgress}%` }}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_1.5s_ease-in-out_infinite]"></div>
-                            </div>
-                        </div>
-                        <div className="mt-3 text-center">
-                            <span className="text-sm font-bold text-scoutBrown-800">
-                                {loadingProgress}%
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
         );
@@ -79,9 +35,9 @@ export default function WorkflowPage() {
     return (
         <>
             <Header />
-            
+
             <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 mt-3 sm:mt-4 mb-4 sm:mb-6 animate-slide-up">
-                <Link 
+                <Link
                     href="/"
                     className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-white hover:bg-scoutKhaki-50 border border-scoutBrown-300 hover:border-scoutBrown-500 rounded-lg transition-all text-xs sm:text-sm font-semibold text-scoutBrown-800 shadow-sm hover:shadow-md"
                 >
@@ -126,7 +82,7 @@ export default function WorkflowPage() {
                             <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4">
                                 <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">💡 Tips:</p>
                                 <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc">
-                                    <li>NIS minimal 4 digit</li>
+                                    <li>NIS minimal 5 digit</li>
                                     <li>Pastikan NIS yang kamu masukkan benar</li>
                                     <li>Data akan terisi otomatis setelah NIS divalidasi</li>
                                 </ul>
@@ -291,7 +247,7 @@ export default function WorkflowPage() {
                     </div>
                 </div>
 
-                                <div className="bg-gradient-to-br from-scoutBrown-50 to-scoutKhaki-50 border border-scoutBrown-300 rounded-lg p-4 sm:p-6 mt-6 sm:mt-8 animate-scale-in">
+                <div className="bg-gradient-to-br from-scoutBrown-50 to-scoutKhaki-50 border border-scoutBrown-300 rounded-lg p-4 sm:p-6 mt-6 sm:mt-8 animate-scale-in">
                     <div className="flex items-start gap-3 sm:gap-4">
                         <div className="flex-shrink-0">
                             <svg className="w-8 h-8 sm:w-10 sm:h-10 text-scoutBrown-700" fill="currentColor" viewBox="0 0 20 20">
