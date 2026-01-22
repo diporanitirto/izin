@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className="bg-white/95 backdrop-blur-lg sticky top-0 z-50 transition-all duration-300 shadow-md transform" role="banner">
       {/* Top Hasduk Line */}
-      <div className="h-1.5 w-full pattern-hasduk relative z-50 shadow-sm opacity-90"></div>
+      {/* Simple top border */}
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main header content */}

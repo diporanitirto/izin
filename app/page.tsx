@@ -185,61 +185,33 @@ export default function Home() {
   // Show loading spinner while checking session
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-scoutKhaki-50 to-scoutBrown-100 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 compass-pattern opacity-10 pointer-events-none"></div>
-
-        <div className="w-full max-w-md px-6 relative z-10">
-          <div className="text-center mb-8 animate-scale-in">
-            <div className="inline-block p-3 rounded-2xl bg-gradient-to-br from-white to-scoutKhaki-50 mb-4 shadow-xl ring-4 ring-scoutBrown-100 border border-scoutBrown-200">
-              <Image
-                src="/assets/logo-diporani.png"
-                alt="Logo Diporani"
-                width={64}
-                height={64}
-                className="object-contain mix-blend-multiply animate-pulse"
-                priority
-              />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-scoutBrown-900 mb-2 font-display">
-              SIAP SEDIA
-            </h2>
-            <p className="text-scoutBrown-600 text-sm font-medium">
-              Mempersiapkan kelengkapan...
-            </p>
+      <div className="min-h-screen flex items-center justify-center bg-scoutKhaki-50">
+        <div className="w-full max-w-sm px-6 text-center">
+          <div className="inline-block p-4 rounded-xl bg-white shadow-md mb-6 border border-scoutBrown-100">
+            <Image
+              src="/assets/logo-diporani.png"
+              alt="Logo Diporani"
+              width={64}
+              height={64}
+              className="object-contain"
+              priority
+            />
           </div>
 
-          {/* Progress Bar Container */}
-          <div className="relative">
-            {/* Background track */}
-            <div className="w-full h-4 bg-scoutBrown-100 rounded-full overflow-hidden shadow-inner border border-scoutBrown-300">
-              {/* Progress fill */}
-              <div
-                className="h-full bg-gradient-to-r from-scoutBrown-600 via-scoutBrown-500 to-scoutBrown-600 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
-                style={{ width: `${loadingProgress}%` }}
-              >
-                {/* Hasduk Pattern on Progress Bar */}
-                <div className="absolute inset-0 opacity-20 pattern-hasduk"></div>
-              </div>
-            </div>
+          <h2 className="text-xl font-bold text-scoutBrown-800 mb-4">
+            Memuat...
+          </h2>
 
-            {/* Percentage text */}
-            <div className="mt-3 text-center">
-              <span className="text-sm font-bold text-scoutBrown-800">
-                {loadingProgress}%
-              </span>
-            </div>
+          <div className="w-full h-2 bg-scoutBrown-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-scoutBrown-500 rounded-full transition-all duration-300"
+              style={{ width: `${loadingProgress}%` }}
+            />
           </div>
 
-          {/* Loading messages based on progress */}
-          <div className="mt-6 text-center animate-fade-in">
-            <p className="text-xs text-scoutBrown-600 font-semibold uppercase tracking-wider">
-              {loadingProgress < 30 && "Menyiapkan..."}
-              {loadingProgress >= 30 && loadingProgress < 60 && "Mengecek Atribut..."}
-              {loadingProgress >= 60 && loadingProgress < 90 && "Menyiapkan Surat..."}
-              {loadingProgress >= 90 && "Siap!"}
-            </p>
-          </div>
+          <p className="text-sm text-scoutBrown-500 mt-3">
+            {loadingProgress}%
+          </p>
         </div>
       </div>
     );
@@ -266,119 +238,44 @@ export default function Home() {
         <>
           <Header />
 
-          {/* Info Bar & Riwayat - Side by Side Compact */}
+          {/* Simple Profile Card */}
           {!showPreview && siswaData && (
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-4 animate-slide-up">
-              {/* Profile Card */}
-              {/* Profile Card - KTA Style */}
-              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all p-0 border-2 border-scoutBrown-800 overflow-hidden relative group">
-                {/* Header KTA */}
-                <div className="bg-scoutBrown-800 p-2 flex justify-between items-center pattern-hasduk relative">
-                  <div className="absolute inset-0 bg-scoutBrown-900/40 backdrop-blur-[1px]"></div>
-                  <h3 className="text-white font-bold text-sm z-10 relative px-2 tracking-wider">KARTU TANDA ANGGOTA</h3>
-                  <div className="w-2 h-2 rounded-full bg-scoutGreen-500 z-10 relative animate-pulse"></div>
-                </div>
-
-                <div className="p-4 relative">
-                  {/* Watermark */}
-                  <div className="absolute right-0 bottom-0 opacity-[0.03] pointer-events-none transform translate-y-4 translate-x-4">
-                    <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2zm0 3.5l6 10.5H6L12 5.5z" /></svg>
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-4">
+              <div className="bg-white rounded-lg shadow-sm p-4 border border-scoutBrown-200">
+                <div className="flex items-center gap-4">
+                  <div className="bg-scoutKhaki-100 p-3 rounded-lg border border-scoutBrown-200">
+                    <svg className="w-8 h-8 text-scoutBrown-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
                   </div>
-
-                  <div className="flex items-center gap-4">
-                    {/* Photo Placeholder / Icon */}
-                    <div className="bg-gradient-to-br from-scoutKhaki-100 to-white p-3 rounded-lg border-2 border-scoutBrown-200 shadow-inner flex-shrink-0">
-                      <svg className="w-10 h-10 text-scoutBrown-700" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                      </svg>
-                    </div>
-
-                    <div className="flex-1 min-w-0 font-mono">
-                      <p className="font-bold text-base sm:text-lg text-scoutBrown-900 truncate uppercase">{siswaData.nama}</p>
-                      <div className="flex flex-col gap-0.5 mt-1">
-                        <div className="flex text-xs text-scoutBrown-700">
-                          <span className="w-12 opacity-70">NIA</span>
-                          <span className="font-semibold">: {nis}</span>
-                        </div>
-                        <div className="flex text-xs text-scoutBrown-700">
-                          <span className="w-12 opacity-70">KELAS</span>
-                          <span className="font-semibold">: {siswaData.kelas}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Button Ganti NIS */}
-                    <button
-                      onClick={() => setShowChangeNISModal(true)}
-                      className="group bg-scoutKhaki-50 hover:bg-scoutBrown-50 text-scoutBrown-700 p-2 rounded-lg border border-scoutBrown-200 transition-all flex-shrink-0"
-                      title="Ganti Akun"
-                    >
-                      <svg className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                      </svg>
-                    </button>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-scoutBrown-800 truncate">{siswaData.nama}</p>
+                    <p className="text-sm text-scoutBrown-500">NIS: {nis} • Kelas: {siswaData.kelas}</p>
                   </div>
+                  <button
+                    onClick={() => setShowChangeNISModal(true)}
+                    className="text-scoutBrown-500 hover:text-scoutBrown-700 p-2"
+                    title="Ganti Akun"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </button>
                 </div>
-              </div>
-
-              {/* Action Buttons - Below card on mobile, inside on desktop */}
-              <div className="flex sm:hidden items-center gap-2 mt-3">
-                {/* Button Panduan - Mobile */}
-                <Link
-                  href="/workflow"
-                  className="flex-1 px-4 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all font-semibold text-sm active:scale-[0.98] flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                  <span>Panduan</span>
-                </Link>
-
-                {/* Button Lihat/Tutup Riwayat Izin - Mobile */}
-                <button
-                  onClick={() => setShowCekIzin(!showCekIzin)}
-                  className="flex-1 px-4 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all font-semibold text-sm active:scale-[0.98] flex items-center justify-center gap-2 bg-scoutBrown-900 hover:bg-scoutBrown-950 text-white"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    {showCekIzin ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    )}
-                  </svg>
-                  <span>{showCekIzin ? 'Tutup Riwayat' : 'Lihat Riwayat'}</span>
-                </button>
-              </div>
-
-              {/* Desktop Buttons - Inside extended card */}
-              <div className="hidden sm:flex items-center gap-2 mt-3">
-                {/* Button Panduan - Desktop */}
-                <Link
-                  href="/workflow"
-                  className="flex-1 px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all font-semibold text-sm active:scale-[0.98] flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                  <span>Panduan</span>
-                </Link>
-
-                {/* Button Lihat/Tutup Riwayat Izin - Desktop */}
-                <button
-                  onClick={() => setShowCekIzin(!showCekIzin)}
-                  className="flex-1 px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all font-semibold text-sm active:scale-[0.98] flex items-center justify-center gap-2 bg-scoutBrown-900 hover:bg-scoutBrown-950 text-white"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    {showCekIzin ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    )}
-                  </svg>
-                  <span>
-                    {showCekIzin ? 'Tutup Riwayat Izin' : 'Lihat Riwayat Izin'}
-                  </span>
-                </button>
+                <div className="flex gap-2 mt-3 pt-3 border-t border-scoutBrown-100">
+                  <Link
+                    href="/workflow"
+                    className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-scoutBrown-600 bg-scoutKhaki-50 hover:bg-scoutKhaki-100 text-center"
+                  >
+                    Panduan
+                  </Link>
+                  <button
+                    onClick={() => setShowCekIzin(!showCekIzin)}
+                    className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-white bg-scoutBrown-600 hover:bg-scoutBrown-700 text-center"
+                  >
+                    {showCekIzin ? 'Tutup Riwayat' : 'Riwayat Izin'}
+                  </button>
+                </div>
               </div>
             </div>
           )}

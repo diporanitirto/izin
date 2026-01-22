@@ -22,7 +22,7 @@ export default function ChangeNISModal({
   return (
     <div className="fixed inset-0 bg-scoutBrown-900/80 backdrop-blur-sm flex items-center justify-center z-[100] p-4 animate-fade-in">
       <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-scale-in relative">
-        <div className="h-1.5 w-full pattern-hasduk relative z-10"></div>
+        {/* Simple top border */}
         <div className="p-8">
           {/* Icon Warning */}
           <div className="mb-6 flex justify-center">

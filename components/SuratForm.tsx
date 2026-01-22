@@ -141,9 +141,8 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
   return (
     <section className="fade-in" aria-label="Form pembuatan surat">
       <div className="border-2 border-scoutBrown-700 rounded-lg overflow-hidden bg-white shadow-md">
-        <div className="bg-scoutBrown-800 border-b border-scoutBrown-700 px-3 sm:px-4 py-2 sm:py-3 pattern-hasduk relative">
-          <div className="absolute inset-0 bg-scoutBrown-900/30"></div>
-          <span className="font-bold text-white text-sm sm:text-base relative z-10 flex items-center">
+        <div className="bg-scoutBrown-600 border-b border-scoutBrown-500 px-3 sm:px-4 py-2 sm:py-3">
+          <span className="font-bold text-white text-sm sm:text-base flex items-center">
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
