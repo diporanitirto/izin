@@ -127,7 +127,7 @@ export default function Home() {
   };
 
   const handleFormSubmit = async (data: FormData) => {
-    console.log('📤 Sending to API:', data);
+    console.log('Sending to API:', data);
 
     const headers = {
       'Content-Type': 'application/json',
@@ -139,17 +139,17 @@ export default function Home() {
       body: JSON.stringify(data),
     });
 
-    console.log('📥 DB Response status:', dbResponse.status);
+    console.log('DB Response status:', dbResponse.status);
 
     if (!dbResponse.ok) {
       const errorPayload = await dbResponse.json().catch(() => null);
-      console.error('❌ DB Error:', errorPayload);
+      console.error('DB Error:', errorPayload);
       const message = errorPayload?.error ?? 'Gagal menyimpan data ke database.';
       throw new Error(message);
     }
 
     const dbResult = await dbResponse.json();
-    console.log('✅ Data saved to DB:', dbResult);
+    console.log('Data saved to DB:', dbResult);
 
     const telegramResponse = await fetch('/api/telegram', {
       method: 'POST',
@@ -161,7 +161,7 @@ export default function Home() {
       const errorPayload = await telegramResponse.json().catch(() => null);
       const message =
         errorPayload?.error ?? 'Data tersimpan, tetapi notifikasi Telegram gagal dikirim.';
-      console.warn('⚠️ Telegram warning:', message);
+      console.warn('Telegram warning:', message);
       // Don't throw error, telegram is not critical
     }
 

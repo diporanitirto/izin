@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     }
 
     const messageLines = [
-      '📬 Izin Diporani Baru',
+      'Izin Diporani Baru',
       '',
       `Nama: ${payload.nama}`,
       `Nomor Absen: ${payload.absen}`,

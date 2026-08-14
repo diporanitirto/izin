@@ -80,7 +80,7 @@ export default function WorkflowPage() {
                                 Saat pertama kali membuka website, kamu akan diminta memasukkan <strong>NIS (Nomor Induk Siswa)</strong>.
                             </p>
                             <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">💡 Tips:</p>
+                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">Tips:</p>
                                 <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc">
                                     <li>NIS minimal 5 digit</li>
                                     <li>Pastikan NIS yang kamu masukkan benar</li>
@@ -125,7 +125,7 @@ export default function WorkflowPage() {
                                 Setelah submit, kamu akan langsung melihat preview surat izin yang telah dibuat. <strong className="text-green-700">Tombol download akan langsung tersedia!</strong>
                             </p>
                             <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-1">✅ Langkah Selanjutnya:</p>
+                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-1">Langkah Selanjutnya:</p>
                                 <p className="text-xs sm:text-sm text-green-700">
                                     Klik tombol <strong>"Download Surat PDF"</strong> untuk mengunduh surat izin kamu, kemudian print dan kumpulkan tanda tangan yang diperlukan.
                                 </p>
@@ -147,7 +147,7 @@ export default function WorkflowPage() {
                                 Klik tombol <strong>"Download Surat PDF"</strong> di preview, kemudian print surat tersebut.
                             </p>
                             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-blue-900 mb-2">🖨️ Tips Print:</p>
+                                <p className="text-xs sm:text-sm font-semibold text-blue-900 mb-2">Tips Print:</p>
                                 <ul className="text-xs sm:text-sm text-blue-700 space-y-1 ml-4 list-disc">
                                     <li>Print dalam format A4</li>
                                     <li>Pastikan hasil print jelas dan tidak blur</li>
@@ -216,7 +216,7 @@ export default function WorkflowPage() {
                                 Setelah semua tanda tangan lengkap, <strong>serahkan surat izin ke penjaga gerbang</strong> saat kamu akan izin keluar.
                             </p>
                             <div className="bg-green-50 border border-green-300 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-2">✅ Checklist Akhir:</p>
+                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-2">Checklist Akhir:</p>
                                 <ul className="text-xs sm:text-sm text-green-800 space-y-1 ml-4 list-disc">
                                     <li>Surat sudah didownload dan diprint</li>
                                     <li>Ada tanda tangan PK, JUDAT, dan MABIGUS</li>

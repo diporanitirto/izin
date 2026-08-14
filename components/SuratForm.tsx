@@ -104,7 +104,7 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
         nis
       };
 
-      console.log('🔍 Form Submit Debug:', {
+      console.log('Form Submit Debug:', {
         originalKelas: formData.kelas,
         normalizedKelas: normalizedData.kelas,
         fullData: normalizedData

@@ -113,7 +113,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
 
     const baseWidth = 794;
     const baseHeight = 1123;
-    const scale = 2000 / baseWidth; // ~200 DPI keeps readability while reducing file size
+    const scale = 4000 / baseWidth; // Higher DPI = larger PNG/PDF file size
     canvas.width = baseWidth * scale;
     canvas.height = baseHeight * scale;
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
@@ -404,7 +404,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const imgData = canvas.toDataURL('image/jpeg', 0.85);
+    const imgData = canvas.toDataURL('image/png');
 
     const { jsPDF } = await import('jspdf');
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
@@ -454,13 +454,13 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
               <i className="fas fa-check-circle text-green-600 text-2xl"></i>
               <div className="flex-1">
                 <h3 className="font-bold text-lg mb-1 text-green-800">
-                  ✓ Surat Izin Siap Didownload
+                  Surat Izin Siap Didownload
                 </h3>
                 <p className="text-sm text-green-700">
                   Surat izin Anda telah berhasil dibuat. Silakan download dalam format PDF untuk dicetak dan ditandatangani.
                 </p>
                 <div className="mt-3 bg-green-100 rounded-lg p-3">
-                  <p className="text-xs text-green-800 font-semibold mb-1">📝 Langkah Selanjutnya:</p>
+                  <p className="text-xs text-green-800 font-semibold mb-1">Langkah Selanjutnya:</p>
                   <ol className="text-xs text-green-700 ml-4 list-decimal space-y-1">
                     <li>Download surat PDF</li>
                     <li>Cetak surat tersebut</li>

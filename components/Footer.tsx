@@ -4,7 +4,7 @@ export default function Footer() {
       {/* Simple top border */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
         <p className="text-scoutKhaki-200 text-xs sm:text-sm">
-          Made with ❤️ by Diporani Tirto © 2025
+          Made with love by Diporani Tirto © 2025
         </p>
         <div className="flex items-center justify-center gap-3 mt-2.5">
           <button
