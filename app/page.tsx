@@ -11,6 +11,7 @@ import PreviewSection from '@/components/PreviewSection';
 import CekIzin from '@/components/CekIzin';
 import NISModal from '@/components/NISModal';
 import ChangeNISModal from '@/components/ChangeNISModal';
+import type { SiswaData } from '@/lib/utils';
 
 interface FormData {
   nama: string;
@@ -20,14 +21,6 @@ interface FormData {
   pkKelas: string;
   alasan: string;
   nis?: string;
-}
-
-interface SiswaData {
-  kelas: string;
-  nama: string;
-  presensi: number;
-  nis: number;
-  sangga: string | null;
 }
 
 export default function Home() {

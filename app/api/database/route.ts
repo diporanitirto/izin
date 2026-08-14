@@ -20,6 +20,7 @@ const ALLOWED_KELAS = new Set([
   'X6',
   'X7',
   'X8',
+  'XADMIN',
 ]);
 
 export async function POST(request: Request) {

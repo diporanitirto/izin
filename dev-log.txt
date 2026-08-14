@@ -1,0 +1,55 @@
+
+> surat-ijin-pramuka@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.9
+   - Local:        http://localhost:3000
+   - Network:      http://172.16.0.2:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 4s
+ ○ Compiling / ...
+Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled / in 12.6s (1126 modules)
+ GET / 200 in 13737ms
+ ✓ Compiled in 1477ms (472 modules)
+ GET / 200 in 134ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1348ms (1117 modules)
+ GET / 404 in 1841ms
+ GET / 200 in 278ms
+ GET / 200 in 298ms
+   Reload env: .env
+ ✓ Compiled in 10.1s (472 modules)
+   Reload env: .env
+ ✓ Compiled in 321ms (458 modules)
+   Reload env: .env
+ ✓ Compiled in 401ms (458 modules)
+   Reload env: .env
+ ✓ Compiled in 414ms (458 modules)
+ ✓ Compiled in 750ms (472 modules)
+ ✓ Compiled in 627ms (472 modules)
+ ○ Compiling /api/izin ...
+ ✓ Compiled /api/izin in 2.1s (600 modules)
+DEBUG - Kelas validation: {
+  original: 'XADMIN',
+  normalized: 'XADMIN',
+  isValid: true,
+  allowedKelas: [
+    'X1',     'X2',
+    'X3',     'X4',
+    'X5',     'X6',
+    'X7',     'X8',
+    'XADMIN'
+  ]
+}
+Supabase insert error: {
+  code: '23514',
+  details: 'Failing row contains (2858c479-c0fa-47bc-b060-1319dde4bdde, AKU ADMIN BERKUASA, 1, XADMIN, testing, pending, 2026-08-14 02:34:38.474026+00, f, null, null, Pendobrak, TEST, 1, null, null, 2026-08-14 02:34:38.474026+00).',
+  hint: null,
+  message: 'new row for relation "izin" violates check constraint "izin_kelas_check"'
+}
+ POST /api/izin 500 in 3001ms

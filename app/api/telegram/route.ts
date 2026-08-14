@@ -35,10 +35,8 @@ export async function POST(request: Request) {
     }
 
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-      return NextResponse.json(
-        { error: 'Konfigurasi Telegram belum lengkap.' },
-        { status: 500 },
-      );
+      console.warn('Telegram tidak dikonfigurasi, notifikasi dilewati.');
+      return NextResponse.json({ success: true, skipped: true });
     }
 
     const messageLines = [

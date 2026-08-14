@@ -3,14 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-interface SiswaData {
-  kelas: string;
-  nama: string;
-  presensi: number;
-  nis: number;
-  sangga: string | null;
-}
+import { parseSiswaData, type SiswaData } from '@/lib/utils';
 
 interface NISModalProps {
   isOpen: boolean;
@@ -45,7 +38,7 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
       if (!res.ok) {
         throw new Error('Gagal memuat data siswa');
       }
-      const dataSiswa: SiswaData[] = await res.json();
+      const dataSiswa = parseSiswaData(await res.json());
       const siswa = dataSiswa.find((s) => s.nis === parseInt(nis));
 
       if (siswa) {

@@ -19,7 +19,7 @@ BEGIN
   
   -- Tambah constraint baru
   ALTER TABLE izin ADD CONSTRAINT izin_kelas_check 
-    CHECK (kelas IN ('X1','X2','X3','X4','X5','X6','X7','X8'));
+    CHECK (kelas IN ('X1','X2','X3','X4','X5','X6','X7','X8','XADMIN'));
 EXCEPTION
   WHEN OTHERS THEN
     NULL; -- Ignore error jika constraint sudah ada

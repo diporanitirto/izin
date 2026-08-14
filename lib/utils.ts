@@ -75,3 +75,55 @@ export function validateNIS(nis: string): boolean {
 export function getVerificationUrl(baseUrl: string, izinId: string): string {
   return `${baseUrl}/verify/${izinId}`;
 }
+
+export interface SiswaData {
+  kelas: string;
+  nama: string;
+  presensi: number;
+  nis: number;
+  sangga: string | null;
+}
+
+interface RawSiswaRow {
+  'DAFTAR HADIR MURID'?: unknown;
+  '__EMPTY'?: unknown;
+  '__EMPTY_1'?: unknown;
+  [key: string]: unknown;
+}
+
+/**
+ * Parse data-siswa.json dari format export Excel (DAFTAR HADIR MURID)
+ * menjadi struktur SiswaData yang digunakan aplikasi.
+ */
+export function parseSiswaData(raw: RawSiswaRow[]): SiswaData[] {
+  const result: SiswaData[] = [];
+  let currentKelas = '';
+
+  for (const row of raw) {
+    if (row['DAFTAR HADIR MURID'] === 'KELAS') {
+      const kelasValue = row['__EMPTY_1'];
+      if (typeof kelasValue === 'string') {
+        currentKelas = kelasValue.replace(/^:\s*/, '').trim();
+      }
+      continue;
+    }
+
+    const urut = row['DAFTAR HADIR MURID'];
+    const nama = row['__EMPTY_1'];
+    const nis = row['__EMPTY'];
+
+    if (typeof urut !== 'number' || typeof nama !== 'string' || typeof nis !== 'number') {
+      continue;
+    }
+
+    result.push({
+      kelas: currentKelas,
+      nama,
+      presensi: urut,
+      nis,
+      sangga: null,
+    });
+  }
+
+  return result;
+}
