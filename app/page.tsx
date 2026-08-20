@@ -142,7 +142,7 @@ export default function Home() {
           <Header />
 
           {!showPreview && siswaData && (
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-4">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 mt-4 mb-4">
               <div className="bg-white rounded-xl border border-scoutBrown-200 p-4">
                 <div className="flex items-center gap-4">
                   <div className="bg-scoutKhaki-100 p-3 rounded-xl">
@@ -182,7 +182,7 @@ export default function Home() {
             </div>
           )}
 
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8" role="main">
+          <main className="max-w-3xl mx-auto px-4 sm:px-6 pb-8" role="main">
             <div className="animate-fade-in">
               {showCekIzin && !showPreview && siswaData ? (
                 <CekIzin nis={nis} />
