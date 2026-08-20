@@ -5,7 +5,7 @@
 <h1 align="center">Surat Izin Pramuka</h1>
 
 <p align="center">
-  Sistem pengajuan izin digital untuk Penggalang Ramanda Diporani Tirto.
+  Sistem pengajuan izin digital untuk Diporani Tirto.
 </p>
 
 <p align="center">
