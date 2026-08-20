@@ -246,7 +246,6 @@ export default function VerifyPage() {
                 absen: izin.absen,
                 kelas: izin.kelas,
                 sangga: izin.sangga || '',
-                pkKelas: izin.pk_kelas || '',
                 alasan: izin.alasan,
               }}
               onBack={() => setShowPreview(false)}

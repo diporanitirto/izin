@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Script from 'next/script';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SuratForm from '@/components/SuratForm';
@@ -11,21 +10,11 @@ import PreviewSection from '@/components/PreviewSection';
 import CekIzin from '@/components/CekIzin';
 import NISModal from '@/components/NISModal';
 import ChangeNISModal from '@/components/ChangeNISModal';
-import type { SiswaData } from '@/lib/utils';
-
-interface FormData {
-  nama: string;
-  absen: string;
-  kelas: string;
-  sangga: string;
-  pkKelas: string;
-  alasan: string;
-  nis?: string;
-}
+import { parseSiswaData, type SiswaData } from '@/lib/utils';
+import type { FormData } from '@/lib/types';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [loadingProgress, setLoadingProgress] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
   const [showCekIzin, setShowCekIzin] = useState(false);
   const [showNISModal, setShowNISModal] = useState(false);
@@ -38,69 +27,33 @@ export default function Home() {
     absen: '',
     kelas: '',
     sangga: '',
-    pkKelas: '',
     alasan: '',
   });
 
   useEffect(() => {
-    // Simulate realistic loading progress
-    const intervals = [
-      { time: 100, progress: 20 },   // Initial load
-      { time: 200, progress: 45 },   // Checking session
-      { time: 150, progress: 70 },   // Loading data
-      { time: 200, progress: 90 },   // Almost done
-      { time: 150, progress: 100 },  // Complete
-    ];
-
-    let currentStep = 0;
-    const runProgress = () => {
-      if (currentStep < intervals.length) {
-        const { time, progress } = intervals[currentStep];
-        setTimeout(() => {
-          setLoadingProgress(progress);
-          currentStep++;
-          runProgress();
-        }, time);
-      }
-    };
-
-    runProgress();
-
-    // Check if NIS is already stored in sessionStorage
     const storedNis = sessionStorage.getItem('nis');
     const storedSiswaData = sessionStorage.getItem('siswaData');
 
     if (storedNis && storedSiswaData) {
       try {
-        const parsedData = JSON.parse(storedSiswaData);
+        const parsedData = JSON.parse(storedSiswaData) as SiswaData;
         setNis(storedNis);
         setSiswaData(parsedData);
-        setShowNISModal(false);
-      } catch (error) {
-        console.error('Error parsing stored siswa data:', error);
-        // Clear corrupted data
+      } catch {
         sessionStorage.removeItem('nis');
         sessionStorage.removeItem('siswaData');
         setShowNISModal(true);
       }
     } else {
-      // No stored data, show modal
       setShowNISModal(true);
     }
 
-    // Finish loading check after progress completes
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
+    setIsLoading(false);
 
-    // Check if URL has showCekIzin parameter
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('showCekIzin') === 'true' && storedNis) {
-        setShowCekIzin(true);
-        // Clean URL without reload
-        window.history.replaceState({}, '', '/');
-      }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('showCekIzin') === 'true' && storedNis) {
+      setShowCekIzin(true);
+      window.history.replaceState({}, '', '/');
     }
   }, []);
 
@@ -108,14 +61,11 @@ export default function Home() {
     setNis(submittedNis);
     setSiswaData(data);
     setShowNISModal(false);
-
-    // Store in sessionStorage
     sessionStorage.setItem('nis', submittedNis);
     sessionStorage.setItem('siswaData', JSON.stringify(data));
   };
 
   const handleChangeNIS = () => {
-    // Clear session storage and show modal again
     sessionStorage.removeItem('nis');
     sessionStorage.removeItem('siswaData');
     setShowNISModal(true);
@@ -127,47 +77,29 @@ export default function Home() {
   };
 
   const handleFormSubmit = async (data: FormData) => {
-    console.log('Sending to API:', data);
-
-    const headers = {
-      'Content-Type': 'application/json',
-    } as const;
-
     const dbResponse = await fetch('/api/izin', {
       method: 'POST',
-      headers,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
 
-    console.log('DB Response status:', dbResponse.status);
-
     if (!dbResponse.ok) {
-      const errorPayload = await dbResponse.json().catch(() => null);
-      console.error('DB Error:', errorPayload);
-      const message = errorPayload?.error ?? 'Gagal menyimpan data ke database.';
-      throw new Error(message);
+      const err = await dbResponse.json().catch(() => null);
+      throw new Error(err?.error ?? 'Gagal menyimpan data.');
     }
 
     const dbResult = await dbResponse.json();
-    console.log('Data saved to DB:', dbResult);
 
-    const telegramResponse = await fetch('/api/telegram', {
+    fetch('/api/telegram', {
       method: 'POST',
-      headers,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    });
-
-    if (!telegramResponse.ok) {
-      const errorPayload = await telegramResponse.json().catch(() => null);
-      const message =
-        errorPayload?.error ?? 'Data tersimpan, tetapi notifikasi Telegram gagal dikirim.';
-      console.warn('Telegram warning:', message);
-      // Don't throw error, telegram is not critical
-    }
+    }).catch(() => {});
 
     setFormData(data);
+    setPreviewIzinId(dbResult?.data?.id ?? null);
     setShowPreview(true);
-    setShowCekIzin(false); // Close cek izin if open
+    setShowCekIzin(false);
   };
 
   const handleBack = () => {
@@ -175,36 +107,19 @@ export default function Home() {
     setPreviewIzinId(null);
   };
 
-  // Show loading spinner while checking session
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-scoutKhaki-50">
-        <div className="w-full max-w-sm px-6 text-center">
-          <div className="inline-block p-4 rounded-xl bg-white shadow-md mb-6 border border-scoutBrown-100">
-            <Image
-              src="/assets/logo-diporani.png"
-              alt="Logo Diporani"
-              width={64}
-              height={64}
-              className="object-contain"
-              priority
-            />
-          </div>
-
-          <h2 className="text-xl font-bold text-scoutBrown-800 mb-4">
-            Memuat...
-          </h2>
-
-          <div className="w-full h-2 bg-scoutBrown-100 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-scoutBrown-500 rounded-full transition-all duration-300"
-              style={{ width: `${loadingProgress}%` }}
-            />
-          </div>
-
-          <p className="text-sm text-scoutBrown-500 mt-3">
-            {loadingProgress}%
-          </p>
+        <div className="text-center">
+          <Image
+            src="/assets/logo-diporani.png"
+            alt="Logo Diporani"
+            width={64}
+            height={64}
+            className="object-contain mx-auto mb-4"
+            priority
+          />
+          <p className="text-scoutBrown-500 text-sm">Memuat...</p>
         </div>
       </div>
     );
@@ -212,11 +127,6 @@ export default function Home() {
 
   return (
     <>
-      <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        strategy="beforeInteractive"
-      />
-
       <NISModal isOpen={showNISModal} onSubmit={handleNISSubmit} />
 
       <ChangeNISModal
@@ -231,7 +141,6 @@ export default function Home() {
         <>
           <Header />
 
-          {/* Simple Profile Card */}
           {!showPreview && siswaData && (
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-4">
               <div className="bg-white rounded-lg shadow-sm p-4 border border-scoutBrown-200">
@@ -275,7 +184,6 @@ export default function Home() {
 
           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8" role="main">
             <div className="bg-white rounded-xl shadow-xl border-2 border-scoutBrown-200 p-5 sm:p-6 animate-fade-in relative z-10 wood-texture">
-              {/* Paper effect overlay */}
               <div className="absolute inset-0 bg-white/95 rounded-[10px]"></div>
               <div className="relative z-10">
                 {showCekIzin && !showPreview && siswaData ? (

@@ -76,13 +76,8 @@ export function getVerificationUrl(baseUrl: string, izinId: string): string {
   return `${baseUrl}/verify/${izinId}`;
 }
 
-export interface SiswaData {
-  kelas: string;
-  nama: string;
-  presensi: number;
-  nis: number;
-  sangga: string | null;
-}
+import type { SiswaData } from './types';
+export type { SiswaData };
 
 interface RawSiswaRow {
   'DAFTAR HADIR MURID'?: unknown;
