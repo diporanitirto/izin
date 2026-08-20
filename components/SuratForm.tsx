@@ -55,73 +55,74 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
 
   return (
     <section className="fade-in" aria-label="Form pembuatan surat">
-      <div className="border-2 border-scoutBrown-700 rounded-lg overflow-hidden bg-white shadow-md">
-        <div className="bg-scoutBrown-600 border-b border-scoutBrown-500 px-3 sm:px-4 py-2 sm:py-3">
-          <span className="font-bold text-white text-sm sm:text-base flex items-center">
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="border border-scoutBrown-200 rounded-xl bg-white">
+        <div className="px-5 py-4 border-b border-scoutBrown-100">
+          <h2 className="font-bold text-scoutBrown-900 text-base flex items-center gap-2">
+            <svg className="w-5 h-5 text-scoutBrown-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             Form Izin Pramuka
-          </span>
+          </h2>
         </div>
-        <div className="p-3 sm:p-4">
+
+        <div className="p-5">
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-              <div className="md:col-span-2 bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 flex gap-3 items-start">
-                <svg className="w-5 h-5 text-scoutBrown-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="md:col-span-2 bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg p-3 flex gap-3 items-start">
+                <svg className="w-5 h-5 text-scoutBrown-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <div className="text-sm text-scoutBrown-800">
-                  Data Anda: <strong>{siswaData.nama}</strong> - NIS <strong>{nis}</strong>
+                <div className="text-sm text-scoutBrown-700">
+                  <strong>{siswaData.nama}</strong> — NIS <strong>{nis}</strong>
                 </div>
               </div>
 
-              <div className="form-group">
-                <label className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
-                  Nama Lengkap:
+              <div>
+                <label className="block mb-1.5 text-scoutBrown-700 font-semibold text-sm">
+                  Nama Lengkap
                 </label>
                 <input
                   type="text"
                   value={formData.nama}
                   readOnly
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-200 rounded bg-scoutBrown-50 text-scoutBrown-800 text-sm sm:text-base cursor-not-allowed font-mono"
+                  className="w-full px-4 py-2.5 border border-scoutBrown-200 rounded-lg bg-scoutKhaki-50 text-scoutBrown-800 text-sm cursor-not-allowed"
                 />
               </div>
 
-              <div className="form-group">
-                <label className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
-                  Nomor Absen:
+              <div>
+                <label className="block mb-1.5 text-scoutBrown-700 font-semibold text-sm">
+                  Nomor Absen
                 </label>
                 <input
                   type="text"
                   value={formData.absen}
                   readOnly
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-200 rounded bg-scoutBrown-50 text-scoutBrown-800 text-sm sm:text-base cursor-not-allowed font-mono"
+                  className="w-full px-4 py-2.5 border border-scoutBrown-200 rounded-lg bg-scoutKhaki-50 text-scoutBrown-800 text-sm cursor-not-allowed"
                 />
               </div>
 
-              <div className="form-group">
-                <label className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
-                  Kelas:
+              <div>
+                <label className="block mb-1.5 text-scoutBrown-700 font-semibold text-sm">
+                  Kelas
                 </label>
                 <input
                   type="text"
                   value={formData.kelas}
                   readOnly
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-200 rounded bg-scoutBrown-50 text-scoutBrown-800 text-sm sm:text-base cursor-not-allowed font-mono"
+                  className="w-full px-4 py-2.5 border border-scoutBrown-200 rounded-lg bg-scoutKhaki-50 text-scoutBrown-800 text-sm cursor-not-allowed"
                 />
               </div>
 
-              <div className="form-group">
-                <label className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
-                  Sangga:
+              <div>
+                <label className="block mb-1.5 text-scoutBrown-700 font-semibold text-sm">
+                  Sangga
                 </label>
                 <select
                   name="sangga"
                   value={formData.sangga}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-300 rounded bg-white text-scoutBrown-900 text-sm sm:text-base focus:outline-none focus:border-scoutBrown-600 focus:ring-1 focus:ring-scoutBrown-600 transition-all cursor-pointer shadow-sm"
+                  className="w-full px-4 py-2.5 border border-scoutBrown-300 rounded-lg bg-white text-scoutBrown-900 text-sm focus:outline-none focus:border-scoutBrown-500 focus:ring-2 focus:ring-scoutBrown-500/20 transition-all cursor-pointer"
                 >
                   <option value="">Pilih Sangga</option>
                   <option value="Pendobrak">Pendobrak</option>
@@ -133,8 +134,8 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
               </div>
 
               <div className="md:col-span-2">
-                <label className="block mb-1.5 sm:mb-2 text-scoutBrown-900 font-bold text-sm sm:text-[0.95em]">
-                  Alasan Tidak Mengikuti:
+                <label className="block mb-1.5 text-scoutBrown-700 font-semibold text-sm">
+                  Alasan Tidak Mengikuti
                 </label>
                 <textarea
                   name="alasan"
@@ -143,7 +144,7 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
                   rows={4}
                   placeholder="Jelaskan alasan Anda tidak dapat mengikuti kegiatan pramuka..."
                   required
-                  className="w-full px-3 sm:px-[15px] py-2.5 sm:py-3 border-2 border-scoutBrown-300 rounded bg-white text-scoutBrown-900 text-sm sm:text-base focus:outline-none focus:border-scoutBrown-600 focus:ring-1 focus:ring-scoutBrown-600 transition-all resize-vertical min-h-[100px] shadow-sm"
+                  className="w-full px-4 py-2.5 border border-scoutBrown-300 rounded-lg bg-white text-scoutBrown-900 text-sm focus:outline-none focus:border-scoutBrown-500 focus:ring-2 focus:ring-scoutBrown-500/20 transition-all resize-vertical min-h-[100px]"
                 />
               </div>
             </div>
@@ -151,16 +152,16 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-4 py-3 sm:py-3.5 bg-scoutBrown-600 text-white rounded font-bold text-sm sm:text-base cursor-pointer hover:bg-scoutBrown-800 active:scale-[0.98] transition-all mt-2 sm:mt-2.5 disabled:opacity-60 disabled:cursor-not-allowed shadow-md flex items-center justify-center transform hover:-translate-y-0.5"
+              className="w-full mt-5 px-4 py-3 bg-scoutBrown-700 text-white rounded-lg font-semibold text-sm cursor-pointer hover:bg-scoutBrown-800 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               {isSubmitting ? 'Mengirim...' : 'Buat Surat'}
             </button>
 
             {errorMessage && (
-              <p className="mt-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+              <p className="mt-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2">
                 {errorMessage}
               </p>
             )}

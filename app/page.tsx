@@ -109,17 +109,17 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-scoutKhaki-50">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <Image
             src="/assets/logo-diporani.png"
             alt="Logo Diporani"
-            width={64}
-            height={64}
-            className="object-contain mx-auto mb-4"
+            width={56}
+            height={56}
+            className="object-contain mx-auto mb-3"
             priority
           />
-          <p className="text-scoutBrown-500 text-sm">Memuat...</p>
+          <p className="text-scoutBrown-400 text-sm">Memuat...</p>
         </div>
       </div>
     );
@@ -143,20 +143,20 @@ export default function Home() {
 
           {!showPreview && siswaData && (
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-4">
-              <div className="bg-white rounded-lg shadow-sm p-4 border border-scoutBrown-200">
+              <div className="bg-white rounded-xl border border-scoutBrown-200 p-4">
                 <div className="flex items-center gap-4">
-                  <div className="bg-scoutKhaki-100 p-3 rounded-lg border border-scoutBrown-200">
-                    <svg className="w-8 h-8 text-scoutBrown-600" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="bg-scoutKhaki-100 p-3 rounded-xl">
+                    <svg className="w-7 h-7 text-scoutBrown-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-bold text-scoutBrown-800 truncate">{siswaData.nama}</p>
+                    <p className="font-bold text-scoutBrown-900 truncate">{siswaData.nama}</p>
                     <p className="text-sm text-scoutBrown-500">NIS: {nis} • Kelas: {siswaData.kelas}</p>
                   </div>
                   <button
                     onClick={() => setShowChangeNISModal(true)}
-                    className="text-scoutBrown-500 hover:text-scoutBrown-700 p-2"
+                    className="text-scoutBrown-400 hover:text-scoutBrown-600 p-2 rounded-lg hover:bg-scoutKhaki-50 transition-colors"
                     title="Ganti Akun"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,13 +167,13 @@ export default function Home() {
                 <div className="flex gap-2 mt-3 pt-3 border-t border-scoutBrown-100">
                   <Link
                     href="/workflow"
-                    className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-scoutBrown-600 bg-scoutKhaki-50 hover:bg-scoutKhaki-100 text-center"
+                    className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-scoutBrown-600 bg-scoutKhaki-50 hover:bg-scoutKhaki-100 text-center transition-colors"
                   >
                     Panduan
                   </Link>
                   <button
                     onClick={() => setShowCekIzin(!showCekIzin)}
-                    className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-white bg-scoutBrown-600 hover:bg-scoutBrown-700 text-center"
+                    className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-white bg-scoutBrown-700 hover:bg-scoutBrown-800 text-center transition-colors"
                   >
                     {showCekIzin ? 'Tutup Riwayat' : 'Riwayat Izin'}
                   </button>
@@ -183,27 +183,24 @@ export default function Home() {
           )}
 
           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8" role="main">
-            <div className="bg-white rounded-xl shadow-xl border-2 border-scoutBrown-200 p-5 sm:p-6 animate-fade-in relative z-10 wood-texture">
-              <div className="absolute inset-0 bg-white/95 rounded-[10px]"></div>
-              <div className="relative z-10">
-                {showCekIzin && !showPreview && siswaData ? (
-                  <CekIzin nis={nis} />
-                ) : !showPreview && siswaData ? (
-                  <SuratForm
-                    onSubmit={handleFormSubmit}
-                    initialData={formData}
-                    nis={nis}
-                    siswaData={{
-                      nama: siswaData.nama,
-                      kelas: siswaData.kelas.includes('-') ? siswaData.kelas : `X-${siswaData.kelas.replace('X', '')}`,
-                      absen: siswaData.presensi.toString(),
-                      sangga: siswaData.sangga || ''
-                    }}
-                  />
-                ) : (
-                  <PreviewSection formData={formData} onBack={handleBack} izinId={previewIzinId} />
-                )}
-              </div>
+            <div className="animate-fade-in">
+              {showCekIzin && !showPreview && siswaData ? (
+                <CekIzin nis={nis} />
+              ) : !showPreview && siswaData ? (
+                <SuratForm
+                  onSubmit={handleFormSubmit}
+                  initialData={formData}
+                  nis={nis}
+                  siswaData={{
+                    nama: siswaData.nama,
+                    kelas: siswaData.kelas.includes('-') ? siswaData.kelas : `X-${siswaData.kelas.replace('X', '')}`,
+                    absen: siswaData.presensi.toString(),
+                    sangga: siswaData.sangga || ''
+                  }}
+                />
+              ) : (
+                <PreviewSection formData={formData} onBack={handleBack} izinId={previewIzinId} />
+              )}
             </div>
           </main>
 

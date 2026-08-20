@@ -9,10 +9,7 @@ export default function WorkflowPage() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Simple loading delay for smooth transition
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 300);
+        setIsLoading(false);
     }, []);
 
     if (isLoading) {
@@ -51,7 +48,7 @@ export default function WorkflowPage() {
             <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pb-8 sm:pb-12">
                 <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 animate-scale-in">
                     <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-scoutBrown-700 to-scoutBrown-900 rounded-lg flex items-center justify-center">
+                        <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-scoutBrown-700 rounded-lg flex items-center justify-center">
                             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
@@ -59,7 +56,7 @@ export default function WorkflowPage() {
                         <div className="flex-1 min-w-0">
                             <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-scoutBrown-900 mb-2 sm:mb-3">Panduan Penggunaan</h2>
                             <p className="text-sm sm:text-base text-scoutBrown-700 leading-relaxed">
-                                Sistem ini memudahkan kamu untuk membuat surat izin pramuka secara online. Surat izin yang dibuat akan direview oleh admin terlebih dahulu sebelum bisa digunakan. Ikuti langkah-langkah berikut dengan lengkap.
+                                Sistem ini memudahkan kamu untuk membuat surat izin pramuka secara online. Ikuti langkah-langkah berikut dengan lengkap.
                             </p>
                         </div>
                     </div>
@@ -67,7 +64,7 @@ export default function WorkflowPage() {
 
                 <div className="space-y-4 sm:space-y-6">
                     <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up">
-                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                        <div className="bg-scoutBrown-700 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     1
@@ -79,7 +76,7 @@ export default function WorkflowPage() {
                             <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
                                 Saat pertama kali membuka website, kamu akan diminta memasukkan <strong>NIS (Nomor Induk Siswa)</strong>.
                             </p>
-                            <div className="bg-scoutKhaki-50 border border-scoutBrown-200 rounded-lg p-3 sm:p-4">
+                            <div className="bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg p-3 sm:p-4">
                                 <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">Tips:</p>
                                 <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc">
                                     <li>NIS minimal 5 digit</li>
@@ -91,7 +88,7 @@ export default function WorkflowPage() {
                     </div>
 
                     <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.1s' }}>
-                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                        <div className="bg-scoutBrown-700 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     2
@@ -104,7 +101,7 @@ export default function WorkflowPage() {
                                 Lengkapi formulir surat izin dengan informasi yang dibutuhkan:
                             </p>
                             <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1.5 sm:space-y-2 ml-4 list-disc">
-                                <li>Pilih PK yang bertugas</li>
+                                <li>Pilih Sangga</li>
                                 <li>Tulis alasan izin dengan jelas dan lengkap</li>
                                 <li>Pastikan semua data sudah benar sebelum submit</li>
                             </ul>
@@ -112,29 +109,29 @@ export default function WorkflowPage() {
                     </div>
 
                     <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                        <div className="bg-scoutBrown-700 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     3
                                 </div>
-                                <h3 className="text-base sm:text-lg font-bold">Preview & Submit</h3>
+                                <h3 className="text-base sm:text-lg font-bold">Preview & Download</h3>
                             </div>
                         </div>
                         <div className="p-4 sm:p-6">
                             <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
-                                Setelah submit, kamu akan langsung melihat preview surat izin yang telah dibuat. <strong className="text-green-700">Tombol download akan langsung tersedia!</strong>
+                                Setelah submit, kamu akan langsung melihat preview surat izin yang telah dibuat. Tombol download akan langsung tersedia.
                             </p>
-                            <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-1">Langkah Selanjutnya:</p>
-                                <p className="text-xs sm:text-sm text-green-700">
-                                    Klik tombol <strong>"Download Surat PDF"</strong> untuk mengunduh surat izin kamu, kemudian print dan kumpulkan tanda tangan yang diperlukan.
-                                </p>
+                            <div className="bg-scoutGreen-50 border border-scoutGreen-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-scoutGreen-900 mb-1">Langkah Selanjutnya:</p>
+                                    <p className="text-xs sm:text-sm text-scoutGreen-700">
+                                        Klik tombol <strong>"Download PDF (2 Rangkap)"</strong> untuk mengunduh surat izin kamu.
+                                    </p>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.3s' }}>
-                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                        <div className="bg-scoutBrown-700 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     4
@@ -144,21 +141,21 @@ export default function WorkflowPage() {
                         </div>
                         <div className="p-4 sm:p-6">
                             <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
-                                Klik tombol <strong>"Download Surat PDF"</strong> di preview, kemudian print surat tersebut.
+                                Klik tombol <strong>"Download PDF (2 Rangkap)"</strong> di preview. PDF sudah berisi 2 halaman surat yang sama.
                             </p>
-                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-blue-900 mb-2">Tips Print:</p>
-                                <ul className="text-xs sm:text-sm text-blue-700 space-y-1 ml-4 list-disc">
+                            <div className="bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-scoutBrown-900 mb-2">Tips Print:</p>
+                                <ul className="text-xs sm:text-sm text-scoutBrown-700 space-y-1 ml-4 list-disc">
                                     <li>Print dalam format A4</li>
                                     <li>Pastikan hasil print jelas dan tidak blur</li>
-                                    <li>Bawa surat yang sudah diprint</li>
+                                    <li>1 rangkap dibawa ke gerbang, 1 rangkap ditinggal di kelas</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.4s' }}>
-                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                        <div className="bg-scoutBrown-700 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     5
@@ -168,10 +165,10 @@ export default function WorkflowPage() {
                         </div>
                         <div className="p-4 sm:p-6">
                             <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
-                                Surat izin harus ditandatangani oleh <strong>3 pihak</strong> secara berurutan:
+                                Surat izin harus ditandatangani oleh <strong>4 pihak</strong> secara berurutan:
                             </p>
                             <div className="space-y-2 sm:space-y-3">
-                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gradient-to-r from-scoutKhaki-50 to-white border border-scoutBrown-200 rounded-lg">
+                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg">
                                     <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-scoutBrown-700 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm">
                                         1
                                     </div>
@@ -180,7 +177,7 @@ export default function WorkflowPage() {
                                         <p className="text-xs sm:text-sm text-scoutBrown-600">Minta tanda tangan ke PK kamu</p>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gradient-to-r from-scoutKhaki-50 to-white border border-scoutBrown-200 rounded-lg">
+                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg">
                                     <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-scoutBrown-700 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm">
                                         2
                                     </div>
@@ -189,9 +186,18 @@ export default function WorkflowPage() {
                                         <p className="text-xs sm:text-sm text-scoutBrown-600">Setelah PK, minta tanda tangan JUDAT</p>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gradient-to-r from-scoutKhaki-50 to-white border border-scoutBrown-200 rounded-lg">
+                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg">
                                     <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-scoutBrown-700 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm">
                                         3
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="font-bold text-scoutBrown-900 text-sm sm:text-base">PRADANA</p>
+                                        <p className="text-xs sm:text-sm text-scoutBrown-600">Menghadap Pradana untuk mendapat stempel cap</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-2 sm:gap-3 p-2.5 sm:p-3 bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg">
+                                    <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-scoutBrown-700 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm">
+                                        4
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="font-bold text-scoutBrown-900 text-sm sm:text-base">MABIGUS</p>
@@ -203,7 +209,7 @@ export default function WorkflowPage() {
                     </div>
 
                     <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.5s' }}>
-                        <div className="bg-gradient-to-r from-green-700 to-green-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                        <div className="bg-scoutGreen-700 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     6
@@ -213,21 +219,22 @@ export default function WorkflowPage() {
                         </div>
                         <div className="p-4 sm:p-6">
                             <p className="text-sm sm:text-base text-scoutBrown-700 mb-3 sm:mb-4">
-                                Setelah semua tanda tangan lengkap, <strong>serahkan surat izin ke penjaga gerbang</strong> saat kamu akan izin keluar.
+                                Setelah semua tanda tangan lengkap (PK, JUDAT, PRADANA, MABIGUS), <strong>serahkan surat izin ke penjaga gerbang</strong> saat kamu akan izin keluar.
                             </p>
-                            <div className="bg-green-50 border border-green-300 rounded-lg p-3 sm:p-4">
-                                <p className="text-xs sm:text-sm font-semibold text-green-900 mb-2">Checklist Akhir:</p>
-                                <ul className="text-xs sm:text-sm text-green-800 space-y-1 ml-4 list-disc">
-                                    <li>Surat sudah didownload dan diprint</li>
-                                    <li>Ada tanda tangan PK, JUDAT, dan MABIGUS</li>
-                                    <li>Surat dalam kondisi baik dan lengkap</li>
+                            <div className="bg-scoutGreen-50 border border-scoutGreen-300 rounded-lg p-3 sm:p-4">
+                                <p className="text-xs sm:text-sm font-semibold text-scoutGreen-900 mb-2">Checklist Akhir:</p>
+                                <ul className="text-xs sm:text-sm text-scoutGreen-800 space-y-1 ml-4 list-disc">
+                                    <li>Surat sudah didownload dan diprint 2 rangkap</li>
+                                    <li>Ada tanda tangan PK, JUDAT, PRADANA, dan MABIGUS (di kedua rangkap)</li>
+                                    <li>Sudah dapat stempel cap Pradana</li>
+                                    <li>1 rangkap diserahkan ke gerbang, 1 rangkap ditinggal di kelas</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-white rounded-lg shadow-sm border border-scoutBrown-200/50 overflow-hidden animate-slide-up" style={{ animationDelay: '0.6s' }}>
-                        <div className="bg-gradient-to-r from-scoutBrown-700 to-scoutBrown-900 text-white px-4 sm:px-6 py-3 sm:py-4">
+                        <div className="bg-scoutBrown-700 text-white px-4 sm:px-6 py-3 sm:py-4">
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">
                                     7
@@ -247,7 +254,7 @@ export default function WorkflowPage() {
                     </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-scoutBrown-50 to-scoutKhaki-50 border border-scoutBrown-300 rounded-lg p-4 sm:p-6 mt-6 sm:mt-8 animate-scale-in">
+                <div className="bg-scoutKhaki-50 border border-scoutKhaki-200 rounded-lg p-4 sm:p-6 mt-6 sm:mt-8 animate-scale-in">
                     <div className="flex items-start gap-3 sm:gap-4">
                         <div className="flex-shrink-0">
                             <svg className="w-8 h-8 sm:w-10 sm:h-10 text-scoutBrown-700" fill="currentColor" viewBox="0 0 20 20">
