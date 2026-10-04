@@ -10,8 +10,7 @@ import PreviewSection from '@/components/PreviewSection';
 import CekIzin from '@/components/CekIzin';
 import NISModal from '@/components/NISModal';
 import ChangeNISModal from '@/components/ChangeNISModal';
-import { parseSiswaData, type SiswaData } from '@/lib/utils';
-import type { FormData } from '@/lib/types';
+import type { FormData, SiswaData } from '@/lib/types';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +36,9 @@ export default function Home() {
     if (storedNis && storedSiswaData) {
       try {
         const parsedData = JSON.parse(storedSiswaData) as SiswaData;
+        if (typeof parsedData.absen !== 'number' || !parsedData.kelas || typeof parsedData.jk !== 'string' || !Array.isArray(parsedData.pkList)) {
+          throw new Error('format lama');
+        }
         setNis(storedNis);
         setSiswaData(parsedData);
       } catch {
@@ -80,7 +82,7 @@ export default function Home() {
     const dbResponse = await fetch('/api/izin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, pk_kelas: data.pk ?? '' }),
     });
 
     if (!dbResponse.ok) {
@@ -90,11 +92,12 @@ export default function Home() {
 
     const dbResult = await dbResponse.json();
 
-    fetch('/api/telegram', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    }).catch(() => {});
+    // Telegram bot dinonaktifkan sementara
+    // fetch('/api/telegram', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(data),
+    // }).catch(() => {});
 
     setFormData(data);
     setPreviewIzinId(dbResult?.data?.id ?? null);
@@ -193,9 +196,10 @@ export default function Home() {
                   nis={nis}
                   siswaData={{
                     nama: siswaData.nama,
-                    kelas: siswaData.kelas.includes('-') ? siswaData.kelas : `X-${siswaData.kelas.replace('X', '')}`,
-                    absen: siswaData.presensi.toString(),
-                    sangga: siswaData.sangga || ''
+                    jk: siswaData.jk,
+                    kelas: siswaData.kelas,
+                    absen: siswaData.absen.toString(),
+                    pkList: siswaData.pkList
                   }}
                 />
               ) : (

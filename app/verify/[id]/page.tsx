@@ -69,15 +69,9 @@ export default function VerifyPage() {
     <div className="min-h-screen bg-scoutKhaki-50 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-xl border border-scoutBrown-200 overflow-hidden">
-          <div className={`px-6 py-5 text-white ${
-            izin.status === 'approved' ? 'bg-scoutGreen-600' :
-            izin.status === 'rejected' ? 'bg-red-600' : 'bg-scoutBrown-600'
-          }`}>
+          <div className="px-6 py-5 text-white bg-scoutBrown-600">
             <div className="text-center">
-              <h1 className="text-xl font-bold mb-1">
-                {izin.status === 'approved' ? 'Surat Izin Terverifikasi' :
-                 izin.status === 'rejected' ? 'Surat Izin Ditolak' : 'Menunggu Verifikasi'}
-              </h1>
+              <h1 className="text-xl font-bold mb-1">Surat Izin Pramuka</h1>
               <p className="text-xs opacity-90">
                 Dewan Ambalan DIPORANI • Gudep 3089/3090 • SMA Negeri 1 Kasihan
               </p>
@@ -124,13 +118,9 @@ export default function VerifyPage() {
             {!showPreview && (
               <button
                 onClick={() => setShowPreview(true)}
-                className={`w-full mt-4 px-4 py-3 rounded-lg text-sm font-semibold transition-colors ${
-                  izin.status === 'approved'
-                    ? 'bg-scoutGreen-600 hover:bg-scoutGreen-700 text-white'
-                    : 'bg-scoutBrown-600 hover:bg-scoutBrown-700 text-white'
-                }`}
+                className="w-full mt-4 px-4 py-3 rounded-lg text-sm font-semibold transition-colors bg-scoutBrown-600 hover:bg-scoutBrown-700 text-white"
               >
-                {izin.status === 'approved' ? 'Lihat Preview & Download Surat' : 'Lihat Preview Surat'}
+                Lihat Preview Surat
               </button>
             )}
           </div>
@@ -145,6 +135,7 @@ export default function VerifyPage() {
                 kelas: izin.kelas,
                 sangga: izin.sangga || '',
                 alasan: izin.alasan,
+                pk: izin.pk_kelas || '',
               }}
               onBack={() => setShowPreview(false)}
               izinId={izin.id}

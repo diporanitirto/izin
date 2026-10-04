@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { parseSiswaData, type SiswaData } from '@/lib/utils';
+import type { SiswaData } from '@/lib/types';
 
 interface NISModalProps {
   isOpen: boolean;
@@ -34,15 +34,15 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
     setIsLoading(true);
 
     try {
-      const res = await fetch('/data-siswa.json');
-      if (!res.ok) throw new Error('Gagal memuat data siswa');
-      const dataSiswa = parseSiswaData(await res.json());
-      const siswa = dataSiswa.find((s) => s.nis === parseInt(nis));
+      const res = await fetch(`/api/siswa?nis=${encodeURIComponent(nis)}`);
+      const result = await res.json().catch(() => null);
 
-      if (siswa) {
-        onSubmit(nis, siswa);
-      } else {
+      if (res.ok && result?.success) {
+        onSubmit(nis, result.data as SiswaData);
+      } else if (res.status === 404) {
         setError('NIS tidak ditemukan dalam database. Periksa kembali NIS Anda.');
+      } else {
+        setError('Gagal memuat data siswa. Silakan coba lagi.');
       }
     } catch {
       setError('Gagal memuat data siswa. Silakan coba lagi.');

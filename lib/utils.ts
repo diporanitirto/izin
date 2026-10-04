@@ -27,41 +27,6 @@ export function formatDateShort(dateString: string): string {
 }
 
 /**
- * Get status badge color
- */
-export function getStatusColor(status: string): {
-  bg: string;
-  text: string;
-  label: string;
-} {
-  const statusMap = {
-    pending: {
-      bg: 'bg-yellow-200',
-      text: 'text-yellow-800',
-      label: 'Menunggu',
-    },
-    approved: {
-      bg: 'bg-green-200',
-      text: 'text-green-800',
-      label: 'Disetujui',
-    },
-    rejected: {
-      bg: 'bg-red-200',
-      text: 'text-red-800',
-      label: 'Ditolak',
-    },
-  };
-
-  return (
-    statusMap[status as keyof typeof statusMap] || {
-      bg: 'bg-gray-200',
-      text: 'text-gray-800',
-      label: status,
-    }
-  );
-}
-
-/**
  * Validasi NIS
  */
 export function validateNIS(nis: string): boolean {
@@ -74,51 +39,4 @@ export function validateNIS(nis: string): boolean {
  */
 export function getVerificationUrl(baseUrl: string, izinId: string): string {
   return `${baseUrl}/verify/${izinId}`;
-}
-
-import type { SiswaData } from './types';
-export type { SiswaData };
-
-interface RawSiswaRow {
-  'DAFTAR HADIR MURID'?: unknown;
-  '__EMPTY'?: unknown;
-  '__EMPTY_1'?: unknown;
-  [key: string]: unknown;
-}
-
-/**
- * Parse data-siswa.json dari format export Excel (DAFTAR HADIR MURID)
- * menjadi struktur SiswaData yang digunakan aplikasi.
- */
-export function parseSiswaData(raw: RawSiswaRow[]): SiswaData[] {
-  const result: SiswaData[] = [];
-  let currentKelas = '';
-
-  for (const row of raw) {
-    if (row['DAFTAR HADIR MURID'] === 'KELAS') {
-      const kelasValue = row['__EMPTY_1'];
-      if (typeof kelasValue === 'string') {
-        currentKelas = kelasValue.replace(/^:\s*/, '').trim();
-      }
-      continue;
-    }
-
-    const urut = row['DAFTAR HADIR MURID'];
-    const nama = row['__EMPTY_1'];
-    const nis = row['__EMPTY'];
-
-    if (typeof urut !== 'number' || typeof nama !== 'string' || typeof nis !== 'number') {
-      continue;
-    }
-
-    result.push({
-      kelas: currentKelas,
-      nama,
-      presensi: urut,
-      nis,
-      sangga: null,
-    });
-  }
-
-  return result;
 }

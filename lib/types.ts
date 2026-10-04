@@ -1,9 +1,10 @@
 export interface SiswaData {
-  kelas: string;
+  nis: string;
   nama: string;
-  presensi: number;
-  nis: number;
-  sangga: string | null;
+  jk: string;
+  kelas: string;
+  absen: number;
+  pkList: string[];
 }
 
 export interface FormData {
@@ -13,6 +14,7 @@ export interface FormData {
   sangga: string;
   alasan: string;
   nis?: string;
+  pk?: string;
 }
 
 export interface IzinData {

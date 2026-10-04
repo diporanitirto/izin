@@ -1,5 +1,25 @@
 import { NextResponse } from 'next/server';
+import { UAParser } from 'ua-parser-js';
 import { getSupabase } from '@/lib/supabase';
+
+function getClientIp(request: Request): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0].trim();
+  return request.headers.get('x-real-ip') ?? '';
+}
+
+function summarizeDevice(ua: string): string {
+  if (!ua) return '';
+  const r = UAParser(ua);
+  const parts: string[] = [r.device.type === 'mobile' ? 'HP' : r.device.type ?? 'Desktop'];
+  const device = [r.device.vendor, r.device.model].filter(Boolean).join(' ');
+  if (device) parts.push(device);
+  const os = [r.os.name, r.os.version].filter(Boolean).join(' ');
+  if (os) parts.push(os);
+  const browser = [r.browser.name, r.browser.major].filter(Boolean).join(' ');
+  if (browser) parts.push(browser);
+  return parts.join(' • ');
+}
 
 interface IzinPayload {
   nama: string;
@@ -8,6 +28,7 @@ interface IzinPayload {
   sangga?: string;
   alasan: string;
   nis?: string | number;
+  pk_kelas?: string;
 }
 
 const ALLOWED_KELAS = new Set(['X1','X2','X3','X4','X5','X6','X7','X8','XADMIN']);
@@ -27,7 +48,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Nomor absen harus berupa angka positif.' }, { status: 400 });
     }
 
-    const kelasNormalized = String(payload.kelas).replace(/[^0-9A-Z]/gi, '').toUpperCase();
+    let kelasNormalized = String(payload.kelas).replace(/[^0-9A-Z]/gi, '').toUpperCase();
+    // Kelas "KING" di tabel siswa dipetakan ke XADMIN (bucket admin di tabel izin)
+    if (kelasNormalized === 'KING') kelasNormalized = 'XADMIN';
     if (!ALLOWED_KELAS.has(kelasNormalized)) {
       return NextResponse.json({ error: 'Kelas tidak valid.' }, { status: 400 });
     }
@@ -35,20 +58,33 @@ export async function POST(request: Request) {
     const supabase = getSupabase();
     const nisValue = payload.nis ? String(payload.nis) : String(absenNumber);
 
-    const { data, error } = await supabase
+    const basePayload = {
+      nama: payload.nama,
+      absen: absenNumber,
+      kelas: kelasNormalized,
+      sangga: payload.sangga || '',
+      pk_kelas: payload.pk_kelas || '',
+      alasan: payload.alasan,
+      nis: nisValue,
+      status: 'pending',
+    };
+
+    const ua = request.headers.get('user-agent') ?? '';
+    let { data, error } = await supabase
       .from('izin')
       .insert({
-        nama: payload.nama,
-        absen: absenNumber,
-        kelas: kelasNormalized,
-        sangga: payload.sangga || '',
-        pk_kelas: '',
-        alasan: payload.alasan,
-        nis: nisValue,
-        status: 'pending',
+        ...basePayload,
+        ip: getClientIp(request),
+        user_agent: ua,
+        device: summarizeDevice(ua),
       })
       .select()
       .single();
+
+    // Kolom metadata belum dimigrasi? Simpan tanpa metadata.
+    if (error?.code === 'PGRST204') {
+      ({ data, error } = await supabase.from('izin').insert(basePayload).select().single());
+    }
 
     if (error) {
       console.error('Supabase insert error:', error);

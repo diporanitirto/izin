@@ -56,18 +56,24 @@ function drawLetter(ctx: CanvasRenderingContext2D, formData: FormData, W: number
   ctx.fillText('Saya yang bertanda tangan di bawah ini:', LM, y); y += LH * 1.4;
 
   const indent = LM + 40, lw = 150, di = indent + 20;
+  const valueX = di + lw + 20;
+  const valueMaxW = W - RM - valueX;
   const fields: [string, string][] = [
     ['Nama', formData.nama],
     ['Nomor Absen', formData.absen],
     ['Kelas', formData.kelas],
     ['Sangga', formData.sangga],
-    ['Pembina Kelas', ''],
+    ['Pembina Kelas', formData.pk || ''],
   ];
   for (const [label, val] of fields) {
     ctx.fillText(label, di, y);
     ctx.fillText(':', di + lw, y);
-    ctx.fillText(val, di + lw + 20, y);
-    y += LH;
+    const lines = wrapText(ctx, val, valueMaxW);
+    if (lines.length === 0) lines.push('');
+    for (const line of lines) {
+      ctx.fillText(line, valueX, y);
+      y += LH;
+    }
   }
   y += LH * 0.4;
 

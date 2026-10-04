@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Izin Diporani Ambalan SMAN 1 Kasihan",
+  title: "DIPORANI | Izin",
   description: "Izin Diporani Ambalan SMAN 1 Kasihan.",
   icons: {
     icon: [
