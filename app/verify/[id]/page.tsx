@@ -49,13 +49,19 @@ export default function VerifyPage() {
           if (r.ok) {
             setAuthenticated(true);
             window.history.replaceState(null, '', window.location.pathname);
+            fetch('/api/auth/session').then((s) => s.json()).then((d) => {
+              if (d.username && !verifiedBy) setVerifiedBy(d.username);
+            });
           }
         })
         .finally(() => setAuthLoading(false));
     } else {
       fetch('/api/auth/session')
         .then((r) => r.json())
-        .then((d) => setAuthenticated(!!d.authenticated))
+        .then((d) => {
+          setAuthenticated(!!d.authenticated);
+          if (d.username && !verifiedBy) setVerifiedBy(d.username);
+        })
         .finally(() => setAuthLoading(false));
     }
   }, [id]);
@@ -139,11 +145,18 @@ export default function VerifyPage() {
     <div className="min-h-screen bg-scoutKhaki-50 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-xl border border-scoutBrown-200 overflow-hidden">
-          <div className="px-6 py-5 text-white bg-scoutBrown-600">
+          <div className={`px-6 py-5 text-white ${izin.status === 'approved' || izin.status === 'rejected' ? 'bg-green-700' : 'bg-red-700'}`}>
             <div className="text-center">
               <h1 className="text-xl font-bold mb-1">Surat Izin Pramuka</h1>
               <p className="text-xs opacity-90">
                 Dewan Ambalan DIPORANI • Gudep 3089/3090 • SMA Negeri 1 Kasihan
+              </p>
+              <p className="text-xs font-semibold mt-1">
+                {izin.status === 'approved'
+                  ? 'Status: DISETUJUI'
+                  : izin.status === 'rejected'
+                    ? 'Status: DITOLAK'
+                    : 'Status: BELUM DIVERIFIKASI'}
               </p>
             </div>
           </div>
@@ -191,7 +204,7 @@ export default function VerifyPage() {
               </p>
             </div>
 
-            {authLoading ? null : !authenticated ? (
+            {izin.status !== 'approved' && izin.status !== 'rejected' && (authLoading ? null : !authenticated ? (
               <form onSubmit={handleLogin} className="mt-4 border border-scoutBrown-200 rounded-lg p-4 space-y-3">
                 <h3 className="text-sm font-bold text-scoutBrown-900">Login Admin untuk Verifikasi</h3>
                 <input
@@ -244,7 +257,7 @@ export default function VerifyPage() {
                 </div>
                 {verifyMsg && <p className="text-xs text-scoutBrown-600">{verifyMsg}</p>}
               </div>
-            )}
+            ))}
 
             {!showPreview && (
               <button
