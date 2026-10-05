@@ -28,10 +28,6 @@ export default function VerifyPage() {
   const [showPreview, setShowPreview] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
-  const [loginLoading, setLoginLoading] = useState(false);
   const [verifiedBy, setVerifiedBy] = useState('');
   const [verifyMsg, setVerifyMsg] = useState<string | null>(null);
   const [verifyLoading, setVerifyLoading] = useState(false);
@@ -83,24 +79,6 @@ export default function VerifyPage() {
     new Date(dateString).toLocaleDateString('id-ID', {
       day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
     });
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginLoading(true);
-    setLoginError('');
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-    setLoginLoading(false);
-    if (res.ok) {
-      setAuthenticated(true);
-    } else {
-      const d = await res.json().catch(() => ({}));
-      setLoginError(d.error ?? 'Gagal login.');
-    }
-  };
 
   const handleVerify = async (status: 'approved' | 'rejected') => {
     if (!verifiedBy.trim()) {
@@ -205,31 +183,9 @@ export default function VerifyPage() {
             </div>
 
             {izin.status !== 'approved' && izin.status !== 'rejected' && (authLoading ? null : !authenticated ? (
-              <form onSubmit={handleLogin} className="mt-4 border border-scoutBrown-200 rounded-lg p-4 space-y-3">
-                <h3 className="text-sm font-bold text-scoutBrown-900">Login Admin untuk Verifikasi</h3>
-                <input
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Username"
-                  className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm"
-                  autoFocus
-                />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
-                  className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm"
-                />
-                {loginError && <p className="text-xs text-red-600">{loginError}</p>}
-                <button
-                  type="submit"
-                  disabled={loginLoading}
-                  className="w-full px-4 py-2 rounded-lg text-sm font-semibold bg-scoutBrown-700 text-white hover:bg-scoutBrown-800"
-                >
-                  {loginLoading ? 'Memproses...' : 'Masuk'}
-                </button>
-              </form>
+              <div className="mt-4 border border-scoutBrown-200 rounded-lg p-4 text-sm text-scoutBrown-600">
+                Login otomatis dari dashboard admin untuk memverifikasi izin ini.
+              </div>
             ) : (
               <div className="mt-4 border border-scoutBrown-200 rounded-lg p-4 space-y-3">
                 <h3 className="text-sm font-bold text-scoutBrown-900">Verifikasi Izin</h3>
