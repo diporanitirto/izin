@@ -187,9 +187,8 @@ export default function VerifyPage() {
                 <h3 className="text-sm font-bold text-scoutBrown-900">Verifikasi Izin</h3>
                 <input
                   value={verifiedBy}
-                  onChange={(e) => setVerifiedBy(e.target.value)}
-                  placeholder="Nama verifikator (mis. Juru Adat)"
-                  className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm"
+                  readOnly
+                  className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm bg-scoutKhaki-50"
                 />
                 <button
                   onClick={() => handleVerify('approved')}
