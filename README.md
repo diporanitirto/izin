@@ -31,7 +31,8 @@ Data siswa, kelas, dan pendamping kelas dibaca langsung dari database Supabase y
 - Pilihan sangga menyesuaikan jenis kelamin (putra: Pendobrak, Penegas; putri: Perintis, Pencoba, Pelaksana).
 - Surat izin PDF 2 rangkap: satu diserahkan ke gerbang, satu ditinggal di kelas.
 - Riwayat izin per NIS, dengan tautan ke surat yang pernah dibuat.
-- Halaman verifikasi publik di `/verify/[id]` untuk mengecek keaslian surat.
+- Halaman verifikasi di `/verify/[id]`: header merah (belum diverifikasi) / hijau (sudah diverifikasi). Juru Adat login sebagai admin lalu bisa approve; setelah diverifikasi tombol verifikasi hilang.
+- QR Code di surat (kolom kanan, logo DIPORANI di tengah) otomatis mengarah ke halaman verifikasi. Bisa dipindai dari dashboard admin yang sudah login.
 - Pencatatan metadata pengajuan: alamat IP, user-agent, dan ringkasan perangkat (ua-parser-js).
 - Notifikasi Telegram tersedia di kode, saat ini dinonaktifkan.
 
@@ -64,6 +65,17 @@ Buka http://localhost:3000.
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key Supabase |
 | `TELEGRAM_BOT_TOKEN` | Opsional, untuk notifikasi Telegram |
 | `TELEGRAM_CHAT_ID` | Opsional, tujuan chat notifikasi |
+| `AUTH_SECRET` | Secret acak untuk sesi login admin |
+
+Akun admin disimpan di tabel `admin_users` (SQL: folder `../sql/`). File SQL semua proyek kini terkumpul di folder `/home/joulezy/Documents/pramuka/sql/`:
+
+| File | Isi |
+|---|---|
+| `01-setup-schema.sql` | Skema awal (kelas, siswa, izin, pendamping) |
+| `02-seed-pk.sql` | Seed data pendamping kelas |
+| `03-admin-users.sql` | Tabel akun admin |
+| `04-izin-verification.sql` | Kolom verifikasi izin |
+| `05-izin-device-info.sql` | Kolom IP & user-agent |
 
 ## Terkait
 
