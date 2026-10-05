@@ -200,7 +200,7 @@ export default function VerifyPage() {
                 </button>
                 {verifyMsg && <p className="text-xs text-scoutBrown-600">{verifyMsg}</p>}
               </div>
-            ))}
+            )}
 
             {!showPreview && (
               <button
