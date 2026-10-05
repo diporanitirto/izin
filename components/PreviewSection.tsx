@@ -113,9 +113,8 @@ function drawLetter(ctx: CanvasRenderingContext2D, formData: FormData, W: number
   ctx.font = 'bold 16px Times New Roman';
   ctx.fillText('Pembina Kelas', pkX, rowY + LH);
   ctx.font = '16px Times New Roman';
-  ctx.fillText('( ____________________ )', pkX, rowY + LH * 4);
   if (formData.pk) {
-    ctx.fillText(`( ${formData.pk} )`, pkX, rowY + LH * 5.5);
+    ctx.fillText(`( ${formData.pk} )`, pkX, rowY + LH * 4);
   }
 
   ctx.fillText('Mengetahui,', judatX, rowY);
