@@ -239,22 +239,13 @@ export default function VerifyPage() {
                   placeholder="Nama verifikator (mis. Juru Adat)"
                   className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm"
                 />
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleVerify('approved')}
-                    disabled={verifyLoading}
-                    className="flex-1 px-4 py-2 rounded-lg text-sm font-semibold bg-scoutGreen-600 text-white hover:bg-scoutGreen-700 disabled:opacity-50"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={() => handleVerify('rejected')}
-                    disabled={verifyLoading}
-                    className="flex-1 px-4 py-2 rounded-lg text-sm font-semibold bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
-                  >
-                    Reject
-                  </button>
-                </div>
+                <button
+                  onClick={() => handleVerify('approved')}
+                  disabled={verifyLoading}
+                  className="w-full px-4 py-2 rounded-lg text-sm font-semibold bg-scoutGreen-600 text-white hover:bg-scoutGreen-700 disabled:opacity-50"
+                >
+                  Approve
+                </button>
                 {verifyMsg && <p className="text-xs text-scoutBrown-600">{verifyMsg}</p>}
               </div>
             ))}

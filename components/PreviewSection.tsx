@@ -130,8 +130,8 @@ function drawLetter(ctx: CanvasRenderingContext2D, formData: FormData, W: number
   ctx.fillText('( ____________________ )', mabX, mabY + LH * 4);
 
   if (qrImg) {
-    const qrSize = 110;
-    const pad = 12;
+    const qrSize = 150;
+    const pad = 14;
     const qrX = W - RM - qrSize - pad;
     const qrY = 120;
     ctx.fillStyle = '#ffffff';
