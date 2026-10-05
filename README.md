@@ -69,25 +69,9 @@ Buka http://localhost:3000.
 
 ### Struktur Database (Supabase)
 
-Relasi antar tabel:
+Relasi: `siswa.kelas_id` & `pendamping.kelas_id` → `kelas`. Tabel `izin` menyimpan tiap pengajuan (snapshot nama/kelas/sangga/alasan + `status`, `verified_by`, `verified_at`). `admin_users` untuk login admin.
 
-- `kelas` adalah tabel master kelas (mis. `X-1` s/d `X-8`, `KING` untuk bucket admin).
-- `siswa` merujuk ke satu `kelas` lewat `kelas_id`. Siswa masuk dengan NIS.
-- `pendamping` adalah pembina kelas, merujuk ke `kelas` lewat `kelas_id`.
-- `izin` mencatat pengajuan izin tiap siswa (satu baris per pengajuan), menyimpan snapshot `nis`, `nama`, `absen`, `kelas`, `sangga`, `pk_kelas`, `alasan`, plus `status` verifikasi (`pending`/`approved`/`rejected`) dan siapa yang memverifikasi (`verified_by`, `verified_at`).
-- `admin_users` berdiri sendiri untuk login admin (`diporani` dan Juru Adat).
-
-Tabel utamanya:
-
-| Tabel | Kolom penting |
-|---|---|
-| `kelas` | `id`, `nama` |
-| `siswa` | `id`, `nis`, `nama`, `jk`, `agama`, `kelas_id` |
-| `pendamping` | `id`, `nama`, `kontak`, `aktif`, `kelas_id` |
-| `izin` | `id`, `nis`, `nama`, `absen`, `kelas`, `sangga`, `pk_kelas`, `alasan`, `status`, `verified_by`, `verified_at`, `ip`, `user_agent`, `is_archived`, `created_at`, `updated_at` |
-| `admin_users` | `username` (PK), `password`, `created_at` |
-
-Cara menyiapkan dari nol: jalankan script skema awal (pembuatan tabel `kelas`, `siswa`, `pendamping`, `izin`) di Supabase SQL Editor, lalu seed kelas/siswa/pendamping, lalu `create table admin_users` + satu akun admin pertama. Kolom verifikasi (`verified_by`, `verified_at`) dan metadata perangkat (`ip`, `user_agent`) ditambahkan lewat migrasi ALTER TABLE.
+Tabel: `kelas`, `siswa`, `pendamping`, `izin`, `admin_users`. Kolom verifikasi & metadata perangkat ditambahkan via migrasi ALTER TABLE.
 
 ## Terkait
 
