@@ -182,11 +182,7 @@ export default function VerifyPage() {
               </p>
             </div>
 
-            {izin.status !== 'approved' && izin.status !== 'rejected' && (authLoading ? null : !authenticated ? (
-              <div className="mt-4 border border-scoutBrown-200 rounded-lg p-4 text-sm text-scoutBrown-600">
-                Login otomatis dari dashboard admin untuk memverifikasi izin ini.
-              </div>
-            ) : (
+            {izin.status !== 'approved' && izin.status !== 'rejected' && !authLoading && authenticated && (
               <div className="mt-4 border border-scoutBrown-200 rounded-lg p-4 space-y-3">
                 <h3 className="text-sm font-bold text-scoutBrown-900">Verifikasi Izin</h3>
                 <input
