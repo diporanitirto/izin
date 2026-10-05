@@ -67,15 +67,19 @@ Buka http://localhost:3000.
 | `TELEGRAM_CHAT_ID` | Opsional, tujuan chat notifikasi |
 | `AUTH_SECRET` | Secret acak untuk sesi login admin |
 
-Akun admin disimpan di tabel `admin_users` (SQL: folder `../sql/`). File SQL semua proyek kini terkumpul di folder `/home/joulezy/Documents/pramuka/sql/`:
+### Struktur Database (Supabase)
 
-| File | Isi |
+File SQL (seed, migrasi, skema) **tidak di-commit** ke GitHub karena berisi data internal. Gambaran tabel utamanya:
+
+| Tabel | Kolom penting |
 |---|---|
-| `01-setup-schema.sql` | Skema awal (kelas, siswa, izin, pendamping) |
-| `02-seed-pk.sql` | Seed data pendamping kelas |
-| `03-admin-users.sql` | Tabel akun admin |
-| `04-izin-verification.sql` | Kolom verifikasi izin |
-| `05-izin-device-info.sql` | Kolom IP & user-agent |
+| `kelas` | `id`, `nama` |
+| `siswa` | `id`, `nis`, `nama`, `jk`, `agama`, `kelas_id` |
+| `pendamping` | `id`, `nama`, `kontak`, `aktif`, `kelas_id` |
+| `izin` | `id`, `nis`, `nama`, `absen`, `kelas`, `sangga`, `pk_kelas`, `alasan`, `status` (`pending`/`approved`/`rejected`), `verified_by`, `verified_at`, `ip`, `user_agent`, `is_archived`, `created_at`, `updated_at` |
+| `admin_users` | `username` (PK), `password`, `created_at` |
+
+Migrasi kolom verifikasi (`verified_by`, `verified_at`, dll) dan metadata perangkat (`ip`, `user_agent`) dijalankan manual lewat Supabase SQL Editor.
 
 ## Terkait
 
