@@ -67,12 +67,6 @@ Buka http://localhost:3000.
 | `TELEGRAM_CHAT_ID` | Opsional, tujuan chat notifikasi |
 | `AUTH_SECRET` | Secret acak untuk sesi login admin |
 
-### Struktur Database (Supabase)
-
-Relasi: `siswa.kelas_id` & `pendamping.kelas_id` → `kelas`. Tabel `izin` menyimpan tiap pengajuan (snapshot nama/kelas/sangga/alasan + `status`, `verified_by`, `verified_at`). `admin_users` untuk login admin.
-
-Tabel: `kelas`, `siswa`, `pendamping`, `izin`, `admin_users`. Kolom verifikasi & metadata perangkat ditambahkan via migrasi ALTER TABLE.
-
 ## Terkait
 
 - [diporanitirto/dashboard](https://github.com/diporanitirto/dashboard): dashboard admin untuk memantau pengajuan izin dari aplikasi ini.
