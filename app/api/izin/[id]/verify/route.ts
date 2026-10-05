@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 import { getSupabase } from '@/lib/supabase';
+import { isAuthenticated } from '@/lib/auth';
 
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json({ error: 'Login admin diperlukan.' }, { status: 401 });
+    }
+
     const { id } = await params;
     const { status, verifiedBy } = await request.json();
 

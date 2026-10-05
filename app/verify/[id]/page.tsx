@@ -26,9 +26,38 @@ export default function VerifyPage() {
   const [izin, setIzin] = useState<IzinData | null>(null);
   const [loading, setLoading] = useState(true);
   const [showPreview, setShowPreview] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [verifiedBy, setVerifiedBy] = useState('');
+  const [verifyMsg, setVerifyMsg] = useState<string | null>(null);
+  const [verifyLoading, setVerifyLoading] = useState(false);
 
   useEffect(() => {
     if (id) fetchIzin();
+    const t = new URLSearchParams(window.location.search).get('t');
+    if (t) {
+      fetch('/api/auth/handshake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: t }),
+      })
+        .then((r) => {
+          if (r.ok) {
+            setAuthenticated(true);
+            window.history.replaceState(null, '', window.location.pathname);
+          }
+        })
+        .finally(() => setAuthLoading(false));
+    } else {
+      fetch('/api/auth/session')
+        .then((r) => r.json())
+        .then((d) => setAuthenticated(!!d.authenticated))
+        .finally(() => setAuthLoading(false));
+    }
   }, [id]);
 
   const fetchIzin = async () => {
@@ -48,6 +77,47 @@ export default function VerifyPage() {
     new Date(dateString).toLocaleDateString('id-ID', {
       day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
     });
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginLoading(true);
+    setLoginError('');
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    setLoginLoading(false);
+    if (res.ok) {
+      setAuthenticated(true);
+    } else {
+      const d = await res.json().catch(() => ({}));
+      setLoginError(d.error ?? 'Gagal login.');
+    }
+  };
+
+  const handleVerify = async (status: 'approved' | 'rejected') => {
+    if (!verifiedBy.trim()) {
+      setVerifyMsg('Nama verifikator harus diisi.');
+      return;
+    }
+    setVerifyLoading(true);
+    setVerifyMsg(null);
+    const res = await fetch(`/api/izin/${id}/verify`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, verifiedBy }),
+    });
+    setVerifyLoading(false);
+    if (res.ok) {
+      const d = await res.json();
+      setIzin(d.data);
+      setVerifyMsg(status === 'approved' ? 'Izin disetujui.' : 'Izin ditolak.');
+    } else {
+      const d = await res.json().catch(() => ({}));
+      setVerifyMsg(d.error ?? 'Gagal memverifikasi.');
+    }
+  };
 
   if (loading) return <Loading />;
 
@@ -114,6 +184,67 @@ export default function VerifyPage() {
             <div className="mt-4 text-center text-xs text-scoutBrown-400">
               <p>Dibuat: {formatDate(izin.created_at)}</p>
             </div>
+
+            <div className="mt-4">
+              <p className="text-xs text-scoutBrown-500 mb-1">
+                Status: <span className="font-semibold text-scoutBrown-900">{izin.status}</span>
+              </p>
+            </div>
+
+            {authLoading ? null : !authenticated ? (
+              <form onSubmit={handleLogin} className="mt-4 border border-scoutBrown-200 rounded-lg p-4 space-y-3">
+                <h3 className="text-sm font-bold text-scoutBrown-900">Login Admin untuk Verifikasi</h3>
+                <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Username"
+                  className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm"
+                  autoFocus
+                />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm"
+                />
+                {loginError && <p className="text-xs text-red-600">{loginError}</p>}
+                <button
+                  type="submit"
+                  disabled={loginLoading}
+                  className="w-full px-4 py-2 rounded-lg text-sm font-semibold bg-scoutBrown-700 text-white hover:bg-scoutBrown-800"
+                >
+                  {loginLoading ? 'Memproses...' : 'Masuk'}
+                </button>
+              </form>
+            ) : (
+              <div className="mt-4 border border-scoutBrown-200 rounded-lg p-4 space-y-3">
+                <h3 className="text-sm font-bold text-scoutBrown-900">Verifikasi Izin</h3>
+                <input
+                  value={verifiedBy}
+                  onChange={(e) => setVerifiedBy(e.target.value)}
+                  placeholder="Nama verifikator (mis. Juru Adat)"
+                  className="w-full border border-scoutBrown-200 rounded-lg px-3 py-2 text-sm"
+                />
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleVerify('approved')}
+                    disabled={verifyLoading}
+                    className="flex-1 px-4 py-2 rounded-lg text-sm font-semibold bg-scoutGreen-600 text-white hover:bg-scoutGreen-700 disabled:opacity-50"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    onClick={() => handleVerify('rejected')}
+                    disabled={verifyLoading}
+                    className="flex-1 px-4 py-2 rounded-lg text-sm font-semibold bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+                  >
+                    Reject
+                  </button>
+                </div>
+                {verifyMsg && <p className="text-xs text-scoutBrown-600">{verifyMsg}</p>}
+              </div>
+            )}
 
             {!showPreview && (
               <button

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import QRCode from 'qrcode';
 import type { FormData } from '@/lib/types';
 
 interface PreviewSectionProps {
@@ -11,7 +12,7 @@ interface PreviewSectionProps {
 }
 
 function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
-  const words = text.split(' ');
+  const words = String(text ?? '').split(' ');
   const lines: string[] = [];
   let line = '';
 
@@ -28,7 +29,7 @@ function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number)
   return lines;
 }
 
-function drawLetter(ctx: CanvasRenderingContext2D, formData: FormData, W: number, H: number) {
+function drawLetter(ctx: CanvasRenderingContext2D, formData: FormData, W: number, H: number, qrImg: HTMLImageElement | null, logoImg: HTMLImageElement | null) {
   const LM = 100, RM = 100, LH = 26;
   const maxW = W - LM - RM;
   let y = 80;
@@ -127,6 +128,27 @@ function drawLetter(ctx: CanvasRenderingContext2D, formData: FormData, W: number
   ctx.fillText('Mabigus', mabX, mabY + LH);
   ctx.font = '16px Times New Roman';
   ctx.fillText('( ____________________ )', mabX, mabY + LH * 4);
+
+  if (qrImg) {
+    const qrSize = 110;
+    const pad = 12;
+    const qrX = W - RM - qrSize - pad;
+    const qrY = 120;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(qrX - pad, qrY - pad, qrSize + pad * 2, qrSize + pad * 2);
+    ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+
+    if (logoImg) {
+      const ls = qrSize * 0.26;
+      const lx = qrX + qrSize / 2 - ls / 2;
+      const ly = qrY + qrSize / 2 - ls / 2;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(lx - 3, ly - 3, ls + 6, ls + 6);
+      try {
+        ctx.drawImage(logoImg, lx, ly, ls, ls);
+      } catch {}
+    }
+  }
 }
 
 function drawWatermark(ctx: CanvasRenderingContext2D, w: number, h: number, logoImg: HTMLImageElement | null) {
@@ -171,7 +193,7 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
   useEffect(() => {
     generatePreview();
     if (!propIzinId) fetchIzinId();
-  }, [formData, propIzinId]);
+  }, [formData, propIzinId, izinId]);
 
   useEffect(() => {
     if (propIzinId) setIzinId(propIzinId);
@@ -215,7 +237,25 @@ export default function PreviewSection({ formData, onBack, izinId: propIzinId }:
     ctx.fillRect(0, 0, W, H);
 
     drawWatermark(ctx, W, H, logoImg);
-    drawLetter(ctx, formData, W, H);
+
+    let qrImg: HTMLImageElement | null = null;
+    if (izinId) {
+      try {
+        const verifyUrl = `${window.location.origin}/verify/${izinId}`;
+        const qrDataUrl = await QRCode.toDataURL(verifyUrl, {
+          width: 400,
+          margin: 2,
+          errorCorrectionLevel: 'H',
+          color: { dark: '#000000', light: '#FFFFFF' },
+        });
+        const img = new window.Image();
+        img.src = qrDataUrl;
+        await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; });
+        qrImg = img;
+      } catch {}
+    }
+
+    drawLetter(ctx, formData, W, H, qrImg, logoImg);
 
     setPreviewUrl(canvas.toDataURL('image/jpeg', 0.85));
   };
