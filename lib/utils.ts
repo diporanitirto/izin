@@ -35,6 +35,39 @@ export function validateNIS(nis: string): boolean {
 }
 
 /**
+ * Link wa.me berisi ringkasan izin yang sudah disetujui
+ */
+export function getWhatsAppShareUrl(izin: {
+  nama: string;
+  kelas: string;
+  sangga: string | null;
+  alasan: string;
+  created_at: string;
+}): string {
+  const tanggal = new Date(izin.created_at).toLocaleString('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Asia/Jakarta',
+  });
+
+  const text = [
+    `Tanggal: ${tanggal} WIB`,
+    `Nama: ${izin.nama}`,
+    `Kelas: ${izin.kelas}`,
+    `Sangga: ${izin.sangga || '-'}`,
+    `Alasan: ${izin.alasan}`,
+    '',
+    '*Izin telah disetujui*',
+  ].join('\n');
+
+  return `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+
+/**
  * Generate verification URL
  */
 export function getVerificationUrl(baseUrl: string, izinId: string): string {
