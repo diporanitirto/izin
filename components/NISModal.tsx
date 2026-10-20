@@ -48,9 +48,6 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
           const url = `${siswaUrl}/?nis=${encodeURIComponent(nis)}`;
           setPeringatan('Masih ada hukuman yang belum selesai. Selesaikan dulu di halaman siswa, nanti bisa ajukan izin lagi.');
           setRedirectUrl(url);
-          setTimeout(() => {
-            window.location.href = url;
-          }, 2500);
           return;
         }
         onSubmit(nis, data);
@@ -93,7 +90,6 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
           {peringatan && (
             <div className="mb-5 p-4 rounded-lg bg-amber-50 border border-amber-200">
               <p className="text-sm text-amber-800 mb-3">{peringatan}</p>
-              <p className="text-xs text-amber-700 mb-3">Mengalihkan otomatis dalam beberapa detik...</p>
               <button
                 type="button"
                 onClick={() => redirectUrl && (window.location.href = redirectUrl)}

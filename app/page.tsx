@@ -92,9 +92,6 @@ export default function Home() {
       if (err?.redirect) {
         setPeringatan('Masih ada hukuman yang belum selesai. Selesaikan dulu di halaman siswa, nanti bisa ajukan izin lagi.');
         setRedirectUrl(err.redirect);
-        setTimeout(() => {
-          window.location.href = err.redirect;
-        }, 2500);
         return;
       }
       throw new Error(err?.error ?? 'Gagal menyimpan data.');
@@ -155,7 +152,6 @@ export default function Home() {
           <div className="bg-white rounded-2xl shadow-lg max-w-md w-full border border-amber-200 p-6">
             <h2 className="text-lg font-bold text-amber-900 mb-2">Peringatan</h2>
             <p className="text-sm text-amber-800 mb-3">{peringatan}</p>
-            <p className="text-xs text-amber-700 mb-4">Mengalihkan otomatis dalam beberapa detik...</p>
             <button
               type="button"
               onClick={() => redirectUrl && (window.location.href = redirectUrl)}
