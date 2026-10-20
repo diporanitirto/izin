@@ -87,6 +87,10 @@ export default function Home() {
 
     if (!dbResponse.ok) {
       const err = await dbResponse.json().catch(() => null);
+      if (err?.redirect) {
+        window.location.href = err.redirect;
+        return;
+      }
       throw new Error(err?.error ?? 'Gagal menyimpan data.');
     }
 

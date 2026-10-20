@@ -38,7 +38,13 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
       const result = await res.json().catch(() => null);
 
       if (res.ok && result?.success) {
-        onSubmit(nis, result.data as SiswaData);
+        const data = result.data as SiswaData;
+        if (data.hukumanBelumSelesai) {
+          const siswaUrl = process.env.NEXT_PUBLIC_SISWA_APP_URL || 'http://localhost:3002';
+          window.location.href = `${siswaUrl}/?nis=${encodeURIComponent(nis)}`;
+          return;
+        }
+        onSubmit(nis, data);
       } else if (res.status === 404) {
         setError('NIS tidak ditemukan dalam database. Periksa kembali NIS Anda.');
       } else {

@@ -30,6 +30,16 @@ export async function GET(request: Request) {
 
     const kelasNama = (siswa.kelas as unknown as { nama: string } | null)?.nama ?? '';
 
+    const { data: belumRows } = await supabase
+      .from('pelanggaran')
+      .select('id')
+      .eq('nis', siswa.nis)
+      .eq('perlu_bukti', true)
+      .neq('bukti_status', 'selesai')
+      .limit(1);
+
+    const hukumanBelumSelesai = (belumRows ?? []).length > 0;
+
     const { data: pendamping } = await supabase
       .from('pendamping')
       .select('nama')
@@ -48,6 +58,7 @@ export async function GET(request: Request) {
         kelas: kelasNama,
         absen: (count ?? 0) + 1,
         pkList,
+        hukumanBelumSelesai,
       },
     });
   } catch (error) {

@@ -58,6 +58,27 @@ export async function POST(request: Request) {
     const supabase = getSupabase();
     const nisValue = payload.nis ? String(payload.nis) : String(absenNumber);
 
+    // Cegah pengajuan izin kalau siswa masih punya hukuman yang belum selesai.
+    const { data: belumRows } = await supabase
+      .from('pelanggaran')
+      .select('id')
+      .eq('nis', nisValue)
+      .eq('perlu_bukti', true)
+      .neq('bukti_status', 'selesai')
+      .limit(1);
+
+    if ((belumRows ?? []).length > 0) {
+      const siswaUrl = process.env.NEXT_PUBLIC_SISWA_APP_URL || process.env.SISWA_APP_URL || 'http://localhost:3002';
+      return NextResponse.json(
+        {
+          error: 'Masih ada hukuman yang belum selesai. Selesaikan dulu di halaman siswa.',
+          blocked: true,
+          redirect: `${siswaUrl}/?nis=${encodeURIComponent(nisValue)}`,
+        },
+        { status: 403 }
+      );
+    }
+
     const basePayload = {
       nama: payload.nama,
       absen: absenNumber,

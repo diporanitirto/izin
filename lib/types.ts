@@ -5,6 +5,7 @@ export interface SiswaData {
   kelas: string;
   absen: number;
   pkList: string[];
+  hukumanBelumSelesai?: boolean;
 }
 
 export interface FormData {

@@ -71,7 +71,7 @@ export default function SuratForm({ onSubmit, initialData, nis, siswaData }: Sur
             Form Izin Pramuka
           </h2>
           <p className="text-xs text-scoutBrown-500 mt-1">
-            Data diri terisi otomatis — tinggal pilih sangga dan tulis alasan.
+            Data diri terisi otomatis: tinggal pilih sangga dan tulis alasan.
           </p>
         </div>
 
