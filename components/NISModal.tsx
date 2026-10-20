@@ -14,11 +14,15 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
   const [nis, setNis] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [peringatan, setPeringatan] = useState<string | null>(null);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       setNis('');
       setError(null);
+      setPeringatan(null);
+      setRedirectUrl(null);
     }
   }, [isOpen]);
 
@@ -41,7 +45,12 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
         const data = result.data as SiswaData;
         if (data.hukumanBelumSelesai) {
           const siswaUrl = process.env.NEXT_PUBLIC_SISWA_APP_URL || 'http://localhost:3002';
-          window.location.href = `${siswaUrl}/?nis=${encodeURIComponent(nis)}`;
+          const url = `${siswaUrl}/?nis=${encodeURIComponent(nis)}`;
+          setPeringatan('Masih ada hukuman yang belum selesai. Selesaikan dulu di halaman siswa, nanti bisa ajukan izin lagi.');
+          setRedirectUrl(url);
+          setTimeout(() => {
+            window.location.href = url;
+          }, 2500);
           return;
         }
         onSubmit(nis, data);
@@ -81,6 +90,21 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
             </p>
           </div>
 
+          {peringatan && (
+            <div className="mb-5 p-4 rounded-lg bg-amber-50 border border-amber-200">
+              <p className="text-sm text-amber-800 mb-3">{peringatan}</p>
+              <p className="text-xs text-amber-700 mb-3">Mengalihkan otomatis dalam beberapa detik...</p>
+              <button
+                type="button"
+                onClick={() => redirectUrl && (window.location.href = redirectUrl)}
+                className="w-full bg-amber-700 text-white py-2.5 px-4 rounded-lg text-sm font-medium hover:bg-amber-800"
+              >
+                Buka halaman siswa sekarang
+              </button>
+            </div>
+          )}
+
+          {!peringatan && (
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
               <label
@@ -116,6 +140,7 @@ export default function NISModal({ isOpen, onSubmit }: NISModalProps) {
               {isLoading ? 'Memverifikasi...' : 'Masuk'}
             </button>
           </form>
+          )}
 
           <Link
             href="/workflow"

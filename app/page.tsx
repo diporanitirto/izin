@@ -18,6 +18,8 @@ export default function Home() {
   const [showCekIzin, setShowCekIzin] = useState(false);
   const [showNISModal, setShowNISModal] = useState(false);
   const [showChangeNISModal, setShowChangeNISModal] = useState(false);
+  const [peringatan, setPeringatan] = useState<string | null>(null);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
   const [nis, setNis] = useState('');
   const [siswaData, setSiswaData] = useState<SiswaData | null>(null);
   const [previewIzinId, setPreviewIzinId] = useState<string | null>(null);
@@ -88,7 +90,11 @@ export default function Home() {
     if (!dbResponse.ok) {
       const err = await dbResponse.json().catch(() => null);
       if (err?.redirect) {
-        window.location.href = err.redirect;
+        setPeringatan('Masih ada hukuman yang belum selesai. Selesaikan dulu di halaman siswa, nanti bisa ajukan izin lagi.');
+        setRedirectUrl(err.redirect);
+        setTimeout(() => {
+          window.location.href = err.redirect;
+        }, 2500);
         return;
       }
       throw new Error(err?.error ?? 'Gagal menyimpan data.');
@@ -143,6 +149,23 @@ export default function Home() {
         onConfirm={handleChangeNIS}
         onCancel={() => setShowChangeNISModal(false)}
       />
+
+      {peringatan && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[100] p-4">
+          <div className="bg-white rounded-2xl shadow-lg max-w-md w-full border border-amber-200 p-6">
+            <h2 className="text-lg font-bold text-amber-900 mb-2">Peringatan</h2>
+            <p className="text-sm text-amber-800 mb-3">{peringatan}</p>
+            <p className="text-xs text-amber-700 mb-4">Mengalihkan otomatis dalam beberapa detik...</p>
+            <button
+              type="button"
+              onClick={() => redirectUrl && (window.location.href = redirectUrl)}
+              className="w-full bg-amber-700 text-white py-2.5 px-4 rounded-lg text-sm font-medium hover:bg-amber-800"
+            >
+              Buka halaman siswa sekarang
+            </button>
+          </div>
+        </div>
+      )}
 
       {!showNISModal && (
         <>
